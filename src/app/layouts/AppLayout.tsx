@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router'
+import { AppHeader } from '../../widgets/header/AppHeader'
 
-// import { Header } from '@/widgets/header'
+// import { TheHeader } from '@/widgets/header/TheHeader.tsx'
 // import { Sidebar } from '@/widgets/sidebar'
 
 export const AppLayout = () => {
@@ -9,7 +10,7 @@ export const AppLayout = () => {
       {/* <Sidebar /> */}
 
       <div className="content">
-        {/* <Header /> */}
+        <AppHeader />
         <main>
           <Outlet />
         </main>

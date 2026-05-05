@@ -51,19 +51,24 @@
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
+  max-width: 1920px;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding-top: calc(48px + 40px);
+  padding-left: 80px;
+  padding-right: 80px;
+  font-size: 14px;
 }
 
 h1,
@@ -108,4 +113,20 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  font-size: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 0.9;
 }

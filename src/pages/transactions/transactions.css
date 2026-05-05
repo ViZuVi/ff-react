@@ -1,0 +1,19 @@
+.transactions-wrapper {
+  display: flex;
+  gap: 24px;
+}
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.transactions-table td,
+.transactions-table th {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.transactions-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
