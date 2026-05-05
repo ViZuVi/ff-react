@@ -8,7 +8,6 @@ type Props = {
 
 export const Icon = ({ name, size = 24, className }: Props) => {
     const SvgIcon = icons[name];
-console.log(SvgIcon);
 
     if (!SvgIcon) {
         return <span style={{ width: size, height: size }} />;

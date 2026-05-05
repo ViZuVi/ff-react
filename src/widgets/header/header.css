@@ -12,3 +12,8 @@
     box-shadow: 0px 4px 11px -2px #eceef1;
     background-color: #fff;
 }
+.app-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
