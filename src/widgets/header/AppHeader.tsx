@@ -1,4 +1,4 @@
-import { Button } from '../../shared/components/ui/Button/Button'
+import { Button } from '@components/ui/Button/Button'
 import './header.css'
 
 export const AppHeader = () => {

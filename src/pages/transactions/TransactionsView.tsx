@@ -1,5 +1,5 @@
 // https://api.funds-flow.ru/v1/transaction/get-by-filter
-import { MainActions } from './components/actions/MainActions'
+import { MainActions } from '@/pages/transactions/components/actions/MainActions'
 import './transactions.css'
 const transactions = [
     {

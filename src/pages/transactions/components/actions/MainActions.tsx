@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../../../shared/components/ui/Button/Button"
-import { UModal } from "../../../../shared/components/ui/Modal/Modal"
+import { Button } from "@components/ui/Button/Button"
+import { UModal } from "@components/ui/Modal/Modal"
 
 type ModalType = 'balance' | 'categories' | 'converter' | null
 

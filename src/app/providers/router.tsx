@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router'
 
-import { AppLayout } from '../layouts/AppLayout.tsx'
-import { TransactionsPage } from '../../pages/transactions/TransactionsPage'
-// import { AuthLayout } from '../layouts/AuthLayout'
+import { AppLayout } from '@/app/layouts/AppLayout.tsx'
+import { TransactionsPage } from '@/pages/transactions/TransactionsPage'
+// import { AuthLayout } from '@/app/layouts/AuthLayout'
 
 // import { LoginPage } from '@/pages/auth/LoginPage'
 // import { RegisterPage } from '@/pages/auth/RegisterPage'
