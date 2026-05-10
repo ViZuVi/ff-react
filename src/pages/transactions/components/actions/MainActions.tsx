@@ -1,20 +1,17 @@
-import { useState } from "react";
 import { Button } from "@components/ui/Button/Button"
 import { UModal } from "@components/ui/Modal/Modal"
+import { useModal } from '@/shared/hooks/useModal'
+import { BalanceModal } from "./BalanceModal"
 
-type ModalType = 'balance' | 'categories' | 'converter' | null
+type ModalType = 'balance' | 'categories' | 'converter'
 
 
 export const MainActions = () => {
-    const [activeModal, setActiveModal] = useState<ModalType>(null)
-
-    const openModal = (modal: ModalType) => {
-        setActiveModal(modal)
-    }
-
-    const closeModal = () => {
-        setActiveModal(null)
-    }
+    const {
+        openModal,
+        closeModal,
+        isOpen,
+    } = useModal<ModalType>()
 
     return (
         <div className='transactions-actions'>
@@ -23,9 +20,9 @@ export const MainActions = () => {
             <Button icon='currency_exchange' aria-label="конвертер" onClick={() => openModal('converter')} />
             <Button icon='bar_chart' aria-label="аналитика" onClick={() => { }} />
 
-            <UModal open={activeModal === 'balance'} handleClose={closeModal} title="Balance" />
-            <UModal open={activeModal === 'categories'} handleClose={closeModal} title="Categories" />
-            <UModal open={activeModal === 'converter'} handleClose={closeModal} title="Converter" />
+            <BalanceModal open={isOpen('balance')} onClose={closeModal} />
+            <UModal open={isOpen('categories')} onClose={closeModal} title="Categories" />
+            <UModal open={isOpen('converter')} onClose={closeModal} title="Converter" />
         </div>
     )
 }

@@ -6,18 +6,16 @@ interface ModalProps {
     title?: string;
     content?: string
     children?: React.ReactNode;
-    handleClose: () => void;
+    onClose: () => void;
 }
 
-export const UModal = ({ open, title, content, children, handleClose }: ModalProps) => {
+export const UModal = ({ open, title, content, children, onClose }: ModalProps) => {
 
     return (
         <div>
             <Modal
                 open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                onClose={onClose}
             >
                 <div className='u-modal'>
                     <h3>{title}</h3>

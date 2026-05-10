@@ -17,3 +17,19 @@
   gap: 12px;
   margin-bottom: 20px;
 }
+
+.balance-modal {
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.balance-modal__accounts-item {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+}
+
+.balance-modal__accounts-item:nth-child(odd) {
+  background-color: #f7f7f7;
+}
