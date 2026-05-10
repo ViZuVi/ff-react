@@ -140,3 +140,16 @@ ul {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
+
+.text-success {
+  /* color: #99fc0a; */
+  color: #6fbd00;
+}
+
+.text-error {
+  color: #ef2929;
+}
+
+.text-accent {
+  color: var(--accent-border)
+}

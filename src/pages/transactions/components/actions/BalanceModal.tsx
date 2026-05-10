@@ -1,3 +1,4 @@
+import { Icon } from "@/shared/components/ui/Icon/Icon";
 import { UModal } from "@/shared/components/ui/Modal/Modal"
 
 interface props {
@@ -147,38 +148,44 @@ const mockBalance = {
 
 export const BalanceModal = ({ open, onClose }: props) => {
     return (
-        <UModal open={open} onClose={onClose} title="Balance">
+        <UModal open={open} onClose={onClose} title="Счета и баланс">
             <div className="balance-modal">
                 <div className="balance-modal__accounts">
-                    <h4>Accounts</h4>
+                    <h3 className="balance-modal__block-title">Счета</h3>
                     <ul>
                         {mockAccounts.map(acc => {
-                            return <li className="balance-modal__accounts-item">
-                                <span>{acc.name}</span>
-                                <span>{acc.balance}</span>
+                            return <li className="balance-modal__accounts-item" key={acc.id}>
+                                <span className="balance-modal__account-name">{acc.name}</span>
+                                <b className={parseFloat(acc.balance) < 0 ? 'text-error' : 'text-success'}>{parseFloat(acc.balance).toLocaleString('ru')}</b>
                                 <span>{acc.currency.code}</span>
+                                <span className="balance-modal__accounts-actions">
+                                    <Icon size={16} name="pencil" />
+                                    <Icon className="text-error" size={16} name="trash" />
+                                </span>
                             </li>
                         })}
                     </ul>
                 </div>
                 <div className="balance-modal__totals">
-                    <h4>balance/by amount</h4>
-                    <div>
+                    <h3 className="balance-modal__block-title">Баланс</h3>
+                    <div className="balance-modal__totals-wrapper">
                         <div className="balance-modal__total">
-                            <h5>Общий баланс:</h5>
+                            <h4>Общий баланс:</h4>
                             <p>
-                                <span>{mockBalance["total-amount"].total}</span>
+                                <b className={mockBalance["total-amount"].total < 0 ? 'text-error' : 'text-success'}>
+                                    {mockBalance["total-amount"].total.toLocaleString('ru')} &nbsp;
+                                </b>
                                 <span>{mockBalance["total-amount"].currency.code}</span>
                             </p>
                         </div>
                         <div className="balance-modal__by-curr">
-                            <h5>Сумма по валютам:</h5>
+                            <h4>Баланс по валютам:</h4>
                             <ul>
                                 {mockBalance["amount-by-currency"].map(acc => {
-                                    return <li className="balance-modal__accounts-item">
-                                        <span>{acc.total}</span>
+                                    return <li className="balance-modal__accounts-item" key={acc.currency.id}>
+                                        <b className={acc.total < 0 ? 'text-error' : 'text-success'}>{acc.total.toLocaleString('ru')}</b>
                                         <span>{acc.currency.code}</span>
-                                        <span>{acc.currency.rate}</span>
+                                        <span>{parseFloat(acc.currency.rate).toLocaleString('ru')}</span>
                                     </li>
                                 })}
                             </ul>

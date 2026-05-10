@@ -6,3 +6,14 @@
     transform: translate(-50%, -50%);
     padding: 20px;
 }
+
+.u-modal__title {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.u-modal .u-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

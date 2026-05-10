@@ -2,16 +2,19 @@
   display: flex;
   gap: 24px;
 }
+
 .transactions-table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .transactions-table td,
 .transactions-table th {
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    text-align: left;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
+
 .transactions-actions {
   display: flex;
   gap: 12px;
@@ -21,15 +24,38 @@
 .balance-modal {
   width: 600px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 36px;
+}
+
+.balance-modal__totals-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .balance-modal__accounts-item {
   display: grid;
-  grid-template-columns: 3fr 2fr 1fr;
+  grid-template-columns: 4fr 3fr 2fr 2fr;
+  padding: 4px 8px;
 }
 
 .balance-modal__accounts-item:nth-child(odd) {
   background-color: #f7f7f7;
+}
+
+.balance-modal__account-name {
+  padding-right: 8px;
+}
+
+.balance-modal__block-title {
+  text-align: center;
+  margin-bottom: 0.7em;
+}
+
+.balance-modal__accounts-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
 }
