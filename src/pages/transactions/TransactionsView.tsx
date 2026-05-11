@@ -1,6 +1,7 @@
 // https://api.funds-flow.ru/v1/transaction/get-by-filter
 import { MainActions } from '@/pages/transactions/components/actions/MainActions'
 import './transactions.css'
+import { Filters } from './components/filters/Filters'
 const transactions = [
     {
         "id": 4074,
@@ -115,7 +116,7 @@ export const TransactionsView = () => {
                         {tableItems}
                     </tbody>
                 </table>
-                фильтры
+                <Filters />
             </div>
         </>
     )
