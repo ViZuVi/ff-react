@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 
 import { AppLayout } from '@/app/layouts/AppLayout.tsx'
 import { TransactionsPage } from '@/pages/transactions/TransactionsPage'
+import { ChartsPage } from '@/pages/charts/ChartsPage'
 // import { AuthLayout } from '@/app/layouts/AuthLayout'
 
 // import { LoginPage } from '@/pages/auth/LoginPage'
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <TransactionsPage /> },
+      { path: '/charts', element: <ChartsPage /> },
 
     //   {
     //     path: 'workspace/:id',

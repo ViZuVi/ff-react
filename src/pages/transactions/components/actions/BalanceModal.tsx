@@ -1,5 +1,7 @@
-import { Icon } from "@/shared/components/ui/Icon/Icon";
 import { UModal } from "@/shared/components/ui/Modal/Modal"
+import { IconButton } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface props {
     open: boolean;
@@ -159,8 +161,8 @@ export const BalanceModal = ({ open, onClose }: props) => {
                                 <b className={parseFloat(acc.balance) < 0 ? 'text-error' : 'text-success'}>{parseFloat(acc.balance).toLocaleString('ru')}</b>
                                 <span>{acc.currency.code}</span>
                                 <span className="balance-modal__accounts-actions">
-                                    <Icon size={16} name="pencil" />
-                                    <Icon className="text-error" size={16} name="trash" />
+                                    <IconButton size='small' aria-label="редактировать"><EditIcon fontSize="inherit" /></IconButton>
+                                    <IconButton size='small' color="error" aria-label="удалить"><DeleteIcon fontSize="inherit" /></IconButton>
                                 </span>
                             </li>
                         })}
