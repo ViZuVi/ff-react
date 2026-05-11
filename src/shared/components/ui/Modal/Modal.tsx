@@ -22,7 +22,7 @@ export const UModal = ({ open, closeIcon = true, title, content, children, onClo
             >
                 <div className='u-modal'>
                     <h3 className='u-modal__title'>{title}</h3>
-                    {closeIcon && <IconButton size='small' aria-label="закрыть"onClick={onClose}><CloseIcon /></IconButton>}
+                    {closeIcon && <IconButton className='u-modal__close-btn' size='small' aria-label="закрыть"onClick={onClose}><CloseIcon /></IconButton>}
                     <div>{content || children}</div>
                 </div>
             </Modal>

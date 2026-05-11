@@ -12,8 +12,8 @@
     text-align: center;
 }
 
-.u-modal .u-button {
-    position: absolute;
-    top: 0;
-    right: 0;
+.u-modal__close-btn {
+    position: absolute !important;
+    top: 12px;
+    right: 12px;
 }

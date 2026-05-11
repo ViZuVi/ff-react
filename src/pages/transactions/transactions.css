@@ -58,3 +58,20 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.category-modal {
+  min-width: 300px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.category-modal__item {
+  padding: 2px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-modal__item:nth-child(odd) {
+  background-color: #f7f7f7;
+}

@@ -4,6 +4,7 @@ import { BalanceModal } from "./BalanceModal"
 import { Button, IconButton } from "@mui/material"
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import { CategoryModal } from "./CategoryModal";
 
 type ModalType = 'balance' | 'categories' | 'converter'
 
@@ -19,11 +20,11 @@ export const MainActions = () => {
         <div className='transactions-actions'>
             <Button variant="outlined" color="secondary" size="small" onClick={() => openModal('balance')}>баланс и счета</Button>
             <Button variant="outlined" color="secondary" size="small" onClick={() => openModal('categories')}>категории</Button>
-            <IconButton aria-label="конвертер" color="secondary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
-            <IconButton aria-label="аналитика" color="secondary" href="/charts"><BarChartIcon /></IconButton>
+            <IconButton aria-label="конвертер" size="small" color="secondary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
+            <IconButton aria-label="аналитика" size="small" color="secondary" href="/charts"><BarChartIcon /></IconButton>
 
             <BalanceModal open={isOpen('balance')} onClose={closeModal} />
-            <UModal open={isOpen('categories')} onClose={closeModal} title="Categories" />
+            <CategoryModal open={isOpen('categories')} onClose={closeModal} />
             <UModal open={isOpen('converter')} onClose={closeModal} title="Converter" />
         </div>
     )
