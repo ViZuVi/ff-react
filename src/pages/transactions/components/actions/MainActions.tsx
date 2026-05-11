@@ -1,10 +1,10 @@
-import { UModal } from "@components/ui/Modal/Modal"
 import { useModal } from '@/shared/hooks/useModal'
 import { BalanceModal } from "./BalanceModal"
 import { Button, IconButton } from "@mui/material"
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { CategoryModal } from "./CategoryModal";
+import { ConverterModal } from "./ConverterModal";
 
 type ModalType = 'balance' | 'categories' | 'converter'
 
@@ -25,7 +25,7 @@ export const MainActions = () => {
 
             <BalanceModal open={isOpen('balance')} onClose={closeModal} />
             <CategoryModal open={isOpen('categories')} onClose={closeModal} />
-            <UModal open={isOpen('converter')} onClose={closeModal} title="Converter" />
+            <ConverterModal open={isOpen('converter')} onClose={closeModal} />
         </div>
     )
 }
