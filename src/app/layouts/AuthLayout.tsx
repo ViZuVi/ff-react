@@ -1,12 +1,10 @@
 import { Outlet } from 'react-router'
-import { AppHeader } from '@/widgets/header/AppHeader'
 
-export const AppLayout = () => {
+export const AuthLayout = () => {
   return (
     <div className="app-layout">
 
       <div className="content">
-        <AppHeader />
         <main>
           <Outlet />
         </main>

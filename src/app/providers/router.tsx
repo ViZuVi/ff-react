@@ -3,27 +3,25 @@ import { createBrowserRouter } from 'react-router'
 import { AppLayout } from '@/app/layouts/AppLayout.tsx'
 import { TransactionsPage } from '@/pages/transactions/TransactionsPage'
 import { ChartsPage } from '@/pages/charts/ChartsPage'
-// import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { LoginPage } from '@/pages/auth/LoginPage'
+import { RegisterPage } from '@/pages/register/RegisterPage'
+import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
 
-// import { LoginPage } from '@/pages/auth/LoginPage'
-// import { RegisterPage } from '@/pages/auth/RegisterPage'
-// import { DashboardPage } from '@/pages/dashboard/DashboardPage'
 // import { WorkspacePage } from '@/pages/workspace/WorkspacePage'
-// import { TransactionsPage } from '@/pages/workspace/TransactionsPage'
 // import { CategoriesPage } from '@/pages/workspace/CategoriesPage'
 // import { InvitePage } from '@/pages/workspace/InvitePage'
 // import { AnalyticsPage } from '@/pages/analytics/AnalyticsPage'
 // import { SettingsPage } from '@/pages/settings/SettingsPage'
-// import { NotFoundPage } from '@/pages/NotFoundPage'
 
 export const router = createBrowserRouter([
-//   {
-//     element: <AuthLayout />,
-//     children: [
-//       { path: '/login', element: <LoginPage /> },
-//       { path: '/register', element: <RegisterPage /> },
-//     ],
-//   },
+  {
+    element: <AuthLayout />,
+    children: [
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
+    ],
+  },
   {
     element: <AppLayout />,
     children: [
@@ -45,7 +43,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    // path: '*',
-    // element: <NotFoundPage />,
+    path: '*',
+    element: <NotFoundPage />,
   },
 ])

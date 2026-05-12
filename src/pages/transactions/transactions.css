@@ -1,6 +1,7 @@
 .transactions-wrapper {
   display: flex;
   gap: 24px;
+  align-items: flex-start;
 }
 
 .transactions-table {
@@ -89,6 +90,9 @@
   align-items: stretch;
   gap: 12px;
   width: 360px;
+  position: sticky;
+  height: 100%;
+  top: 88px;
 }
 
 .filters__date-picker-range {

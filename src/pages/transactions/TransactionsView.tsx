@@ -85,11 +85,13 @@ const transactions = [
     }
 ]
 
+const mockTransactions = [...transactions, ...transactions, ...transactions, ...transactions, ...transactions]
+
 const tableHead = ["дата", "категория", "сумма", "счёт", "создатель", "описание", "действия" ]
 
 export const TransactionsView = () => {
-    const tableItems = transactions.map((row) => 
-        <tr key={row.id}>
+    const tableItems = mockTransactions.map((row, i) => 
+        <tr key={row.id + i.toString()}>
             <td>{row.created_at}</td>
             <td>{row.category.name}</td>
             <td>{row.amount}</td>
