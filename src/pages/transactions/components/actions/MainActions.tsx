@@ -18,10 +18,10 @@ export const MainActions = () => {
 
     return (
         <div className='transactions-actions'>
-            <Button variant="outlined" color="secondary" size="small" onClick={() => openModal('balance')}>баланс и счета</Button>
-            <Button variant="outlined" color="secondary" size="small" onClick={() => openModal('categories')}>категории</Button>
-            <IconButton aria-label="конвертер" size="small" color="secondary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
-            <IconButton aria-label="аналитика" size="small" color="secondary" href="/charts"><BarChartIcon /></IconButton>
+            <Button variant="outlined" size="small" onClick={() => openModal('balance')}>баланс и счета</Button>
+            <Button variant="outlined" size="small" onClick={() => openModal('categories')}>категории</Button>
+            <IconButton aria-label="конвертер" size="small" color="primary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
+            <IconButton aria-label="аналитика" size="small" color="primary" href="/charts"><BarChartIcon /></IconButton>
 
             <BalanceModal open={isOpen('balance')} onClose={closeModal} />
             <CategoryModal open={isOpen('categories')} onClose={closeModal} />

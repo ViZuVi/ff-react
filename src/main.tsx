@@ -1,11 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from "react-router/dom";
-import '@/styles/index.css'
 import { router } from '@/app/providers/router'
+import { AppThemeProvider } from './shared/theme';
+import '@/shared/theme/animations/globals.css'
+import '@/styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AppThemeProvider>
+      <RouterProvider router={router} />
+    </AppThemeProvider>
   </StrictMode>,
 )
