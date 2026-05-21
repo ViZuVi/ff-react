@@ -18,5 +18,15 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      "react/jsx-max-props-per-line": ["error", {
+        "singleline": 3,
+        "multiline": 1
+      }],
+      "react/jsx-closing-bracket-location": ["error", {
+        "singleline": "never",
+        "multiline": "always"
+      }],
+    }
   },
 ])

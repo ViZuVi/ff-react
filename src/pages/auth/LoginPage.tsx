@@ -1,5 +1,5 @@
+import { LoginView } from "./LoginView"
+
 export const LoginPage = () => {
-    return (
-        <div>login</div>
-    )
+    return <LoginView />
 }

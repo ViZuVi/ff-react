@@ -5,8 +5,9 @@ import { TransactionsPage } from '@/pages/transactions/TransactionsPage'
 import { ChartsPage } from '@/pages/charts/ChartsPage'
 import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { LoginPage } from '@/pages/auth/LoginPage'
-import { RegisterPage } from '@/pages/register/RegisterPage'
+import { RestorePage } from '@/pages/restore/RestorePage'
 import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
+import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
 
 // import { WorkspacePage } from '@/pages/workspace/WorkspacePage'
 // import { CategoriesPage } from '@/pages/workspace/CategoriesPage'
@@ -19,11 +20,11 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { path: '/login', element: <LoginPage /> },
-      { path: '/register', element: <RegisterPage /> },
+      { path: '/restore', element: <RestorePage /> },
     ],
   },
   {
-    element: <AppLayout />,
+    element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
     children: [
       { index: true, element: <TransactionsPage /> },
       { path: '/charts', element: <ChartsPage /> },
