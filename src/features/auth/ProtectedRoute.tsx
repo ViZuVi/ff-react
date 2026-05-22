@@ -1,9 +1,10 @@
 import { Navigate } from 'react-router'
 
 import { useAuthStore } from '@/app/store/auth'
+import type { ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export const ProtectedRoute = ({ children }: Props) => {

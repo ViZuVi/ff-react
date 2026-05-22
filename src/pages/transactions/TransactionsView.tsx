@@ -2,6 +2,7 @@
 import { MainActions } from '@/pages/transactions/components/actions/MainActions'
 import './transactions.css'
 import { Filters } from './components/filters/Filters'
+
 const transactions = [
     {
         "id": 4074,

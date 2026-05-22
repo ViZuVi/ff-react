@@ -7,8 +7,8 @@ import { darkScheme } from './schemes/dark'
 import { lightScheme } from './schemes/light'
 
 import { buttonOverrides } from '../components/ui/Button/button'
+import { inputOverrides } from '../components/ui/Input/input'
 // import { cardOverrides } from './components/card'
-// import { inputOverrides } from './components/input'
 
 export const createAppTheme = (
   mode: 'light' | 'dark',
@@ -69,7 +69,7 @@ export const createAppTheme = (
     components: {
       ...buttonOverrides,
     //   ...cardOverrides,
-    //   ...inputOverrides,
+      ...inputOverrides,
     },
   })
 }
