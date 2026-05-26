@@ -1,10 +1,10 @@
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState, type SyntheticEvent } from 'react';
 import { LoginForm } from './LoginForm';
+import { RegisterForm } from './RegisterForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,7 +67,7 @@ export const AuthTabs = () => {
         <LoginForm />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <RegisterForm />
       </TabPanel>
     </Box>
   );

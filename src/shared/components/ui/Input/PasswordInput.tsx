@@ -6,16 +6,18 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 type TextFieldProps = {
   value: string
+  autoComplete?: string
+  disabled?: boolean
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const PasswordInput = ({value, onChange}: TextFieldProps) => {
+export const PasswordInput = ({value, autoComplete, disabled, onChange}: TextFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     return (
-        <TextField id="password" size="small" placeholder="Password" value={value} type={showPassword ? 'text' : 'password'} required slotProps={{
+        <TextField id="password" size="small" placeholder="Password" disabled={disabled} value={value} type={showPassword ? 'text' : 'password'} autoComplete={autoComplete} required slotProps={{
             input: {
                 startAdornment: (
                     <InputAdornment position="start">

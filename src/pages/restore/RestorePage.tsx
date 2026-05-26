@@ -1,11 +1,5 @@
-import { useNavigate } from "react-router"
+import { RestoreView } from "./RestoreView";
 
 export const RestorePage = () => {
-    const navigate = useNavigate();
-    return (
-        <div>
-            <h1>RestorePage</h1>
-            <button onClick={() => navigate(-1)}>back</button>
-        </div>
-    )
+    return <RestoreView />
 }
