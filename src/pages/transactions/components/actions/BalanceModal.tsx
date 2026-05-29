@@ -185,7 +185,7 @@ export const BalanceModal = ({ open, onClose }: props) => {
                             <ul>
                                 {mockBalance["amount-by-currency"].map(acc => {
                                     return <li className="balance-modal__accounts-item" key={acc.currency.id}>
-                                        <b className={acc.total < 0 ? 'text-error' : 'text-success'}>{acc.total.toLocaleString('ru')}</b>
+                                        <b className={acc.total < 0 ? 'text-error' : 'text-success'}>{acc.total.toLocaleString('ru')}&nbsp;</b>
                                         <span>{acc.currency.code}</span>
                                         <span>{parseFloat(acc.currency.rate).toLocaleString('ru')}</span>
                                     </li>

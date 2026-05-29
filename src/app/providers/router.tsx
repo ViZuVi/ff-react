@@ -7,7 +7,7 @@ import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RestorePage } from '@/pages/restore/RestorePage'
 import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
-import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
+// import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
 
 // import { WorkspacePage } from '@/pages/workspace/WorkspacePage'
 // import { CategoriesPage } from '@/pages/workspace/CategoriesPage'
@@ -24,7 +24,8 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
+    // element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
+    element: <AppLayout />,
     children: [
       { index: true, element: <TransactionsPage /> },
       { path: '/charts', element: <ChartsPage /> },

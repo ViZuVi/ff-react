@@ -1,7 +1,11 @@
-.transactions-wrapper {
+.transactions-view {
   display: flex;
   gap: 24px;
   align-items: flex-start;
+}
+
+.transactions-wrapper {
+  flex-grow: 1;
 }
 
 .transactions-table {
@@ -18,8 +22,16 @@
 
 .transactions-actions {
   display: flex;
-  gap: 12px;
   margin-bottom: 20px;
+}
+
+.transactions-actions__block {
+  display: flex;
+  gap: 12px;
+}
+
+.transactions-actions__block--add {
+  margin-left: auto;
 }
 
 .balance-modal {

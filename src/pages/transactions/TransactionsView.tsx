@@ -88,10 +88,10 @@ const transactions = [
 
 const mockTransactions = [...transactions, ...transactions, ...transactions, ...transactions, ...transactions]
 
-const tableHead = ["дата", "категория", "сумма", "счёт", "создатель", "описание", "действия" ]
+const tableHead = ["дата", "категория", "сумма", "счёт", "создатель", "описание", "действия"]
 
 export const TransactionsView = () => {
-    const tableItems = mockTransactions.map((row, i) => 
+    const tableItems = mockTransactions.map((row, i) =>
         <tr key={row.id + i.toString()}>
             <td>{row.created_at}</td>
             <td>{row.category.name}</td>
@@ -107,18 +107,21 @@ export const TransactionsView = () => {
     )
     return (
         <>
-            <MainActions />
-            <div className='transactions-wrapper'>
-                <table className="transactions-table">
-                    <thead>
-                        <tr>
-                            {tableHead.map(h => <th key={h}>{h}</th>)}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableItems}
-                    </tbody>
-                </table>
+            <div className='transactions-view'>
+                <div className='transactions-wrapper'>
+
+                    <MainActions />
+                    <table className="transactions-table">
+                        <thead>
+                            <tr>
+                                {tableHead.map(h => <th key={h}>{h}</th>)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tableItems}
+                        </tbody>
+                    </table>
+                </div>
                 <Filters />
             </div>
         </>
