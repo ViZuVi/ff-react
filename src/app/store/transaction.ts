@@ -1,13 +1,9 @@
 import type { TransactionDraft } from "@/shared/types/TransactionDraft";
-import { useSearchParams } from "react-router";
 import { create } from "zustand";
-
-const [searchParams] = useSearchParams()
-const spaceId = parseInt(searchParams.get('space')!) // TODO type
 
 type Store = {
     drafts: TransactionDraft[]
-    addEmptyDraft: () => void
+    addEmptyDraft: (spaceId: number) => void
     cloneDraft: (localId: string) => void
     updateDraft: <K extends keyof TransactionDraft>(
         localId: string,
@@ -15,9 +11,10 @@ type Store = {
         value: TransactionDraft[K]
     ) => void
     removeDraft: (localId: string) => void
+    init: (spaceId: number) => void
 }
 
-const createEmptyDraft = (): TransactionDraft => ({
+const createEmptyDraft = (spaceId: number): TransactionDraft => ({
     localId: crypto.randomUUID(),
     created_at: new Date().toISOString(),
     amount: 0,
@@ -29,10 +26,20 @@ const createEmptyDraft = (): TransactionDraft => ({
 })
 
 export const useTransactionStore = create<Store>((set) => ({
-    drafts: [createEmptyDraft()],
-    addEmptyDraft: () =>
+    drafts: [],
+    init: (spaceId) =>
+        set((state) => {
+            if (state.drafts.length > 0) {
+                return state
+            }
+
+            return {
+                drafts: [createEmptyDraft(spaceId)],
+            }
+        }),
+    addEmptyDraft: (spaceId) =>
         set((state) => ({
-            drafts: [...state.drafts, createEmptyDraft()],
+            drafts: [...state.drafts, createEmptyDraft(spaceId)],
         })),
     cloneDraft: (localId) =>
         set((state) => {

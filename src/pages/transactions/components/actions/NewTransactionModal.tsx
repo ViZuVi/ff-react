@@ -1,6 +1,8 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import type { CreateTransaction } from "@/shared/types/TransactionDraft";
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTransactionStore } from "@/app/store/transaction";
+import { useEffect } from "react";
+import { TransactionFields } from "./TransactionFields";
+import { Button } from "@mui/material";
 
 interface props {
     open: boolean;
@@ -10,21 +12,25 @@ interface props {
 
 export const NewTransactionModal = ({ open, type, onClose }: props) => {
     const title = `Добавить ${type === 'income' ? "Доход" : "Расход"}`
-    const { register, handleSubmit, formState: { errors } } = useForm<CreateTransaction>()
-    const onSubmit: SubmitHandler<CreateTransaction> = data => console.log(data);
-    console.log(errors);
+
+
+    const drafts = useTransactionStore((s) => s.drafts)
+    const init = useTransactionStore((s) => s.init)
+
+    const spaceId = 31 //TODO magic number
+
+    useEffect(() => {
+        init(spaceId)
+    }, [init, spaceId])
+
 
     return (
         <UModal open={open} onClose={onClose} title={title}>
             <div className="new-transaction-modal">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input defaultValue="null" {...register("comment")} />
-                    <input defaultValue="null" {...register("created_at")} />
-                    <input type="number" defaultValue={0} {...register("amount", { valueAsNumber: true })} />
-                    <input defaultValue="null" {...register("category_id")} />
-                    <input defaultValue="null" {...register("account_id")} />
-                    <input type="submit" value="Save" />
-                </form>
+                <div className="new-transaction-modal__form">
+                    {drafts.map((draft, i) => <TransactionFields key={draft.localId} draft={draft} showRemoveIcon={i>0} />)}
+                </div>
+                <Button variant="contained">Сохранить</Button>
             </div>
         </UModal>
     )
