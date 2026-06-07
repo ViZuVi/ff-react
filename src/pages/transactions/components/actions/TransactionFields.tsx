@@ -3,17 +3,20 @@ import type { TransactionDraft } from "@/shared/types/TransactionDraft";
 import { FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 import NumberField from "@/shared/components/ui/Input/NumberField";
 
 type Props = {
     draft: TransactionDraft
     showRemoveIcon: boolean
+    spaceId: number
 }
 
-export const TransactionFields = ({ draft, showRemoveIcon }: Props) => {
+export const TransactionFields = ({ draft, showRemoveIcon, spaceId }: Props) => {
     const updateDraft = useTransactionStore((s) => s.updateDraft)
     const cloneDraft = useTransactionStore((s) => s.cloneDraft)
     const removeDraft = useTransactionStore((s) => s.removeDraft)
+    const addEmptyDraft = useTransactionStore((s) => s.addEmptyDraft)
 
     return (
         <div className="new-transaction-modal__fields">
@@ -52,6 +55,11 @@ export const TransactionFields = ({ draft, showRemoveIcon }: Props) => {
             <IconButton color="primary" aria-label="копировать" size="small" onClick={() => cloneDraft(draft.localId)}>
                 <ContentCopyIcon fontSize="inherit" />
             </IconButton>
+            <div style={{ width: "36px" }}>
+                {showRemoveIcon && <IconButton color="success" aria-label="добавить" size="small" onClick={() => { addEmptyDraft(spaceId) }}>
+                    <AddIcon fontSize="inherit" />
+                </IconButton>}
+            </div>
             <div style={{ width: "36px" }}>
                 {showRemoveIcon && <IconButton color="error" aria-label="удалить" size="small" onClick={() => { removeDraft(draft.localId) }}>
                     <DeleteIcon fontSize="inherit" />

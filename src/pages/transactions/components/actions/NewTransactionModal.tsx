@@ -28,7 +28,7 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
         <UModal open={open} onClose={onClose} title={title}>
             <div className="new-transaction-modal">
                 <div className="new-transaction-modal__form">
-                    {drafts.map((draft, i) => <TransactionFields key={draft.localId} draft={draft} showRemoveIcon={i>0} />)}
+                    {drafts.map((draft, i) => <TransactionFields key={draft.localId} draft={draft} showRemoveIcon={i>0} spaceId={spaceId} />)}
                 </div>
                 <Button variant="contained">Сохранить</Button>
             </div>

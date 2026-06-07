@@ -128,7 +128,7 @@
 
 .new-transaction-modal__fields {
   display: grid;
-  grid-template-columns: repeat(5, 1fr) 36px 36px;
+  grid-template-columns: repeat(5, 1fr) 36px 36px 36px;
   align-items: center;
   gap: 12px;
 }
