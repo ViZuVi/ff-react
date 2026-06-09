@@ -25,6 +25,10 @@ export interface CreateTransaction extends BaseTransaction {
     space_id: number | null
 }
 
+export interface UpdateTransaction extends CreateTransaction {
+    id: number
+}
+
 export interface Transaction extends BaseTransaction {
     id: number
     account: AccountType

@@ -88,7 +88,12 @@ const transactions: Transaction[] = [
     }
 ]
 
-const mockTransactions = [...transactions, ...transactions, ...transactions, ...transactions, ...transactions]
+const mockTransactions = [
+    ...transactions,
+    ...transactions.map((x) => ({ ...x, id: x.id * 2 })),
+    ...transactions.map((x) => ({ ...x, id: x.id * 3 })),
+    ...transactions.map((x) => ({ ...x, id: x.id * 4 })),
+    ...transactions.map((x) => ({ ...x, id: x.id * 5 }))]
 
 export const TransactionsView = () => {
     return (

@@ -3,6 +3,9 @@ import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, type ChangeEvent, type MouseEvent } from "react";
+import { useModal } from "@/shared/hooks/useModal";
+import { DeleteTransactionModal } from "./DeleteTransactionModal";
+import { EditTransactionModal } from "./EditTransactionModal";
 
 type HeadCell = {
     value: keyof Transaction | 'actions'
@@ -10,6 +13,8 @@ type HeadCell = {
 }
 
 type Order = 'asc' | 'desc';
+
+type ModalType = 'delete' | 'edit'
 
 const headCells: readonly HeadCell[] = [
     { value: 'created_at', name: 'дата' },
@@ -55,6 +60,36 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
         setPage(0);
     };
 
+    const {
+        openModal,
+        closeModal,
+        isOpen,
+    } = useModal<ModalType>()
+
+    const [selectedTransaction, setSelectedTransaction] = useState<Transaction>()
+
+    const handleOpen = (type: ModalType, tr: Transaction) => {
+        setSelectedTransaction(tr)
+        openModal(type)
+    }
+
+    const handleCloseModal = () => {
+        closeModal()
+        setSelectedTransaction(undefined)
+    }
+
+    const EditTransaction = () => {
+        console.log('edited transaction id: ', selectedTransaction?.id);
+        closeModal()
+        setSelectedTransaction(undefined)
+    }
+
+    const deleteTransaction = () => {
+        console.log('deleted transaction id: ', selectedTransaction?.id);
+        closeModal()
+        setSelectedTransaction(undefined)
+    }
+
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
 
@@ -90,8 +125,8 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
                                 <TableCell>{row.user_name}</TableCell>
                                 <TableCell>{row.comment}</TableCell>
                                 <TableCell>
-                                    <IconButton size='small' aria-label="редактировать"><EditIcon fontSize="inherit" /></IconButton>
-                                    <IconButton size='small' color="error" aria-label="удалить"><DeleteIcon fontSize="inherit" /></IconButton>
+                                    <IconButton size='small' aria-label="редактировать" onClick={() => handleOpen('edit', row)}><EditIcon fontSize="inherit" /></IconButton>
+                                    <IconButton size='small' color="error" aria-label="удалить" onClick={() => handleOpen('delete', row)}><DeleteIcon fontSize="inherit" /></IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -107,6 +142,8 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
+            {selectedTransaction && <EditTransactionModal open={isOpen('edit')} onClose={handleCloseModal} confirmEdit={EditTransaction} transaction={selectedTransaction} />}
+            {selectedTransaction && <DeleteTransactionModal open={isOpen('delete')} onClose={handleCloseModal} confirmDelete={deleteTransaction} transaction={selectedTransaction} />}
         </Paper>
     )
 }

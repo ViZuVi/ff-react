@@ -21,15 +21,15 @@ export const TransactionFields = ({ draft, showRemoveIcon, spaceId }: Props) => 
     return (
         <div className="new-transaction-modal__fields">
             <TextField id="comment" label="Описание" size="small" value={draft.comment} onChange={(e) => updateDraft(draft.localId, 'comment', e.target.value)} />
-            <TextField id="created_at" label="Описание" size="small" value={draft.created_at} onChange={(e) => updateDraft(draft.localId, 'created_at', e.target.value)} />
-            <NumberField label="Сумма" size="small" min={1} />
+            <TextField id="created_at" label="Дата" size="small" value={draft.created_at} onChange={(e) => updateDraft(draft.localId, 'created_at', e.target.value)} />
+            <NumberField label="Сумма" value={Number(draft.amount)} onValueChange={(e) => updateDraft(draft.localId, 'amount', `${e}`)} size="small" min={1} />
             <FormControl size="small">
                 <InputLabel id="category">Категория</InputLabel>
                 <Select
                     labelId="category"
                     id="category"
                     value={draft.category_id}
-                    label="Age"
+                    label="Категория"
                     onChange={(e) => updateDraft(draft.localId, 'category_id', Number(e.target.value))}
                 >
                     <MenuItem value={10}>Ten</MenuItem>
@@ -43,7 +43,7 @@ export const TransactionFields = ({ draft, showRemoveIcon, spaceId }: Props) => 
                     labelId="account"
                     id="account"
                     value={draft.account_id}
-                    label="Age"
+                    label="Счёт"
                     onChange={(e) => updateDraft(draft.localId, 'account_id', Number(e.target.value))}
                 >
                     <MenuItem value={10}>Ten</MenuItem>
@@ -56,9 +56,9 @@ export const TransactionFields = ({ draft, showRemoveIcon, spaceId }: Props) => 
                 <ContentCopyIcon fontSize="inherit" />
             </IconButton>
             <div style={{ width: "36px" }}>
-                {showRemoveIcon && <IconButton color="success" aria-label="добавить" size="small" onClick={() => { addEmptyDraft(spaceId) }}>
+                <IconButton color="success" aria-label="добавить" size="small" onClick={() => { addEmptyDraft(spaceId) }}>
                     <AddIcon fontSize="inherit" />
-                </IconButton>}
+                </IconButton>
             </div>
             <div style={{ width: "36px" }}>
                 {showRemoveIcon && <IconButton color="error" aria-label="удалить" size="small" onClick={() => { removeDraft(draft.localId) }}>

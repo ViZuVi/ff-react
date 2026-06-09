@@ -5,6 +5,7 @@ export const buttonOverrides = {
         textTransform: 'none',
         fontWeight: 600,
         height: 44,
+        display: 'block'
       },
 
       containedPrimary: {

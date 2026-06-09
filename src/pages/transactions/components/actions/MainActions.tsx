@@ -44,7 +44,6 @@ export const MainActions = () => {
             <CategoryModal open={isOpen('categories')} onClose={closeModal} />
             <ConverterModal open={isOpen('converter')} onClose={closeModal} />
             <NewTransactionModal open={isOpen('new')} type={newTransType} onClose={closeModal} />
-            {/* <ConverterModal open={isOpen('expense')} onClose={closeModal} /> */}
         </div>
     )
 }
