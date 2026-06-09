@@ -4,11 +4,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
 }
 
 .u-modal__title {
-    margin-bottom: 1rem;
+    margin: 24px auto;
     text-align: center;
 }
 

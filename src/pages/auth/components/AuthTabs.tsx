@@ -43,7 +43,7 @@ function a11yProps(index: number) {
 export const AuthTabs = () => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -57,7 +57,7 @@ export const AuthTabs = () => {
           indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
-          aria-label="full width tabs example"
+          aria-label="auth tabs"
         >
           <Tab label="Вход" {...a11yProps(0)} />
           <Tab label="Регистрация" {...a11yProps(1)} />

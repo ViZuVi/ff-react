@@ -69,7 +69,7 @@ export const EditTransactionModal = ({ transaction, open, onClose, confirmEdit }
                     </Select>
                 </FormControl>
             </div>
-            <Button sx={{m: '0 auto'}} variant="contained" size="small" onClick={confirmEdit}>Подтверить изменения</Button>
+            <Button sx={{m: '0 auto 24px'}} variant="contained" size="small" onClick={confirmEdit}>Подтверить изменения</Button>
         </UModal>
     )
 

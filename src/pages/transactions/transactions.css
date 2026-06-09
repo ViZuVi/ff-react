@@ -39,6 +39,7 @@
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 36px;
+  padding: 0 24px 24px;
 }
 
 .balance-modal__totals-wrapper {
@@ -77,6 +78,7 @@
   min-width: 300px;
   max-height: 400px;
   overflow: auto;
+  padding: 0 24px 24px;
 }
 
 .category-modal__item {
@@ -118,6 +120,7 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding: 0 24px 24px;
 }
 
 .new-transaction-modal__form {
@@ -140,12 +143,13 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  padding: 0 24px 24px;
 }
 
 .delete-transaction-modal {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px;  padding: 0 24px 24px;
 }
 
 .no-space {
