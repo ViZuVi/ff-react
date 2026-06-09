@@ -4,7 +4,19 @@ import './transactions.css'
 import { Filters } from './components/filters/Filters'
 import { TransactionsTable } from './components/table/TransactionsTable'
 import type { Transaction } from '@/shared/types/TransactionDraft'
+import type { BaseSpace } from '@/shared/types/Space'
+import { Skeleton } from '@mui/material'
+import { NoSpaces } from './components/NoSpaces'
+import { useState } from 'react'
 
+
+const spaces: BaseSpace[] = [
+    {
+        "id": 31,
+        "created_at": "2026-05-29 08:17:08",
+        "name": "test"
+    }
+]
 const transactions: Transaction[] = [
     {
         "id": 4074,
@@ -96,14 +108,25 @@ const mockTransactions = [
     ...transactions.map((x) => ({ ...x, id: x.id * 5 }))]
 
 export const TransactionsView = () => {
-    return (
-        <div className='transactions-view'>
-            <div className='transactions-wrapper'>
+    const [loading, setLoading] = useState(true)
 
-                <MainActions />
-                <TransactionsTable rows={mockTransactions} />
-            </div>
-            <Filters />
-        </div>
+    setTimeout(() => { setLoading(false) }, 1000)
+
+    return (
+        loading ?
+            <>
+                <div style={{ display: 'flex', gap: '24px' }}>
+                    <Skeleton animation="wave" variant="rectangular" width={1200} height={400} />
+                    <Skeleton animation="wave" variant="rectangular" width={400} height={400} />
+                </div>
+            </>
+            : spaces.length ? <div className='transactions-view'>
+                <div className='transactions-wrapper'>
+
+                    <MainActions />
+                    <TransactionsTable rows={mockTransactions} />
+                </div>
+                <Filters />
+            </div> : <NoSpaces />
     )
 }
