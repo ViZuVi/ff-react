@@ -4,18 +4,18 @@ type TransactionType = {
 }
 
 type CategoryType = {
-    id: 0 | 1
+    id: number
     name: string
 }
 
 type AccountType = {
-    id: 0 | 1
+    id: number
     name: string
 }
 
 interface BaseTransaction {
     created_at: string
-    amount: number
+    amount: string
     comment: string
 }
 
@@ -30,6 +30,8 @@ export interface Transaction extends BaseTransaction {
     account: AccountType
     type: TransactionType
     category: CategoryType
+    user_name: string
+    editable: boolean
 }
 
 export interface TransactionDraft extends CreateTransaction {

@@ -2,8 +2,10 @@
 import { MainActions } from '@/pages/transactions/components/actions/MainActions'
 import './transactions.css'
 import { Filters } from './components/filters/Filters'
+import { TransactionsTable } from './components/table/TransactionsTable'
+import type { Transaction } from '@/shared/types/TransactionDraft'
 
-const transactions = [
+const transactions: Transaction[] = [
     {
         "id": 4074,
         "created_at": "2026-04-30 22:32:39",
@@ -88,42 +90,15 @@ const transactions = [
 
 const mockTransactions = [...transactions, ...transactions, ...transactions, ...transactions, ...transactions]
 
-const tableHead = ["дата", "категория", "сумма", "счёт", "создатель", "описание", "действия"]
-
 export const TransactionsView = () => {
-    const tableItems = mockTransactions.map((row, i) =>
-        <tr key={row.id + i.toString()}>
-            <td>{row.created_at}</td>
-            <td>{row.category.name}</td>
-            <td>{row.amount}</td>
-            <td>{row.account.name}</td>
-            <td>{row.user_name}</td>
-            <td>{row.comment}</td>
-            <td>
-                <span>edit</span>
-                <span>delete</span>
-            </td>
-        </tr>
-    )
     return (
-        <>
-            <div className='transactions-view'>
-                <div className='transactions-wrapper'>
+        <div className='transactions-view'>
+            <div className='transactions-wrapper'>
 
-                    <MainActions />
-                    <table className="transactions-table">
-                        <thead>
-                            <tr>
-                                {tableHead.map(h => <th key={h}>{h}</th>)}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableItems}
-                        </tbody>
-                    </table>
-                </div>
-                <Filters />
+                <MainActions />
+                <TransactionsTable rows={mockTransactions} />
             </div>
-        </>
+            <Filters />
+        </div>
     )
 }

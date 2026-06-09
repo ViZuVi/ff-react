@@ -17,7 +17,7 @@ type Store = {
 const createEmptyDraft = (spaceId: number): TransactionDraft => ({
     localId: crypto.randomUUID(),
     created_at: new Date().toISOString(),
-    amount: 0,
+    amount: "0",
     account_id: null,
     category_id: null,
     space_id: spaceId,
