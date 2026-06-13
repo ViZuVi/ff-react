@@ -21,7 +21,7 @@ export const OutboxInvitations = () => {
             <h2 className="outbox-invitations__title">Пригласить пользователя в пространство</h2>
             <div className="outbox-invitations__form">
                 <EmailInput value={invite.email} onChange={(e) => onChange('email', e)} />
-                <TextField id="message" placeholder="Сообщение" size="small" value={invite.message} onChange={(e) => onChange('message', e)} />
+                <TextField id="message" placeholder="Сообщение" size="small" value={invite.message} onChange={(e: ChangeEvent<HTMLInputElement>) => onChange('message', e)} />
                 <Button variant="contained" size="small" onClick={() => { }}>Пригласить</Button>
             </div>
             <InvitationsList invitations={invitations} type="исходящих" />

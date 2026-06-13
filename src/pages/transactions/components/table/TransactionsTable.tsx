@@ -33,7 +33,7 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
     const [orderBy, setOrderBy] = useState<keyof Transaction>('created_at');
 
     const onRequestSort = (
-        event: React.MouseEvent<unknown>,
+        event: MouseEvent<unknown>,
         property: keyof Transaction,
     ) => {
         const isAsc = orderBy === property && order === 'asc';

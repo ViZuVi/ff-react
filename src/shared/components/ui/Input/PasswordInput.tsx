@@ -1,5 +1,5 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material"
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -8,7 +8,7 @@ type TextFieldProps = {
   value: string
   autoComplete?: string
   disabled?: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const PasswordInput = ({value, autoComplete, disabled, onChange}: TextFieldProps) => {

@@ -22,7 +22,7 @@ export const RegisterForm = () => {
 
     return (
         <form className="login-form" onSubmit={onSubmit}>
-            <TextField id="username" autoComplete="off" size="small" placeholder="username" value={credentials.username} required onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange("username", e)} />
+            <TextField id="username" autoComplete="off" size="small" placeholder="username" value={credentials.username} required onChange={(e: ChangeEvent<HTMLInputElement>) => onChange("username", e)} />
             <EmailInput value={credentials.email} onChange={(e) => onChange("email", e)} />
             <PasswordInput value={credentials.password} autoComplete="new-password" onChange={(e) => onChange("password", e)} />
             <button type="submit">Подтвердить</button>

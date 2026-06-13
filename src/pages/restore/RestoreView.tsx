@@ -31,7 +31,7 @@ export const RestoreView = () => {
                 <form className="restore-form" onSubmit={onSubmit}>
                     <EmailInput value={credentials.email} onChange={(e) => onChange("email", e)} />
                     <button type="button">Получить код подверждения</button>
-                    <TextField id="code" size="small" placeholder="code" value={credentials.code} required onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange("code", e)} />
+                    <TextField id="code" size="small" placeholder="code" value={credentials.code} required onChange={(e: ChangeEvent<HTMLInputElement>) => onChange("code", e)} />
                     <PasswordInput value={credentials.password} disabled={!credentials.code} autoComplete='new-password' onChange={(e) => onChange("password", e)} />
                     <PasswordInput value={credentials.password_confirmation} disabled={!credentials.code} autoComplete='new-password' onChange={(e) => onChange("password_confirmation", e)} />
                     <button type="submit">Подтвердить</button>

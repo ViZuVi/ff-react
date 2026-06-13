@@ -1,9 +1,10 @@
 import { InputAdornment, TextField } from "@mui/material"
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import type { ChangeEvent } from "react";
 
 type TextFieldProps = {
   value: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const EmailInput = ({value, onChange}: TextFieldProps) => {
