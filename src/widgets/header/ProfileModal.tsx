@@ -1,6 +1,8 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal"
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
+import { InboxInvitations } from "./InboxInvitations";
+import { OutboxInvitations } from "./OutboxInvitations";
 
 interface props {
     open: boolean;
@@ -21,13 +23,14 @@ function TabPanel(props: TabPanelProps) {
     return (
         <div
             role="tabpanel"
+            style={{flexGrow: 1}}
             hidden={value !== index}
             id={`vertical-tabpanel-${index}`}
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ p: 3, width: '100%' }}>
                     {children}
                 </Box>
             )}
@@ -43,14 +46,14 @@ function a11yProps(index: number) {
 }
 
 export const ProfileModal = ({ open, onClose }: props) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
 
     const handleChange = (_: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
     return (
         <UModal open={open} onClose={onClose} title="Информация пользователя" divider>
-            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, minWidth: '60vw' }}>
+            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 'auto', minWidth: '60vw' }}>
                 <Tabs
                     orientation="vertical"
                     variant="scrollable"
@@ -59,18 +62,18 @@ export const ProfileModal = ({ open, onClose }: props) => {
                     sx={{ borderRight: 1, borderColor: 'divider' }}
                     aria-label="profile tabs"
                 >
-                    <Tab label="Личная информация" {...a11yProps(0)} />
+                    <Tab disabled label="Личная информация" {...a11yProps(0)} />
                     <Tab label="Входящие приглашения" {...a11yProps(1)} />
-                    <Tab label="Исходящие приглашения" {...a11yProps(3)} />
+                    <Tab label="Исходящие приглашения" {...a11yProps(2)} />
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     1
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    2
+                    <InboxInvitations />
                 </TabPanel>
-                <TabPanel value={value} index={3}>
-                    3
+                <TabPanel value={value} index={2}>
+                    <OutboxInvitations />
                 </TabPanel>
             </Box>
         </UModal>

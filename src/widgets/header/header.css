@@ -18,3 +18,28 @@
     align-items: center;
     gap: 12px;
 }
+
+.outbox-invitations {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.outbox-invitations__title {
+    text-align: center;
+}
+
+.outbox-invitations__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.invitations-list__title,
+.invitations-list__empty {
+    text-align: center;
+}
+
+.invitations-list__title {
+    margin-bottom: 16px;
+}
