@@ -8,6 +8,8 @@ import type { BaseSpace } from '@/shared/types/Space'
 import { Skeleton } from '@mui/material'
 import { NoSpaces } from './components/NoSpaces'
 import { useState } from 'react'
+import { useCurrentSpace } from '@/entities/space/hooks/use-current-space'
+import { useTransactions } from '@/entities/transaction/hooks/use-transactions'
 
 
 const spaces: BaseSpace[] = [
@@ -108,12 +110,14 @@ const mockTransactions = [
     ...transactions.map((x) => ({ ...x, id: x.id * 5 }))]
 
 export const TransactionsView = () => {
-    const [loading, setLoading] = useState(true)
+    const { data: currentSpace, isLoading } = useCurrentSpace()
+    const { data: transactions, isLoading: transactionsLoading } = useTransactions()
 
-    setTimeout(() => { setLoading(false) }, 1000)
+    console.log(currentSpace, transactions);
+
 
     return (
-        loading ?
+        transactionsLoading ?
             <>
                 <div style={{ display: 'flex', gap: '24px' }}>
                     <Skeleton animation="wave" variant="rectangular" width={1200} height={400} />
