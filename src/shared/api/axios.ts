@@ -21,7 +21,7 @@ api.interceptors.response.use(
 
   (error) => {
     if (error.response?.status === 401) {
-      useAuthStore.getState().logout()
+      useAuthStore.getState().setToken(null)
 
       window.location.href = '/login'
     }

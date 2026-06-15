@@ -1,5 +1,4 @@
 import { Navigate } from 'react-router'
-
 import { useAuthStore } from '@/app/store/auth'
 import type { ReactNode } from 'react'
 
@@ -8,9 +7,9 @@ type Props = {
 }
 
 export const ProtectedRoute = ({ children }: Props) => {
-  const user = useAuthStore((s) => s.user)
+  const token = useAuthStore((s) => s.token)
 
-  if (!user) {
+  if (!token) {
     return <Navigate to="/login" replace />
   }
 

@@ -7,7 +7,8 @@ import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { RestorePage } from '@/pages/restore/RestorePage'
 import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
-// import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
+import { ProtectedRoute } from '@/features/auth/ProtectedRoute'
+import { GuestRoute } from '@/features/auth/GuestRoute'
 
 // import { WorkspacePage } from '@/pages/workspace/WorkspacePage'
 // import { CategoriesPage } from '@/pages/workspace/CategoriesPage'
@@ -17,15 +18,15 @@ import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
 
 export const router = createBrowserRouter([
   {
-    element: <AuthLayout />,
+    element: <GuestRoute><AuthLayout /></GuestRoute>,
     children: [
       { path: '/login', element: <LoginPage /> },
       { path: '/restore', element: <RestorePage /> },
     ],
   },
   {
-    // element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
-    element: <AppLayout />,
+    element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
+    // element: <AppLayout />,
     children: [
       { index: true, element: <TransactionsPage /> },
       { path: '/charts', element: <ChartsPage /> },

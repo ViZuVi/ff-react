@@ -7,10 +7,13 @@ import './header.css'
 import { useModal } from '@/shared/hooks/useModal';
 import { ProfileModal } from './ProfileModal';
 import { SettingsModal } from './SettingsModal';
+import { useLogout } from '@/features/auth/hooks/use-logout';
 
 type ModalType = 'profile' | 'settings'
 
 export const AppHeader = () => {
+    const logoutMutation = useLogout();
+
     const {
         openModal,
         closeModal,
@@ -18,8 +21,9 @@ export const AppHeader = () => {
     } = useModal<ModalType>()
 
     const logout = () => {
-        console.log('logout');
+        logoutMutation.mutate()
     }
+
 
     return (
         <div className="app-header">
