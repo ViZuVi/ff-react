@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/app/store/auth"
 import { useQuery } from "@tanstack/react-query"
-import { getMe } from "../get-me"
+import { getMe } from "../api/get-me"
 
 export const useMe = () => {
     const token = useAuthStore((s) => s.token)
