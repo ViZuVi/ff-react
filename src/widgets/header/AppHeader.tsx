@@ -8,6 +8,7 @@ import { useModal } from '@/shared/hooks/useModal';
 import { ProfileModal } from './ProfileModal';
 import { SettingsModal } from './SettingsModal';
 import { useLogout } from '@/features/auth/hooks/use-logout';
+import { useIsFetching } from '@tanstack/react-query';
 
 type ModalType = 'profile' | 'settings'
 
@@ -24,6 +25,8 @@ export const AppHeader = () => {
         logoutMutation.mutate()
     }
 
+    const isFetching = useIsFetching()
+
 
     return (
         <div className="app-header">
@@ -38,6 +41,7 @@ export const AppHeader = () => {
                 <SettingsModal onClose={closeModal} open={isOpen('settings')} />
                 <ProfileModal onClose={closeModal} open={isOpen('profile')} />
             </div>
+            {isFetching > 0 && <div style={{position: 'absolute', bottom: '2px', content: '', left: 0, right: 0, backgroundColor: 'red', height: 2, zIndex: 2}}></div>}
         </div>
     )
 }
