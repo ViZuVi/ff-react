@@ -2,7 +2,7 @@ import type { Transaction } from "@/shared/types/TransactionDraft";
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState, type ChangeEvent, type MouseEvent } from "react";
+import { memo, useState, type ChangeEvent, type MouseEvent } from "react";
 import { useModal } from "@/shared/hooks/useModal";
 import { DeleteTransactionModal } from "./DeleteTransactionModal";
 import { EditTransactionModal } from "./EditTransactionModal";
@@ -27,7 +27,7 @@ const headCells: readonly HeadCell[] = [
 
 ];
 
-export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
+const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
 
     const [order, setOrder] = useState<Order>('desc');
     const [orderBy, setOrderBy] = useState<keyof Transaction>('created_at');
@@ -113,7 +113,7 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
                     </TableHead>
 
                     <TableBody>
-                        {rows.map((row) => (
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                             <TableRow
                                 key={row.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -147,3 +147,5 @@ export const TransactionsTable = ({ rows }: { rows: Array<Transaction> }) => {
         </Paper>
     )
 }
+
+export const TransactionsTable = memo(TransactionsTableComponent)

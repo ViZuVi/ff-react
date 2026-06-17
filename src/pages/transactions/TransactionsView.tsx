@@ -6,7 +6,7 @@ import { Skeleton } from '@mui/material'
 import { NoSpaces } from './components/NoSpaces'
 import { useTransactions } from '@/entities/transaction/hooks/use-transactions'
 import { useSpaces } from '@/entities/space/hooks/use-spaces'
-import { useState } from 'react'
+import { useDeferredValue, useState } from 'react'
 import { useSpaceStore } from '@/app/store/space'
 import type { Filters } from '@/shared/types/Filters'
 
@@ -15,22 +15,21 @@ export const TransactionsView = () => {
     const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
     const [filters, setFilters] = useState<Filters>({
         search: '',
-        category_id: [],
-        type: 1,
+        category_id: null,
+        type: null,
         space_id: currentSpaceId,
-        user_id: 2,
-        account_id: 22,
+        user_id: null,
+        account_id: null,
         date_from: "2026-06-01",
         date_to: ""
     })
 
-    const { data: transactions, isLoading: transactionsLoading } = useTransactions(filters)
+    const deferredFilters = useDeferredValue(filters);
+    const { data: transactions, isLoading: transactionsLoading } = useTransactions(deferredFilters)
 
     
-    const handleChange = (type: "search" | "type" | "user_id" | "account_id") => (e: SelectChangeEvent) => {
-        setFilters((prev) => ({ ...prev, [type]: e.target.value }))
-        console.log(type, e);
-
+    const handleChange = (type: keyof typeof filters, e: string) => {
+        setFilters((prev) => ({ ...prev, [type]: e }))
     }
 
     return (

@@ -1,9 +1,11 @@
 import { api } from "@/shared/api/axios"
-import type { ApiRespons } from "@/shared/types/ApiRespons"
 import type { TransactionsParams } from "@/shared/types/Filters"
-import type { Transaction } from "@/shared/types/TransactionDraft"
 
-export const getTransactions = async (filters: TransactionsParams): Promise<ApiRespons<Transaction>> => {
-    const { data } = await api.post('transaction/get-by-filter', filters)
+type TransactionsRequest = Partial<TransactionsParams>;
+
+export const getTransactions = async (
+    params: TransactionsRequest
+) => {
+    const { data } = await api.post('transaction/get-by-filter', params)
     return data
 }
