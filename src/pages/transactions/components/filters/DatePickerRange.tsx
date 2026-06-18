@@ -60,12 +60,6 @@ export const DatePickerRange = ({ from, to, onChange }: { from: string, to: stri
                     value={dayjs(draft.from)}
                     maxDate={dayjs(to)}
                     onChange={(v) => v && changeDate('from', v)}
-                    slotProps={{
-                        field: {
-                            clearable: true,
-                            onClear: () => changeDate('from', null),
-                        },
-                    }}
                 />
                 <span>-</span>
                 <DesktopDatePicker
@@ -74,12 +68,6 @@ export const DatePickerRange = ({ from, to, onChange }: { from: string, to: stri
                     value={dayjs(draft.to)}
                     minDate={dayjs(from)}
                     onChange={(v) => v && changeDate('to', v)}
-                    slotProps={{
-                        field: {
-                            clearable: true,
-                            onClear: () => changeDate('to', null),
-                        },
-                    }}
                 />
             </LocalizationProvider>
         </div>
