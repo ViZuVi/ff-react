@@ -11,7 +11,7 @@ export const useTransactions = (filters: TransactionsParams) => {
     const compact = <T extends object>(obj: T) => {
         return Object.fromEntries(
             Object.entries(obj).filter(
-                ([, value]) => value !== null && value !== undefined && value !== ""
+                ([, value]) => value !== null && value !== undefined && value !== "" && (!Array.isArray(value) || value.length > 0)
             )
         ) as Partial<T>;
     }

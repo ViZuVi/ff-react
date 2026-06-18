@@ -2,10 +2,10 @@ export interface Filters {
   date_from: string | null,
   date_to: string | null,
   space_id: string | null,
-  category_id: number[] | null,
-  account_id: number | null,
-  user_id: number | null,
-  type: number | null,
+  category_id: number[],
+  account_id: string,
+  user_id: string,
+  type: string,
   search: string
 }
 

@@ -31,8 +31,8 @@ export const MainActions = () => {
             <div className='transactions-actions__block'>
                 <Button variant="outlined" size="small" onClick={() => openModal('balance')}>баланс и счета</Button>
                 <Button variant="outlined" size="small" onClick={() => openModal('categories')}>категории</Button>
-                <IconButton aria-label="конвертер" size="small" color="primary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
-                <IconButton aria-label="аналитика" size="small" color="primary" href="/charts"><BarChartIcon /></IconButton>
+                <IconButton aria-label="конвертер" disabled size="small" color="primary" onClick={() => openModal('converter')}><CurrencyExchangeIcon /></IconButton>
+                <IconButton aria-label="аналитика" disabled size="small" color="primary" href="/charts"><BarChartIcon /></IconButton>
             </div>
 
             <div className='transactions-actions__block transactions-actions__block--add'>

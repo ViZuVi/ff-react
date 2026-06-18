@@ -15,11 +15,11 @@ export const TransactionsView = () => {
     const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
     const [filters, setFilters] = useState<Filters>({
         search: '',
-        category_id: null,
-        type: null,
+        category_id: [] as number[],
+        type: '',
         space_id: currentSpaceId,
-        user_id: null,
-        account_id: null,
+        user_id: '',
+        account_id: '',
         date_from: "2026-06-01",
         date_to: ""
     })
@@ -28,7 +28,7 @@ export const TransactionsView = () => {
     const { data: transactions, isLoading: transactionsLoading } = useTransactions(deferredFilters)
 
     
-    const handleChange = (type: keyof typeof filters, e: string) => {
+    const handleChange = <K extends keyof typeof filters>(type: K, e: (typeof filters)[K]) => {
         setFilters((prev) => ({ ...prev, [type]: e }))
     }
 
