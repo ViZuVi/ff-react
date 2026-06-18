@@ -9,6 +9,7 @@ import { useSpaces } from '@/entities/space/hooks/use-spaces'
 import { useDeferredValue, useState } from 'react'
 import { useSpaceStore } from '@/app/store/space'
 import type { Filters } from '@/shared/types/Filters'
+import dayjs from 'dayjs'
 
 export const TransactionsView = () => {
     const { data: spaces, isLoading: spacesLoading } = useSpaces()
@@ -20,8 +21,8 @@ export const TransactionsView = () => {
         space_id: currentSpaceId,
         user_id: '',
         account_id: '',
-        date_from: "2026-06-01",
-        date_to: ""
+        date_from: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+        date_to: dayjs().format('YYYY-MM-DD')
     })
 
     const deferredFilters = useDeferredValue(filters);
@@ -37,7 +38,7 @@ export const TransactionsView = () => {
         spacesLoading ?
             <>
                 <div style={{ display: 'flex', gap: '24px' }}>
-                    <Skeleton animation="wave" variant="rectangular" width={1200} height={400} />
+                    <Skeleton animation="wave" variant="rectangular" width={1300} height={400} />
                     <Skeleton animation="wave" variant="rectangular" width={400} height={400} />
                 </div>
             </>

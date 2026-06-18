@@ -11,12 +11,12 @@ import '@/styles/index.css'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <AppThemeProvider>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </AppThemeProvider>
-  </StrictMode>,
+  // </StrictMode>,
 )
