@@ -1,11 +1,12 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal"
-import { CircularProgress, FormControl, IconButton, InputLabel, MenuItem, Select, type SelectChangeEvent } from "@mui/material";
+import { Button, CircularProgress, FormControl, IconButton, InputLabel, MenuItem, Select, Snackbar, type SelectChangeEvent } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useBalance } from "@/entities/balance/hooks/use-balance";
 import { useEffect, useState } from "react";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCurrency } from "@/entities/currency/hooks/use-currency";
+import type { Account } from "@/shared/types/Account";
 
 interface props {
     open: boolean;
@@ -47,6 +48,22 @@ export const BalanceModal = ({ open, onClose }: props) => {
         }
     }, [currencyResp]);
 
+    const [snackVisability, setSnackVisability] = useState(false)
+    const [selectedAccount, setSelectedAccount] = useState<Account>()
+
+    const handleAccountDelete = (acc: Account) => {
+        setSelectedAccount(acc)
+        setSnackVisability(true)
+    }
+
+    const confirmDelete = () => {
+        console.log('delete acc ', selectedAccount?.id, selectedAccount?.name);
+        setSnackVisability(false)
+    }
+    // TODO: acccounts logic to separate file, finish ConfirmSnackbar component
+
+    const handleAccountEdit = () => { }
+
     return (
         open && <UModal open={open} onClose={onClose} title="Счета и баланс">
             <div className="balance-modal">
@@ -60,7 +77,7 @@ export const BalanceModal = ({ open, onClose }: props) => {
                                 <span>{acc.currency.code}</span>
                                 <span className="balance-modal__accounts-actions">
                                     <IconButton size='small' aria-label="редактировать"><EditIcon fontSize="inherit" /></IconButton>
-                                    <IconButton size='small' color="error" aria-label="удалить"><DeleteIcon fontSize="inherit" /></IconButton>
+                                    <IconButton size='small' color="error" aria-label="удалить" onClick={() => handleAccountDelete(acc)}><DeleteIcon fontSize="inherit" /></IconButton>
                                 </span>
                             </li>
                         })}
@@ -103,6 +120,24 @@ export const BalanceModal = ({ open, onClose }: props) => {
                     </div>
                 </div>}
             </div>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: "center" }}
+                open={snackVisability}
+                onClose={() => setSnackVisability(false)}
+                message={`Вы действительно хотите удалить счет ${selectedAccount?.name}`}
+                slotProps={{
+                    clickAwayListener: {
+                        onClickAway: (event) => {
+                            event.defaultMuiPrevented = true;
+                        },
+                    },
+                }}
+                action={
+                    <Button color="error" size="small" onClick={confirmDelete}>
+                        Подтвердить
+                    </Button>
+                }
+            />
         </UModal>
     )
 }
