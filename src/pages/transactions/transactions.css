@@ -35,7 +35,7 @@
 }
 
 .balance-modal {
-  width: 600px;
+  width: 100%;
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 36px;

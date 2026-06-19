@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { Divider, IconButton } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,7 +16,7 @@ interface ModalProps {
 
 export const UModal = ({ open, divider, closeIcon = true, title, content, children, onClose }: ModalProps) => {
 
-    return (
+    return createPortal(
         <div>
             <Modal
                 open={open}
@@ -28,6 +29,6 @@ export const UModal = ({ open, divider, closeIcon = true, title, content, childr
                     <div>{content || children}</div>
                 </div>
             </Modal>
-        </div>
+        </div>, document.body
     )
 }

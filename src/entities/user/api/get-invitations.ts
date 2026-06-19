@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/axios"
-import type { ApiRespons } from "@/shared/types/ApiRespons";
+import type { ApiResponse } from "@/shared/types/ApiResponse";
 import type { Invitation } from "@/shared/types/Invitation";
 
 type R = {
@@ -7,7 +7,7 @@ type R = {
     outbox: Invitation[];
 }
 
-export const getInvitation = async (): Promise<ApiRespons<R>> => {
+export const getInvitation = async (): Promise<ApiResponse<R>> => {
     const { data } = await api.get('/user/show')
     return data
 }

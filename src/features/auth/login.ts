@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/axios";
-import type { ApiRespons } from "../../shared/types/ApiRespons";
+import type { ApiResponse } from "../../shared/types/ApiResponse";
 
 export interface LoginDTO {
     email: string;
@@ -12,7 +12,7 @@ type R = {
     token_type: string;
 }
 
-export const login = async (dto: LoginDTO): Promise<ApiRespons<R>> => {
+export const login = async (dto: LoginDTO): Promise<ApiResponse<R>> => {
     const { data } = await api.post('/user/login', dto)
     return data
 }
