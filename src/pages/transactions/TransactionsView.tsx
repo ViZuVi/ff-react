@@ -6,7 +6,7 @@ import { Skeleton } from '@mui/material'
 import { NoSpaces } from './components/NoSpaces'
 import { useTransactions } from '@/entities/transaction/hooks/use-transactions'
 import { useSpaces } from '@/entities/space/hooks/use-spaces'
-import { useDeferredValue, useState } from 'react'
+import { useDeferredValue, useMemo, useState } from 'react'
 import { useSpaceStore } from '@/app/store/space'
 import type { Filters } from '@/shared/types/Filters'
 import dayjs from 'dayjs'
@@ -14,21 +14,30 @@ import dayjs from 'dayjs'
 export const TransactionsView = () => {
     const { data: spaces, isLoading: spacesLoading } = useSpaces()
     const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
-    const [filters, setFilters] = useState<Filters>({
+
+    const [filters, setFilters] = useState<Omit<Filters, 'space_id'>>({
         search: '',
         category_id: [] as number[],
         type: '',
-        space_id: currentSpaceId,
         user_id: '',
         account_id: '',
         date_from: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
         date_to: dayjs().format('YYYY-MM-DD')
     })
 
-    const deferredFilters = useDeferredValue(filters);
+    const filtersWithSpace = useMemo(
+        () => ({
+            ...filters,
+            space_id: currentSpaceId,
+        }),
+        [filters, currentSpaceId]
+    )
+
+    const deferredFilters = useDeferredValue(filtersWithSpace)
+
     const { data: transactions, isLoading: transactionsLoading } = useTransactions(deferredFilters)
 
-    
+
     const handleChange = <K extends keyof typeof filters>(type: K, e: (typeof filters)[K]) => {
         setFilters((prev) => ({ ...prev, [type]: e }))
     }
@@ -45,8 +54,8 @@ export const TransactionsView = () => {
             : spaces?.spaces.length ? <div className='transactions-view'>
                 <div className='transactions-wrapper'>
                     <MainActions />
-                    {transactions?.data ?  <TransactionsTable rows={transactions.data} /> : ''}
-                    
+                    {transactions?.data ? <TransactionsTable rows={transactions.data} /> : ''}
+
                 </div>
                 <FiltersForm filters={filters} onChange={handleChange} />
             </div> : <NoSpaces />

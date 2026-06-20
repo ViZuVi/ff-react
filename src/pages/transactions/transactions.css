@@ -50,7 +50,14 @@
 
 .balance-modal__accounts-item {
   display: grid;
+  align-items: center;
   grid-template-columns: 4fr 3fr 2fr 2fr;
+  padding: 4px 8px;
+}
+
+.balance-modal__curr-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
   padding: 4px 8px;
 }
 

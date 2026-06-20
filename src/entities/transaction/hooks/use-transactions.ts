@@ -30,6 +30,12 @@ export const useTransactions = (filters: TransactionsParams) => {
     return useQuery({
         queryKey: ['transactions', currentSpaceId, cleanedFilters],
         enabled: !!currentSpaceId,
-        queryFn: () => getTransactions(cleanedFilters),
+        queryFn: ({ queryKey }) => {
+            const [, , params] = queryKey
+
+            return getTransactions(
+                params as Partial<TransactionsParams>
+            )
+        },
     });
 }

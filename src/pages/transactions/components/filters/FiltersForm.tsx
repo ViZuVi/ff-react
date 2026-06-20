@@ -9,13 +9,13 @@ import { UserSelect } from "./UserSelect";
 import { AccountSelect } from "./AccountSelect";
 import { DatePickerRange } from "./DatePickerRange";
 
-
+type FiltersWithoutSpaceId = Omit<Filters, 'space_id'>
 
 type Props = {
-    filters: Filters;
-    onChange: <K extends keyof Filters>(
+    filters: FiltersWithoutSpaceId;
+    onChange: <K extends keyof FiltersWithoutSpaceId>(
         key: K,
-        value: Filters[K]
+        value: FiltersWithoutSpaceId[K]
     ) => void;
 }
 

@@ -63,3 +63,40 @@
     flex-direction: column;
     gap: 12px;
 }
+
+.app-header__loader-wrapper {
+    position: absolute;
+    content: "";
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    background-color: #00C389;
+    height: 2px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.app-header__loader-bar {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            #caf3e6 50%,
+            transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer .5s infinite linear;
+}
+
+@keyframes infinite-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

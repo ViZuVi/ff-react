@@ -44,7 +44,7 @@ export const AppHeader = () => {
                 <SettingsModal onClose={closeModal} open={isOpen('settings')} />
                 <ProfileModal onClose={closeModal} open={isOpen('profile')} />
             </div>
-            {isFetching > 0 && <div style={{ position: 'absolute', bottom: '2px', content: '', left: 0, right: 0, backgroundColor: 'red', height: 2, zIndex: 2 }}></div>}
+            {isFetching > 0 && <div className='app-header__loader-wrapper'><div className='app-header__loader-bar'></div></div>}
         </div>
     )
 }

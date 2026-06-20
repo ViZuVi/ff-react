@@ -7,7 +7,10 @@ export const useCurrentSpace = () => {
 
     return useQuery({
         queryKey: ['space', currentSpaceId],
-        queryFn: () => getCurrentSpace(currentSpaceId!),
+        queryFn: ({queryKey}) => {
+            const [, spaceId] = queryKey
+            return getCurrentSpace(spaceId as string)
+        },
         enabled: !!currentSpaceId,
     })
 }

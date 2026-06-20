@@ -83,7 +83,7 @@ export const BalanceModal = ({ open, onClose }: props) => {
                         })}
                     </ul>
                 </div>
-                {isLoadingBalance ? <CircularProgress aria-label="Loading…" /> : balance && <div className="balance-modal__totals">
+                {isLoadingBalance ? <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><CircularProgress aria-label="Loading…" /></div> : balance && <div className="balance-modal__totals">
                     <h3 className="balance-modal__block-title">Баланс</h3>
                     <div className="balance-modal__totals-wrapper">
                         <div className="balance-modal__total">
@@ -109,7 +109,7 @@ export const BalanceModal = ({ open, onClose }: props) => {
                             <h4>Баланс по валютам:</h4>
                             <ul>
                                 {balance.amountByCurrency.map(acc => {
-                                    return <li className="balance-modal__accounts-item" key={acc.currency.id}>
+                                    return <li className="balance-modal__curr-item" key={acc.currency.id}>
                                         <b className={acc.total < 0 ? 'text-error' : 'text-success'}>{acc.total.toLocaleString('ru')}&nbsp;</b>
                                         <span>{acc.currency.code}</span>
                                         <span>(курс {parseFloat(acc.currency.rate).toLocaleString('ru')})</span>
@@ -123,15 +123,13 @@ export const BalanceModal = ({ open, onClose }: props) => {
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: "center" }}
                 open={snackVisability}
-                onClose={() => setSnackVisability(false)}
-                message={`Вы действительно хотите удалить счет ${selectedAccount?.name}`}
-                slotProps={{
-                    clickAwayListener: {
-                        onClickAway: (event) => {
-                            event.defaultMuiPrevented = true;
-                        },
-                    },
+                onClose={(_, reason) => {
+                    if (reason) {
+                        return
+                    }
+                    setSnackVisability(false)
                 }}
+                message={`Вы действительно хотите удалить счет ${selectedAccount?.name}`}
                 action={
                     <Button color="error" size="small" onClick={confirmDelete}>
                         Подтвердить
