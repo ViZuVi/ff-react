@@ -48,7 +48,11 @@
   gap: 24px;
 }
 
-.balance-modal__accounts-item {
+.balance-accounts__list {
+  margin-bottom: 24px;
+}
+
+.balance-accounts__item {
   display: grid;
   align-items: center;
   grid-template-columns: 4fr 3fr 2fr 2fr;
@@ -61,20 +65,21 @@
   padding: 4px 8px;
 }
 
-.balance-modal__accounts-item:nth-child(odd) {
+.balance-accounts__item:nth-child(odd) {
   background-color: #f7f7f7;
 }
 
-.balance-modal__account-name {
+.balance-accounts__name {
   padding-right: 8px;
 }
 
-.balance-modal__block-title {
+.balance-modal__block-title,
+.balance-accounts__title {
   text-align: center;
   margin-bottom: 0.7em;
 }
 
-.balance-modal__accounts-actions {
+.balance-accounts__actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;

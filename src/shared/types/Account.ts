@@ -7,3 +7,10 @@ export type Account = {
     currency: Currency
     balance: string
 }
+
+export type AccountCreate = {
+    balance: number,
+    currency_id: number,
+    name: string,
+    space_id: string
+} 

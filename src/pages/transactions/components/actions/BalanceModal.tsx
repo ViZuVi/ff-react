@@ -1,22 +1,17 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal"
-import { Button, CircularProgress, FormControl, IconButton, InputLabel, MenuItem, Select, Snackbar, type SelectChangeEvent } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { CircularProgress, type SelectChangeEvent } from "@mui/material";
 import { useBalance } from "@/entities/balance/hooks/use-balance";
 import { useEffect, useState } from "react";
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCurrency } from "@/entities/currency/hooks/use-currency";
-import type { Account } from "@/shared/types/Account";
-import { useSnackbarStore } from "@/shared/store/snackbar";
+import { BalanceAccounts } from "./BalanceAccounts";
+import { CurrencySelect } from "./CurrencySelect";
 
-interface props {
+interface Props {
     open: boolean;
     onClose: () => void;
 }
 
-export const BalanceModal = ({ open, onClose }: props) => {
-    const { showSnackbar } = useSnackbarStore.getState()
-    const { data: spaceResp } = useCurrentSpace()
+export const BalanceModal = ({ open, onClose }: Props) => {
     const { data: currencyResp } = useCurrency()
 
     const [currencyId, setCurrencyId] = useState<number>(0);
@@ -50,76 +45,10 @@ export const BalanceModal = ({ open, onClose }: props) => {
         }
     }, [currencyResp]);
 
-    const [selectedAccount, setSelectedAccount] = useState<Account>()
-
-    const handleAccountDelete = (acc: Account) => {
-        setSelectedAccount(acc)
-        showSnackbar({
-            mode: 'confirm',
-            message: `Вы действительно хотите удалить счёт "${acc.name}?"`,
-            type: 'warning',
-
-            confirmAction: async () => {
-                try {
-                    // await api.delete(`/account/${acc.id}`)
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                            console.log('delete', acc.name);
-                            
-                            resolve(true)
-                        }, 2000);
-                    }).then(() => {
-                        showSnackbar({
-                            message: 'Счёт удалён',
-                            type: 'success',
-                            mode: 'auto'
-                        })
-
-                    })
-
-                } catch (e) {
-                    showSnackbar({
-                        message: 'Ошибка удаления',
-                        type: 'error',
-                    })
-                }
-            },
-
-        })
-    }
-
-    const confirmDelete = () => {
-        console.log('delete acc ', selectedAccount?.id, selectedAccount?.name);
-        // setSnackVisability(false)
-    }
-    // TODO: acccounts logic to separate file, finish ConfirmSnackbar component
-
-    const handleAccountEdit = (acc: Account) => {
-        showSnackbar({
-            message: `Изменения счета "${acc.name}" сохранены`,
-            type: 'success',
-        })
-    }
-
     return (
         open && <UModal open={open} onClose={onClose} title="Счета и баланс">
             <div className="balance-modal">
-                <div className="balance-modal__accounts">
-                    <h3 className="balance-modal__block-title">Счета</h3>
-                    <ul>
-                        {spaceResp?.data.accounts.map(acc => {
-                            return <li className="balance-modal__accounts-item" key={acc.id}>
-                                <span className="balance-modal__account-name">{acc.name}</span>
-                                <b className={parseFloat(acc.balance) < 0 ? 'text-error' : 'text-success'}>{parseFloat(acc.balance).toLocaleString('ru')}</b>
-                                <span>{acc.currency.code}</span>
-                                <span className="balance-modal__accounts-actions">
-                                    <IconButton size='small' aria-label="редактировать" onClick={() => { handleAccountEdit(acc) }}><EditIcon fontSize="inherit" /></IconButton>
-                                    <IconButton size='small' color="error" aria-label="удалить" onClick={() => handleAccountDelete(acc)}><DeleteIcon fontSize="inherit" /></IconButton>
-                                </span>
-                            </li>
-                        })}
-                    </ul>
-                </div>
+                <BalanceAccounts />
                 {isLoadingBalance ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress aria-label="Loading…" /></div> : balance && <div className="balance-modal__totals">
                     <h3 className="balance-modal__block-title">Баланс</h3>
                     <div className="balance-modal__totals-wrapper">
@@ -130,16 +59,7 @@ export const BalanceModal = ({ open, onClose }: props) => {
                                     {balance?.totalAmount.total.toLocaleString('ru')} &nbsp;
                                 </b>
 
-                                <Select
-                                    id="currency"
-                                    size="small"
-                                    value={currencyId}
-                                    onChange={handleCurrencyChange}
-                                >
-                                    {currencyResp?.data.map(item => {
-                                        return <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
-                                    })}
-                                </Select>
+                                {currencyResp && <CurrencySelect value={currencyId} options={currencyResp.data} onChange={handleCurrencyChange} />}
                             </div>
                         </div>
                         <div className="balance-modal__by-curr">
