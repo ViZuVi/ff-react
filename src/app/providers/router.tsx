@@ -26,7 +26,6 @@ export const router = createBrowserRouter([
   },
   {
     element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
-    // element: <AppLayout />,
     children: [
       { index: true, element: <TransactionsPage /> },
       { path: '/charts', element: <ChartsPage /> },

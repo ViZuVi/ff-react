@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCurrency } from "@/entities/currency/hooks/use-currency";
 import type { Account } from "@/shared/types/Account";
+import { useSnackbarStore } from "@/shared/store/snackbar";
 
 interface props {
     open: boolean;
@@ -14,6 +15,7 @@ interface props {
 }
 
 export const BalanceModal = ({ open, onClose }: props) => {
+    const { showSnackbar } = useSnackbarStore.getState()
     const { data: spaceResp } = useCurrentSpace()
     const { data: currencyResp } = useCurrency()
 
@@ -48,21 +50,56 @@ export const BalanceModal = ({ open, onClose }: props) => {
         }
     }, [currencyResp]);
 
-    const [snackVisability, setSnackVisability] = useState(false)
     const [selectedAccount, setSelectedAccount] = useState<Account>()
 
     const handleAccountDelete = (acc: Account) => {
         setSelectedAccount(acc)
-        setSnackVisability(true)
+        showSnackbar({
+            mode: 'confirm',
+            message: `Вы действительно хотите удалить счёт "${acc.name}?"`,
+            type: 'warning',
+
+            confirmAction: async () => {
+                try {
+                    // await api.delete(`/account/${acc.id}`)
+                    new Promise((resolve) => {
+                        setTimeout(() => {
+                            console.log('delete', acc.name);
+                            
+                            resolve(true)
+                        }, 2000);
+                    }).then(() => {
+                        showSnackbar({
+                            message: 'Счёт удалён',
+                            type: 'success',
+                            mode: 'auto'
+                        })
+
+                    })
+
+                } catch (e) {
+                    showSnackbar({
+                        message: 'Ошибка удаления',
+                        type: 'error',
+                    })
+                }
+            },
+
+        })
     }
 
     const confirmDelete = () => {
         console.log('delete acc ', selectedAccount?.id, selectedAccount?.name);
-        setSnackVisability(false)
+        // setSnackVisability(false)
     }
     // TODO: acccounts logic to separate file, finish ConfirmSnackbar component
 
-    const handleAccountEdit = () => { }
+    const handleAccountEdit = (acc: Account) => {
+        showSnackbar({
+            message: `Изменения счета "${acc.name}" сохранены`,
+            type: 'success',
+        })
+    }
 
     return (
         open && <UModal open={open} onClose={onClose} title="Счета и баланс">
@@ -76,14 +113,14 @@ export const BalanceModal = ({ open, onClose }: props) => {
                                 <b className={parseFloat(acc.balance) < 0 ? 'text-error' : 'text-success'}>{parseFloat(acc.balance).toLocaleString('ru')}</b>
                                 <span>{acc.currency.code}</span>
                                 <span className="balance-modal__accounts-actions">
-                                    <IconButton size='small' aria-label="редактировать"><EditIcon fontSize="inherit" /></IconButton>
+                                    <IconButton size='small' aria-label="редактировать" onClick={() => { handleAccountEdit(acc) }}><EditIcon fontSize="inherit" /></IconButton>
                                     <IconButton size='small' color="error" aria-label="удалить" onClick={() => handleAccountDelete(acc)}><DeleteIcon fontSize="inherit" /></IconButton>
                                 </span>
                             </li>
                         })}
                     </ul>
                 </div>
-                {isLoadingBalance ? <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}><CircularProgress aria-label="Loading…" /></div> : balance && <div className="balance-modal__totals">
+                {isLoadingBalance ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress aria-label="Loading…" /></div> : balance && <div className="balance-modal__totals">
                     <h3 className="balance-modal__block-title">Баланс</h3>
                     <div className="balance-modal__totals-wrapper">
                         <div className="balance-modal__total">
@@ -120,22 +157,6 @@ export const BalanceModal = ({ open, onClose }: props) => {
                     </div>
                 </div>}
             </div>
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: "center" }}
-                open={snackVisability}
-                onClose={(_, reason) => {
-                    if (reason) {
-                        return
-                    }
-                    setSnackVisability(false)
-                }}
-                message={`Вы действительно хотите удалить счет ${selectedAccount?.name}`}
-                action={
-                    <Button color="error" size="small" onClick={confirmDelete}>
-                        Подтвердить
-                    </Button>
-                }
-            />
         </UModal>
     )
 }
