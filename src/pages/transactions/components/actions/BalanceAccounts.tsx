@@ -5,7 +5,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import type { Account } from "@/shared/types/Account";
 import { useModal } from "@/shared/hooks/useModal";
-import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { CreateAccount } from "./CreateAccount";
 
 export const BalanceAccounts = () => {

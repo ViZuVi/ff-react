@@ -13,4 +13,6 @@ export type AccountCreate = {
     currency_id: number,
     name: string,
     space_id: string
-} 
+}
+
+export type AccountWithoutSpace = Omit<AccountCreate, 'space_id'>

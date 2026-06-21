@@ -29,7 +29,7 @@ export const useTransactions = (filters: TransactionsParams) => {
 
     return useQuery({
         queryKey: ['transactions', currentSpaceId, cleanedFilters],
-        enabled: !!currentSpaceId,
+        enabled: currentSpaceId != null,
         queryFn: ({ queryKey }) => {
             const [, , params] = queryKey
 
