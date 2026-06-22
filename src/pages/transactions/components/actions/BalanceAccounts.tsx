@@ -6,41 +6,38 @@ import { useSnackbarStore } from "@/shared/store/snackbar";
 import type { Account } from "@/shared/types/Account";
 import { useModal } from "@/shared/hooks/useModal";
 import { CreateAccount } from "./CreateAccount";
+import { useDeleteAccount } from "@/entities/balance/hooks/use-account";
 
 export const BalanceAccounts = () => {
     const { data: spaceResp } = useCurrentSpace()
     const { showSnackbar } = useSnackbarStore.getState()
+    const { mutate, isPending, isError, error } = useDeleteAccount()
+
 
     const handleAccountDelete = (acc: Account) => {
         showSnackbar({
             mode: 'confirm',
             message: `Вы действительно хотите удалить счёт "${acc.name}?"`,
+            loading: isPending,
             type: 'warning',
 
             confirmAction: async () => {
-                try {
-                    // await api.delete(`/account/${acc.id}`)
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                            console.log('delete', acc.name);
-
-                            resolve(true)
-                        }, 2000);
-                    }).then(() => {
+                mutate(acc.id, {
+                    onSuccess: () => {
                         showSnackbar({
                             message: 'Счёт удалён',
                             type: 'success',
-                            mode: 'auto'
+                            mode: 'auto',
                         })
-
-                    })
-
-                } catch (e) {
-                    showSnackbar({
-                        message: 'Ошибка удаления',
-                        type: 'error',
-                    })
-                }
+                    },
+                    onError: () => {
+                        showSnackbar({
+                            message: 'Ошибка удаления',
+                            type: 'error',
+                            mode: 'auto',
+                        })
+                    },
+                })
             },
 
         })
@@ -78,7 +75,7 @@ export const BalanceAccounts = () => {
                 })}
             </ul>
             <Button sx={{ m: 'auto' }} color="secondary" onClick={() => openModal('create')}>Создать новый счёт</Button>
-            
+
             <CreateAccount open={isOpen('create')} onClose={closeModal} />
         </div>
     )

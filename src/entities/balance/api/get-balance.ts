@@ -1,5 +1,4 @@
 import { useSpaceStore } from "@/app/store/space"
-import { useCurrency } from "@/entities/currency/hooks/use-currency"
 import { api } from "@/shared/api/axios"
 import type { ApiResponse } from "@/shared/types/ApiResponse"
 import type { Currency } from "@/shared/types/Currency"
@@ -26,10 +25,6 @@ export const getBalance = async (currencyId?: number): Promise<Balance> => {
         currencyId ?? Number(storedCurr);
 
     const currentSpaceId = useSpaceStore.getState().currentSpaceId
-
-    // if (currencyId && currencyId.toString() !== storedCurr) {
-    //     localStorage.setItem('currency', currencyId.toString())
-    // }
 
     const { data } = await api.post<ApiResponse<Resp>>(`/space/${currentSpaceId}/balance`, { currency_id: selectedCurrency })
     return {
