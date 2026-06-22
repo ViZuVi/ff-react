@@ -4,57 +4,48 @@ import { useSpaceStore } from "@/app/store/space"
 import { deleteAccount } from "../api/delete-account"
 import { editAccount } from "../api/edit-account"
 
-export const useCreateAccount = () => {
+const useInvalidateAccountQueries = () => {
     const queryClient = useQueryClient()
     const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
+
+    return () => {
+        queryClient.invalidateQueries({ queryKey: ['balance'] })
+
+        if (currentSpaceId) {
+            queryClient.invalidateQueries({
+                queryKey: ['space', currentSpaceId],
+            })
+        }
+    }
+}
+
+export const useCreateAccount = () => {
+    const invalidate = useInvalidateAccountQueries()
 
     return useMutation({
         mutationFn: createAccount,
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['balance'] })
-            if (currentSpaceId) {
-                queryClient.invalidateQueries({
-                    queryKey: ['space', currentSpaceId],
-                })
-            }
-        },
+        onSuccess: invalidate
     })
 }
 
 export const useDeleteAccount = () => {
-    const queryClient = useQueryClient()
-    const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
+    const invalidate = useInvalidateAccountQueries()
 
     return useMutation({
         mutationFn: deleteAccount,
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['balance'] })
-            if (currentSpaceId) {
-                queryClient.invalidateQueries({
-                    queryKey: ['space', currentSpaceId],
-                })
-            }
-        },
+        onSuccess: invalidate
     })
 
 }
 
 export const useEditAccount = () => {
-    const queryClient = useQueryClient()
-    const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
+    const invalidate = useInvalidateAccountQueries()
 
     return useMutation({
         mutationFn: editAccount,
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['balance'] })
-            if (currentSpaceId) {
-                queryClient.invalidateQueries({
-                    queryKey: ['space', currentSpaceId],
-                })
-            }
-        },
+        onSuccess: invalidate
     })
 }
