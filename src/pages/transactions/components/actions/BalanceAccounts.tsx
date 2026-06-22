@@ -7,11 +7,13 @@ import type { Account } from "@/shared/types/Account";
 import { useModal } from "@/shared/hooks/useModal";
 import { CreateAccount } from "./CreateAccount";
 import { useDeleteAccount } from "@/entities/balance/hooks/use-account";
+import { EditAccount } from "./EditAccount";
+import { useState } from "react";
 
 export const BalanceAccounts = () => {
     const { data: spaceResp } = useCurrentSpace()
     const { showSnackbar } = useSnackbarStore.getState()
-    const { mutate, isPending, isError, error } = useDeleteAccount()
+    const { mutate, isPending } = useDeleteAccount()
 
 
     const handleAccountDelete = (acc: Account) => {
@@ -43,13 +45,6 @@ export const BalanceAccounts = () => {
         })
     }
 
-    const handleAccountEdit = (acc: Account) => {
-        showSnackbar({
-            message: `Изменения счета "${acc.name}" сохранены`,
-            type: 'success',
-        })
-    }
-
     type ModalType = 'edit' | 'create'
 
     const {
@@ -57,6 +52,19 @@ export const BalanceAccounts = () => {
         closeModal,
         isOpen,
     } = useModal<ModalType>()
+
+    const [editingAccount, setEditingAccount] = useState<Account | null>(null)
+
+    const handleAccountEdit = (acc: Account) => {
+        if (!acc) return
+        setEditingAccount(acc)
+        openModal("edit")
+    }
+
+    const handleEditModalClose = () => {
+        closeModal
+        setEditingAccount(null)
+    }
 
     return (
         <div className="balance-accounts">
@@ -68,7 +76,7 @@ export const BalanceAccounts = () => {
                         <b className={parseFloat(acc.balance) < 0 ? 'text-error' : 'text-success'}>{parseFloat(acc.balance).toLocaleString('ru')}</b>
                         <span>{acc.currency.code}</span>
                         <span className="balance-accounts__actions">
-                            <IconButton size='small' aria-label="редактировать" onClick={() => { handleAccountEdit(acc) }}><EditIcon fontSize="inherit" /></IconButton>
+                            <IconButton size='small' aria-label="редактировать" onClick={() => handleAccountEdit(acc)}><EditIcon fontSize="inherit" /></IconButton>
                             <IconButton size='small' color="error" aria-label="удалить" onClick={() => handleAccountDelete(acc)}><DeleteIcon fontSize="inherit" /></IconButton>
                         </span>
                     </li>
@@ -77,6 +85,7 @@ export const BalanceAccounts = () => {
             <Button sx={{ m: 'auto' }} color="secondary" onClick={() => openModal('create')}>Создать новый счёт</Button>
 
             <CreateAccount open={isOpen('create')} onClose={closeModal} />
+            {editingAccount && <EditAccount open={isOpen('edit')} onClose={handleEditModalClose} account={editingAccount} />}
         </div>
     )
 }

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createAccount } from "../api/create-account"
 import { useSpaceStore } from "@/app/store/space"
 import { deleteAccount } from "../api/delete-account"
+import { editAccount } from "../api/edit-account"
 
 export const useCreateAccount = () => {
     const queryClient = useQueryClient()
@@ -38,4 +39,22 @@ export const useDeleteAccount = () => {
         },
     })
 
+}
+
+export const useEditAccount = () => {
+    const queryClient = useQueryClient()
+    const currentSpaceId = useSpaceStore((s) => s.currentSpaceId)
+
+    return useMutation({
+        mutationFn: editAccount,
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['balance'] })
+            if (currentSpaceId) {
+                queryClient.invalidateQueries({
+                    queryKey: ['space', currentSpaceId],
+                })
+            }
+        },
+    })
 }
