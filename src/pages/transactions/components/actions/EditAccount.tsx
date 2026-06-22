@@ -29,7 +29,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
             },
             onError: () => {
                 showSnackbar({
-                    message: 'Ошибка удаления',
+                    message: 'Ошибка изменения',
                     type: 'error',
                     mode: 'auto',
                 })
@@ -38,7 +38,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
     }
 
     return (
-        <UModal open={open} onClose={onClose} title="Создание нового счёта">
+        <UModal open={open} onClose={onClose} title="Редактирование счёта">
             <Box sx={{ p: '12px', minWidth: '420px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <TextField required label="Наименование счёта" value={newAccount} size="small" onChange={(e) => setNewAccount(e.target.value)} />
 

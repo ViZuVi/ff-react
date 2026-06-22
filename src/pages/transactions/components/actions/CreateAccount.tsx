@@ -36,10 +36,22 @@ export const CreateAccount = ({ open, onClose }: Props) => {
             {
                 onSuccess: () => {
                     onClose()
+                    setNewAccount({
+                        balance: 0,
+                        currency_id: currencyResp?.data[0].id || 0,
+                        name: '',
+                    })
                     showSnackbar({
                         message: 'Счёт успешно создан',
                         type: 'success',
                         mode: 'auto'
+                    })
+                },
+                onError: () => {
+                    showSnackbar({
+                        message: 'Ошибка создания',
+                        type: 'error',
+                        mode: 'auto',
                     })
                 },
             },

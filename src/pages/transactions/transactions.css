@@ -87,7 +87,7 @@
 
 .category-modal,
 .converter-modal {
-  min-width: 300px;
+  min-width: 400px;
   max-height: 400px;
   overflow: auto;
   padding: 0 24px 24px;

@@ -7,3 +7,8 @@ export type Category = {
     },
     icon?: string
 }
+
+export type CategoryCreate = {
+    name: string,
+    type: number
+}
