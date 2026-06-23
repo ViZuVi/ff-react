@@ -16,7 +16,8 @@ export const SettingsModal = ({ open, onClose }: props) => {
   const { data } = useSpaces();
 
   const handleSpaceSelect = (id: string | null) => {
-    id && setCurrentSpaceId(id.toString());
+    if (!id) return;
+    setCurrentSpaceId(id.toString());
   };
 
   return (

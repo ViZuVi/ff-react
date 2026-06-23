@@ -1,17 +1,12 @@
 import type { BaseSpace } from "./Space";
 
-const InvitationStatus = {
-  new: "new",
-  accepted: "accepted",
-  revoked: "revoked",
-  rejected: "rejected",
-} as const;
+type InvitationStatus = "new" | "accepted" | "revoked" | "rejected";
 
 export type Invitation = {
   id: number;
   created_at: string;
   space: BaseSpace;
-  status: keyof typeof InvitationStatus;
+  status: InvitationStatus;
   message: string | null;
   user: {
     id: number;
