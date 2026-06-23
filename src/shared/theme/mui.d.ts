@@ -1,17 +1,17 @@
-import '@mui/material/styles'
+import "@mui/material/styles";
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Palette {
     gradients: {
-      primary: string
-      aurora: string
-    }
+      primary: string;
+      aurora: string;
+    };
   }
 
   interface PaletteOptions {
     gradients?: {
-      primary: string
-      aurora: string
-    }
+      primary: string;
+      aurora: string;
+    };
   }
 }

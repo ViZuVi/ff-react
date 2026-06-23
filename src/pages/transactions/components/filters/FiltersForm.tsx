@@ -9,36 +9,61 @@ import { UserSelect } from "./UserSelect";
 import { AccountSelect } from "./AccountSelect";
 import { DatePickerRange } from "./DatePickerRange";
 
-type FiltersWithoutSpaceId = Omit<Filters, 'space_id'>
+type FiltersWithoutSpaceId = Omit<Filters, "space_id">;
 
 type Props = {
-    filters: FiltersWithoutSpaceId;
-    onChange: <K extends keyof FiltersWithoutSpaceId>(
-        key: K,
-        value: FiltersWithoutSpaceId[K]
-    ) => void;
-}
+  filters: FiltersWithoutSpaceId;
+  onChange: <K extends keyof FiltersWithoutSpaceId>(
+    key: K,
+    value: FiltersWithoutSpaceId[K],
+  ) => void;
+};
 
 const FiltersFormComponent = ({ filters, onChange }: Props) => {
-    const { data: space, isLoading, isError } = useCurrentSpace()
-    // TODO if error && is Loading
+  const { data: space, isLoading, isError } = useCurrentSpace();
+  // TODO if error && is Loading
 
-    const handleChange = <K extends keyof typeof filters>(type: K, value: (typeof filters)[K]) => {
-        onChange(type, value)
-    }
+  const handleChange = <K extends keyof typeof filters>(
+    type: K,
+    value: (typeof filters)[K],
+  ) => {
+    onChange(type, value);
+  };
 
-    return (
-        space?.data ?
-            <div className="filters">
-                <SearchInput value={filters.search} onChange={(e) => handleChange('search', e)} />
-                <CategoriesSelect value={filters.category_id} categories={space.data.categories} onChange={(e) => handleChange('category_id', e)} />
-                <TransactionTypeSelect value={filters.type} onChange={(e) => onChange("type", e)} />
-                <UserSelect users={space.data.users} value={filters.user_id} onChange={(e) => onChange("user_id", e)} />
-                <AccountSelect accounts={space.data.accounts} value={filters.account_id} onChange={(e) => onChange("account_id", e)} />
-                <DatePickerRange from={filters.date_from} to={filters.date_to} onChange={onChange} />
-            </div >
-            : <FiltersSkeleton />
-    )
-}
+  return space?.data ? (
+    <div className="filters">
+      <SearchInput
+        value={filters.search}
+        onChange={(e) => handleChange("search", e)}
+      />
+      <CategoriesSelect
+        value={filters.category_id}
+        categories={space.data.categories}
+        onChange={(e) => handleChange("category_id", e)}
+      />
+      <TransactionTypeSelect
+        value={filters.type}
+        onChange={(e) => onChange("type", e)}
+      />
+      <UserSelect
+        users={space.data.users}
+        value={filters.user_id}
+        onChange={(e) => onChange("user_id", e)}
+      />
+      <AccountSelect
+        accounts={space.data.accounts}
+        value={filters.account_id}
+        onChange={(e) => onChange("account_id", e)}
+      />
+      <DatePickerRange
+        from={filters.date_from}
+        to={filters.date_to}
+        onChange={onChange}
+      />
+    </div>
+  ) : (
+    <FiltersSkeleton />
+  );
+};
 
-export const FiltersForm = memo(FiltersFormComponent)
+export const FiltersForm = memo(FiltersFormComponent);

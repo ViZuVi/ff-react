@@ -1,22 +1,17 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from "@mui/material/styles";
 
-import { primitiveColors } from './tokens/colors'
-import { gradients } from './tokens/gradients'
+import { primitiveColors } from "./tokens/colors";
+import { gradients } from "./tokens/gradients";
 
-import { darkScheme } from './schemes/dark'
-import { lightScheme } from './schemes/light'
+import { darkScheme } from "./schemes/dark";
+import { lightScheme } from "./schemes/light";
 
-import { buttonOverrides } from '../components/ui/Button/button'
-import { inputOverrides } from '../components/ui/Input/input'
+import { buttonOverrides } from "../components/ui/Button/button";
+import { inputOverrides } from "../components/ui/Input/input";
 // import { cardOverrides } from './components/card'
 
-export const createAppTheme = (
-  mode: 'light' | 'dark',
-) => {
-  const scheme =
-    mode === 'dark'
-      ? darkScheme
-      : lightScheme
+export const createAppTheme = (mode: "light" | "dark") => {
+  const scheme = mode === "dark" ? darkScheme : lightScheme;
 
   return createTheme({
     cssVariables: true,
@@ -57,7 +52,6 @@ export const createAppTheme = (
       gradients,
     },
 
-
     typography: {
       fontFamily: `
         Inter,
@@ -68,8 +62,8 @@ export const createAppTheme = (
 
     components: {
       ...buttonOverrides,
-    //   ...cardOverrides,
+      //   ...cardOverrides,
       ...inputOverrides,
     },
-  })
-}
+  });
+};

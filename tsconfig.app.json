@@ -10,7 +10,7 @@
     "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["src/*"],
-      "@components/*": ["src/shared/components/*"],
+      "@components/*": ["src/shared/components/*"]
     },
 
     /* Bundler mode */

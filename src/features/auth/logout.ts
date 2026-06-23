@@ -1,5 +1,5 @@
-import { api } from "@/shared/api/axios"
+import { api } from "@/shared/api/axios";
 
 export const logout = async () => {
-    await api.post('/user/logout')
-}
+  await api.post("/user/logout");
+};

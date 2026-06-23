@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal"
+import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { CircularProgress, type SelectChangeEvent } from "@mui/material";
 import { useBalance } from "@/entities/balance/hooks/use-balance";
 import { useEffect, useState } from "react";
@@ -7,76 +7,118 @@ import { BalanceAccounts } from "./BalanceAccounts";
 import { CurrencySelect } from "./CurrencySelect";
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
 export const BalanceModal = ({ open, onClose }: Props) => {
-    const { data: currencyResp } = useCurrency()
+  const { data: currencyResp } = useCurrency();
 
-    const [currencyId, setCurrencyId] = useState<number>(0);
+  const [currencyId, setCurrencyId] = useState<number>(0);
 
-    const { data: balance, isLoading: isLoadingBalance } = useBalance(currencyId)
+  const { data: balance, isLoading: isLoadingBalance } = useBalance(currencyId);
 
-    const handleCurrencyChange = (e: SelectChangeEvent<number>) => {
-        const id = Number(e.target.value);
+  const handleCurrencyChange = (e: SelectChangeEvent<number>) => {
+    const id = Number(e.target.value);
 
-        setCurrencyId(id);
-        localStorage.setItem('currency', String(id));
-    };
+    setCurrencyId(id);
+    localStorage.setItem("currency", String(id));
+  };
 
-    useEffect(() => {
-        const saved = localStorage.getItem('currency');
+  useEffect(() => {
+    const saved = localStorage.getItem("currency");
 
-        if (saved) {
-            setCurrencyId(Number(saved));
-            return;
-        }
+    if (saved) {
+      setCurrencyId(Number(saved));
+      return;
+    }
 
-        if (currencyResp?.data.length) {
-            const defaultCurrency =
-                currencyResp.data[currencyResp.data.length - 1].id;
+    if (currencyResp?.data.length) {
+      const defaultCurrency =
+        currencyResp.data[currencyResp.data.length - 1].id;
 
-            setCurrencyId(defaultCurrency);
-            localStorage.setItem(
-                'currency',
-                String(defaultCurrency)
-            );
-        }
-    }, [currencyResp]);
+      setCurrencyId(defaultCurrency);
+      localStorage.setItem("currency", String(defaultCurrency));
+    }
+  }, [currencyResp]);
 
-    return (
-        open && <UModal open={open} onClose={onClose} title="Счета и баланс">
-            <div className="balance-modal">
-                <BalanceAccounts />
-                {isLoadingBalance ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress aria-label="Loading…" /></div> : balance && <div className="balance-modal__totals">
-                    <h3 className="balance-modal__block-title">Баланс</h3>
-                    <div className="balance-modal__totals-wrapper">
-                        <div className="balance-modal__total">
-                            <h4>Общий баланс:</h4>
-                            <div>
-                                <b className={(balance?.totalAmount?.total ?? 0) < 0 ? 'text-error' : 'text-success'}>
-                                    {balance?.totalAmount.total.toLocaleString('ru')} &nbsp;
-                                </b>
-
-                                {currencyResp && <CurrencySelect value={currencyId} options={currencyResp.data} onChange={handleCurrencyChange} />}
-                            </div>
-                        </div>
-                        <div className="balance-modal__by-curr">
-                            <h4>Баланс по валютам:</h4>
-                            <ul>
-                                {balance.amountByCurrency.map(acc => {
-                                    return <li className="balance-modal__curr-item" key={acc.currency.id}>
-                                        <b className={acc.total < 0 ? 'text-error' : 'text-success'}>{acc.total.toLocaleString('ru')}&nbsp;</b>
-                                        <span>{acc.currency.code}</span>
-                                        <span>(курс {parseFloat(acc.currency.rate).toLocaleString('ru')})</span>
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                </div>}
+  return (
+    open && (
+      <UModal open={open} onClose={onClose} title="Счета и баланс">
+        <div className="balance-modal">
+          <BalanceAccounts />
+          {isLoadingBalance ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress aria-label="Loading…" />
             </div>
-        </UModal>
+          ) : (
+            balance && (
+              <div className="balance-modal__totals">
+                <h3 className="balance-modal__block-title">Баланс</h3>
+                <div className="balance-modal__totals-wrapper">
+                  <div className="balance-modal__total">
+                    <h4>Общий баланс:</h4>
+                    <div>
+                      <b
+                        className={
+                          (balance?.totalAmount?.total ?? 0) < 0
+                            ? "text-error"
+                            : "text-success"
+                        }
+                      >
+                        {balance?.totalAmount.total.toLocaleString("ru")} &nbsp;
+                      </b>
+
+                      {currencyResp && (
+                        <CurrencySelect
+                          value={currencyId}
+                          options={currencyResp.data}
+                          onChange={handleCurrencyChange}
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="balance-modal__by-curr">
+                    <h4>Баланс по валютам:</h4>
+                    <ul>
+                      {balance.amountByCurrency.map((acc) => {
+                        return (
+                          <li
+                            className="balance-modal__curr-item"
+                            key={acc.currency.id}
+                          >
+                            <b
+                              className={
+                                acc.total < 0 ? "text-error" : "text-success"
+                              }
+                            >
+                              {acc.total.toLocaleString("ru")}&nbsp;
+                            </b>
+                            <span>{acc.currency.code}</span>
+                            <span>
+                              (курс{" "}
+                              {parseFloat(acc.currency.rate).toLocaleString(
+                                "ru",
+                              )}
+                              )
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      </UModal>
     )
-}
+  );
+};

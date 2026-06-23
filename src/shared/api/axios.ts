@@ -1,31 +1,31 @@
-import axios from 'axios'
+import axios from "axios";
 
-import { useAuthStore } from '@/app/store/auth'
+import { useAuthStore } from "@/app/store/auth";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-})
+});
 
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token
+  const token = useAuthStore.getState().token;
 
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
-  return config
-})
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => response,
 
   (error) => {
     if (error.response?.status === 401) {
-      useAuthStore.getState().setToken(null)
+      useAuthStore.getState().setToken(null);
 
-      window.location.href = '/login'
+      window.location.href = "/login";
     }
 
-    return Promise.reject(error)
-  }
-)
+    return Promise.reject(error);
+  },
+);

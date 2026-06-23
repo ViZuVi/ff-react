@@ -1,10 +1,8 @@
-import type { Invitation } from "@/shared/types/Invitation"
-import { InvitationsList } from "./InvitationsList"
+import type { Invitation } from "@/shared/types/Invitation";
+import { InvitationsList } from "./InvitationsList";
 
-const invitations: Invitation[] = []
+const invitations: Invitation[] = [];
 
 export const InboxInvitations = () => {
-    return (
-        <InvitationsList invitations={invitations} type="входящих" />
-    )
-}
+  return <InvitationsList invitations={invitations} type="входящих" />;
+};

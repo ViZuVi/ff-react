@@ -1,11 +1,11 @@
 import type { BaseSpace } from "./Space";
 
 const InvitationStatus = {
-  new: 'new',
-  accepted: 'accepted',
-  revoked: 'revoked',
-  rejected: 'rejected'
-} as const
+  new: "new",
+  accepted: "accepted",
+  revoked: "revoked",
+  rejected: "rejected",
+} as const;
 
 export type Invitation = {
   id: number;
@@ -14,9 +14,9 @@ export type Invitation = {
   status: keyof typeof InvitationStatus;
   message: string | null;
   user: {
-    id: number
-    name: string
-    email: string
-    image: string | null
-  }
-}
+    id: number;
+    name: string;
+    email: string;
+    image: string | null;
+  };
+};

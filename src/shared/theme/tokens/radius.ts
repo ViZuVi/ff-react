@@ -5,4 +5,4 @@ export const radius = {
   lg: 18,
   xl: 24,
   full: 999,
-}
+};

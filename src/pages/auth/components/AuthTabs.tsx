@@ -1,10 +1,10 @@
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { useState, type ReactNode, type SyntheticEvent } from 'react';
-import { LoginForm } from './LoginForm';
-import { RegisterForm } from './RegisterForm';
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { useState, type ReactNode, type SyntheticEvent } from "react";
+import { LoginForm } from "./LoginForm";
+import { RegisterForm } from "./RegisterForm";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -24,11 +24,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -36,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
@@ -48,7 +44,7 @@ export const AuthTabs = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: 500, margin: "32px auto" }}>
+    <Box sx={{ bgcolor: "background.paper", width: 500, margin: "32px auto" }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -71,4 +67,4 @@ export const AuthTabs = () => {
       </TabPanel>
     </Box>
   );
-}
+};

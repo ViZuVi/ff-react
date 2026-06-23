@@ -2,20 +2,19 @@ export const buttonOverrides = {
   MuiButton: {
     styleOverrides: {
       root: {
-        textTransform: 'none',
+        textTransform: "none",
         fontWeight: 600,
         height: 44,
-        display: 'block'
+        display: "block",
       },
 
       containedPrimary: {
-        background:
-          'linear-gradient(135deg,#2962FF,#7C4DFF)',
+        background: "linear-gradient(135deg,#2962FF,#7C4DFF)",
 
-        '&:hover': {
+        "&:hover": {
           opacity: 0.94,
         },
       },
     },
   },
-}
+};

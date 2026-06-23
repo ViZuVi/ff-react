@@ -1,6 +1,6 @@
-export type ApiStatus = 'success' | 'error'
+export type ApiStatus = "success" | "error";
 
 export interface ApiResponse<T> {
-    data: T;
-    status: ApiStatus
+  data: T;
+  status: ApiStatus;
 }

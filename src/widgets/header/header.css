@@ -1,102 +1,104 @@
 .app-header {
-    position: fixed;
-    padding: 16px 80px;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 2;
-    box-shadow: 0px 4px 11px -2px #eceef1;
-    background-color: #fff;
+  position: fixed;
+  padding: 16px 80px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+  box-shadow: 0px 4px 11px -2px #eceef1;
+  background-color: #fff;
 }
 
 .app-header__logo-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .app-header__logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-transform: uppercase;
-    color: #0B3D91;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  color: #0b3d91;
+  font-weight: 700;
 }
 
 .app-header__actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .outbox-invitations {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .outbox-invitations__title {
-    text-align: center;
+  text-align: center;
 }
 
 .outbox-invitations__form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .invitations-list__title,
 .invitations-list__empty {
-    text-align: center;
+  text-align: center;
 }
 
 .invitations-list__title {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .settings-modal {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .app-header__loader-wrapper {
-    position: absolute;
-    content: "";
-    bottom: 2px;
-    left: 0;
-    right: 0;
-    background-color: #00C389;
-    height: 2px;
-    z-index: 2;
-    overflow: hidden;
+  position: absolute;
+  content: "";
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  background-color: #00c389;
+  height: 2px;
+  z-index: 2;
+  overflow: hidden;
 }
 
 .app-header__loader-bar {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            #caf3e6 50%,
-            transparent 100%);
-    background-size: 200% 100%;
-    animation: shimmer .5s infinite linear;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #caf3e6 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 0.5s infinite linear;
 }
 
 @keyframes infinite-loading {
-    0% {
-        background-position: 200% 0;
-    }
+  0% {
+    background-position: 200% 0;
+  }
 
-    100% {
-        background-position: -200% 0;
-    }
+  100% {
+    background-position: -200% 0;
+  }
 }

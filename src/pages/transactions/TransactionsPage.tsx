@@ -1,6 +1,5 @@
-import { TransactionsView } from "./TransactionsView"
-
+import { TransactionsView } from "./TransactionsView";
 
 export const TransactionsPage = () => {
-  return <TransactionsView />
-}
+  return <TransactionsView />;
+};

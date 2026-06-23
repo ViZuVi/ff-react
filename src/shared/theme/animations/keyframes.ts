@@ -1,4 +1,4 @@
-import { keyframes } from '@mui/system'
+import { keyframes } from "@mui/system";
 
 export const gradientShift = keyframes`
   0% {
@@ -12,7 +12,7 @@ export const gradientShift = keyframes`
   100% {
     background-position:0% 50%;
   }
-`
+`;
 
 export const pulseGlow = keyframes`
   0% {
@@ -29,4 +29,4 @@ export const pulseGlow = keyframes`
       box-shadow:
       0 0 0 rgba(41,98,255,.2);
   }
-`
+`;

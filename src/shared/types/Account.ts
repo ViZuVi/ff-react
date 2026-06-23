@@ -1,18 +1,18 @@
-import type { Currency } from "./Currency"
+import type { Currency } from "./Currency";
 
 export type Account = {
-    id: number
-    created_at: string
-    name: string
-    currency: Currency
-    balance: string
-}
+  id: number;
+  created_at: string;
+  name: string;
+  currency: Currency;
+  balance: string;
+};
 
 export type AccountCreate = {
-    balance: number,
-    currency_id: number,
-    name: string,
-    space_id: string
-}
+  balance: number;
+  currency_id: number;
+  name: string;
+  space_id: string;
+};
 
-export type AccountWithoutSpace = Omit<AccountCreate, 'space_id'>
+export type AccountWithoutSpace = Omit<AccountCreate, "space_id">;

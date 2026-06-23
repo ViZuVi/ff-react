@@ -1,34 +1,48 @@
-import { createPortal } from 'react-dom';
-import { Divider, IconButton } from '@mui/material';
-import Modal from '@mui/material/Modal';
-import CloseIcon from '@mui/icons-material/Close';
-import './modal.css'
+import { createPortal } from "react-dom";
+import { Divider, IconButton } from "@mui/material";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+import "./modal.css";
 
 interface ModalProps {
-    open: boolean;
-    divider?: boolean;
-    closeIcon?: boolean;
-    title?: string;
-    content?: string
-    children?: React.ReactNode;
-    onClose: () => void;
+  open: boolean;
+  divider?: boolean;
+  closeIcon?: boolean;
+  title?: string;
+  content?: string;
+  children?: React.ReactNode;
+  onClose: () => void;
 }
 
-export const UModal = ({ open, divider, closeIcon = true, title, content, children, onClose }: ModalProps) => {
-
-    return createPortal(
-        <div>
-            <Modal
-                open={open}
-                onClose={onClose}
+export const UModal = ({
+  open,
+  divider,
+  closeIcon = true,
+  title,
+  content,
+  children,
+  onClose,
+}: ModalProps) => {
+  return createPortal(
+    <div>
+      <Modal open={open} onClose={onClose}>
+        <div className="u-modal">
+          <h3 className="u-modal__title">{title}</h3>
+          {divider && <Divider />}
+          {closeIcon && (
+            <IconButton
+              className="u-modal__close-btn"
+              size="small"
+              aria-label="закрыть"
+              onClick={onClose}
             >
-                <div className='u-modal'>
-                    <h3 className='u-modal__title'>{title}</h3>
-                    {divider && <Divider />}
-                    {closeIcon && <IconButton className='u-modal__close-btn' size='small' aria-label="закрыть"onClick={onClose}><CloseIcon /></IconButton>}
-                    <div>{content || children}</div>
-                </div>
-            </Modal>
-        </div>, document.body
-    )
-}
+              <CloseIcon />
+            </IconButton>
+          )}
+          <div>{content || children}</div>
+        </div>
+      </Modal>
+    </div>,
+    document.body,
+  );
+};

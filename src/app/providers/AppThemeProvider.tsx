@@ -1,3 +1,1 @@
-export {
-  AppThemeProvider,
-} from '@/shared/theme'
+export { AppThemeProvider } from "@/shared/theme";
