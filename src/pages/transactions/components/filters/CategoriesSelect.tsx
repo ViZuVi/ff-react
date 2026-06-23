@@ -43,7 +43,7 @@ export const CategoriesSelect = ({
         renderInput={(params) => (
           <TextField {...params} label="Категория" rows={1} maxRows={1} />
         )}
-        onChange={(e, v) => handleSelect(v)}
+        onChange={(_e, v) => handleSelect(v)}
       />
     </FormControl>
   );

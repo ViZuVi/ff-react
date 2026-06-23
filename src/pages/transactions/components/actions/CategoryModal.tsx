@@ -71,6 +71,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
       <div className="category-modal">
         <ul>
           {spaceResp?.data.categories.map((cat) => {
+            // TODO: вынести в отдельный компонент Item
             return (
               <li className="category-modal__item" key={cat.id}>
                 <span>{cat.name}</span>

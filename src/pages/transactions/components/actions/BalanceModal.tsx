@@ -81,6 +81,7 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                     <h4>Баланс по валютам:</h4>
                     <ul>
                       {balance.amountByCurrency.map((acc) => {
+                        // TODO: вынести в отдельный компонент Item
                         return (
                           <li
                             className="balance-modal__curr-item"

@@ -106,6 +106,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
           <TableHead>
             <TableRow>
               {headCells.map((h) => (
+                // TODO: вынести в отдельный компонент Item
                 <TableCell key={h.value}>
                   {h.value === "actions" ? (
                     h.name

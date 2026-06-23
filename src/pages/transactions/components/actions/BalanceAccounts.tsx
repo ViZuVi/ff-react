@@ -65,6 +65,7 @@ export const BalanceAccounts = () => {
       <h3 className="balance-accounts__title">Счета</h3>
       <ul className="balance-accounts__list">
         {spaceResp?.data.accounts.map((acc) => {
+          // TODO: вынести в отдельный компонент Item
           return (
             <li className="balance-accounts__item" key={acc.id}>
               <span className="balance-accounts__name">{acc.name}</span>
