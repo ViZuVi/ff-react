@@ -1,7 +1,7 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { CircularProgress, type SelectChangeEvent } from "@mui/material";
 import { useBalance } from "@/entities/balance/hooks/use-balance";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCurrency } from "@/entities/currency/hooks/use-currency";
 import { BalanceAccounts } from "./BalanceAccounts";
 import { CurrencySelect } from "./CurrencySelect";
@@ -14,33 +14,26 @@ interface Props {
 export const BalanceModal = ({ open, onClose }: Props) => {
   const { data: currencyResp } = useCurrency();
 
-  const [currencyId, setCurrencyId] = useState<number>(0);
+  const [selectedCurrencyId, setSelectedCurrencyId] = useState<number | null>(
+    () => {
+      const saved = localStorage.getItem("currency");
+      return saved ? Number(saved) : null;
+    },
+  );
+
+  const currencyId =
+    selectedCurrencyId ??
+    currencyResp?.data[currencyResp.data.length - 1]?.id ??
+    0;
 
   const { data: balance, isLoading: isLoadingBalance } = useBalance(currencyId);
 
   const handleCurrencyChange = (e: SelectChangeEvent<number>) => {
     const id = Number(e.target.value);
 
-    setCurrencyId(id);
+    setSelectedCurrencyId(id);
     localStorage.setItem("currency", String(id));
   };
-
-  useEffect(() => {
-    const saved = localStorage.getItem("currency");
-
-    if (saved) {
-      setCurrencyId(Number(saved));
-      return;
-    }
-
-    if (currencyResp?.data.length) {
-      const defaultCurrency =
-        currencyResp.data[currencyResp.data.length - 1].id;
-
-      setCurrencyId(defaultCurrency);
-      localStorage.setItem("currency", String(defaultCurrency));
-    }
-  }, [currencyResp]);
 
   return (
     open && (

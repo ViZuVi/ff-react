@@ -2,7 +2,6 @@ import * as React from "react";
 import { NumberField as BaseNumberField } from "@base-ui/react/number-field";
 import IconButton from "@mui/material/IconButton";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,6 +11,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 /**
  * This component is a placeholder for FormControl to correctly set the shrink label state on SSR.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function SSRInitialFilled(_: BaseNumberField.Root.Props) {
   return null;
 }

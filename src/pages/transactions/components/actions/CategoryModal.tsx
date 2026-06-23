@@ -62,7 +62,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
   };
 
   const handleEditModalClose = () => {
-    closeModal;
+    closeModal();
     setEditingCategory(null);
   };
 

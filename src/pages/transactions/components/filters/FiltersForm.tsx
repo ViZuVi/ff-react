@@ -20,7 +20,7 @@ type Props = {
 };
 
 const FiltersFormComponent = ({ filters, onChange }: Props) => {
-  const { data: space, isLoading, isError } = useCurrentSpace();
+  const { data: space } = useCurrentSpace();
   // TODO if error && is Loading
 
   const handleChange = <K extends keyof typeof filters>(

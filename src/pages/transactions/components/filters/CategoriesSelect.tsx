@@ -5,7 +5,6 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 export const CategoriesSelect = ({
   categories,
-  value,
   onChange,
 }: {
   categories: Category[];

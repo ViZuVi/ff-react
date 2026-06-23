@@ -28,7 +28,7 @@ export const CreateCategory = ({ open, onClose }: Props) => {
     }));
   };
 
-  const { mutate, isPending, isError, error } = useCreateCategory();
+  const { mutate, isPending } = useCreateCategory();
 
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
 
