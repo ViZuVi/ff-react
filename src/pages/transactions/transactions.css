@@ -143,6 +143,7 @@
 }
 
 .new-transaction-modal__fields {
+  min-width: 80vw;
   display: grid;
   grid-template-columns: repeat(5, 1fr) 36px 36px 36px;
   align-items: center;

@@ -9,8 +9,6 @@ const useInvalidateAccountQueries = () => {
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
 
   return () => {
-    queryClient.invalidateQueries({ queryKey: ["balance"] });
-
     if (currentSpaceId) {
       queryClient.invalidateQueries({
         queryKey: ["space", currentSpaceId],

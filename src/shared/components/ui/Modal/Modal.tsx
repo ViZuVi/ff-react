@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { Divider, IconButton } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
-import "./modal.css";
+import styles from "./modal.module.css";
 
 interface ModalProps {
   open: boolean;
@@ -11,7 +11,7 @@ interface ModalProps {
   title?: string;
   content?: string;
   children?: React.ReactNode;
-  onClose: () => void;
+  onClose: (reason?: "backdropClick" | "escapeKeyDown") => void;
 }
 
 export const UModal = ({
@@ -25,16 +25,16 @@ export const UModal = ({
 }: ModalProps) => {
   return createPortal(
     <div>
-      <Modal open={open} onClose={onClose}>
-        <div className="u-modal">
-          <h3 className="u-modal__title">{title}</h3>
+      <Modal open={open} onClose={(_, reason) => onClose(reason)}>
+        <div className={styles["u-modal"]}>
+          <h3 className={styles["u-modal__title"]}>{title}</h3>
           {divider && <Divider />}
           {closeIcon && (
             <IconButton
-              className="u-modal__close-btn"
+              className={styles["u-modal__close-btn"]}
               size="small"
               aria-label="закрыть"
-              onClick={onClose}
+              onClick={() => onClose()}
             >
               <CloseIcon />
             </IconButton>

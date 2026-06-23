@@ -1,9 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getTransactions } from "../api/get-transactions";
 import { useSpaceStore } from "@/app/store/space";
 import type { TransactionsParams } from "@/shared/types/Filters";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useMemo } from "react";
+import { createTransaction } from "../api/create-transaction";
+import { editTransaction } from "../api/edit-transaction";
+import { deleteTransaction } from "../api/delete-transaction";
+import type { CreateTransaction } from "@/shared/types/TransactionDraft";
+
+const useInvalidateTransactionQueries = () => {
+  const queryClient = useQueryClient();
+
+  return () => {
+    queryClient.invalidateQueries({ queryKey: ["transactions"] });
+    queryClient.invalidateQueries({ queryKey: ["balance"] });
+  };
+};
 
 export const useTransactions = (filters: TransactionsParams) => {
   const debouncedSearch = useDebounce(filters.search, 300);
@@ -34,10 +47,45 @@ export const useTransactions = (filters: TransactionsParams) => {
   return useQuery({
     queryKey: ["transactions", currentSpaceId, cleanedFilters],
     enabled: currentSpaceId != null,
+    // placeholderData: keepPreviousData,
     queryFn: ({ queryKey }) => {
       const [, , params] = queryKey;
 
       return getTransactions(params as Partial<TransactionsParams>);
     },
+  });
+};
+
+export const useCreateTransaction = () => {
+  const invalidate = useInvalidateTransactionQueries();
+
+  return useMutation({
+    mutationFn: async (transactions: CreateTransaction[]) => {
+      const results = [];
+
+      for (const tx of transactions) {
+        const res = await createTransaction(tx); // ждём завершения каждого запроса
+        results.push(res.data);
+      }
+    },
+    onSuccess: invalidate,
+  });
+};
+
+export const useEditTransaction = () => {
+  const invalidate = useInvalidateTransactionQueries();
+
+  return useMutation({
+    mutationFn: editTransaction,
+    onSuccess: invalidate,
+  });
+};
+
+export const useDeleteTransaction = () => {
+  const invalidate = useInvalidateTransactionQueries();
+
+  return useMutation({
+    mutationFn: deleteTransaction,
+    onSuccess: invalidate,
   });
 };

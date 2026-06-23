@@ -13,14 +13,20 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import NumberField from "@/shared/components/ui/Input/NumberField";
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useModal } from "@/shared/hooks/useModal";
 import { CreateAccount } from "./CreateAccount";
+import type { Category } from "@/shared/types/Category";
+import type { Account } from "@/shared/types/Account";
 
 type Props = {
   draft: TransactionDraft;
   showRemoveIcon: boolean;
   spaceId: number;
+  type: 0 | 1;
+  defaultAccountId: number;
+  defaultCategoryId: number;
+  categories: Category[];
+  accounts: Account[];
 };
 
 type ModalType = "create-account";
@@ -29,13 +35,16 @@ export const TransactionFields = ({
   draft,
   showRemoveIcon,
   spaceId,
+  type,
+  defaultAccountId,
+  defaultCategoryId,
+  categories,
+  accounts,
 }: Props) => {
   const updateDraft = useTransactionStore((s) => s.updateDraft);
   const cloneDraft = useTransactionStore((s) => s.cloneDraft);
   const removeDraft = useTransactionStore((s) => s.removeDraft);
   const addEmptyDraft = useTransactionStore((s) => s.addEmptyDraft);
-
-  const { data: spaceResp } = useCurrentSpace();
 
   const { openModal, closeModal, isOpen } = useModal<ModalType>();
 
@@ -75,9 +84,11 @@ export const TransactionFields = ({
             updateDraft(draft.localId, "category_id", Number(e.target.value))
           }
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {categories.map((cat) => (
+            <MenuItem value={cat.id} key={cat.id}>
+              {cat.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl size="small">
@@ -91,7 +102,7 @@ export const TransactionFields = ({
             updateDraft(draft.localId, "account_id", Number(e.target.value))
           }
         >
-          {spaceResp?.data.accounts.map((acc) => (
+          {accounts.map((acc) => (
             <MenuItem value={acc.id}>{acc.name}</MenuItem>
           ))}
           <Button
@@ -120,7 +131,7 @@ export const TransactionFields = ({
           aria-label="добавить"
           size="small"
           onClick={() => {
-            addEmptyDraft(spaceId);
+            addEmptyDraft(spaceId, type, defaultAccountId, defaultCategoryId);
           }}
         >
           <AddIcon fontSize="inherit" />

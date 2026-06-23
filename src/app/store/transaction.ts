@@ -3,7 +3,12 @@ import { create } from "zustand";
 
 type Store = {
   drafts: TransactionDraft[];
-  addEmptyDraft: (spaceId: number) => void;
+  addEmptyDraft: (
+    spaceId: number,
+    type: 0 | 1,
+    accountId: number,
+    categoryId: number,
+  ) => void;
   cloneDraft: (localId: string) => void;
   updateDraft: <K extends keyof TransactionDraft>(
     localId: string,
@@ -11,35 +16,49 @@ type Store = {
     value: TransactionDraft[K],
   ) => void;
   removeDraft: (localId: string) => void;
-  init: (spaceId: number) => void;
+  init: (
+    spaceId: number,
+    type: 0 | 1,
+    accountId: number,
+    categoryId: number,
+  ) => void;
+  clear: () => void;
 };
 
-const createEmptyDraft = (spaceId: number): TransactionDraft => ({
+const createEmptyDraft = (
+  spaceId: number,
+  type: 0 | 1,
+  accountId: number,
+  categoryId: number,
+): TransactionDraft => ({
   localId: crypto.randomUUID(),
   created_at: new Date().toISOString(),
   amount: "0",
-  account_id: null,
-  category_id: null,
+  account_id: accountId,
+  category_id: categoryId,
   space_id: spaceId,
-  type: null,
+  type: type,
   comment: "",
 });
 
 export const useTransactionStore = create<Store>((set) => ({
   drafts: [],
-  init: (spaceId) =>
+  init: (spaceId, type, accountId, categoryId) =>
     set((state) => {
       if (state.drafts.length > 0) {
         return state;
       }
 
       return {
-        drafts: [createEmptyDraft(spaceId)],
+        drafts: [createEmptyDraft(spaceId, type, accountId, categoryId)],
       };
     }),
-  addEmptyDraft: (spaceId) =>
+  addEmptyDraft: (spaceId, type, accountId, categoryId) =>
     set((state) => ({
-      drafts: [...state.drafts, createEmptyDraft(spaceId)],
+      drafts: [
+        ...state.drafts,
+        createEmptyDraft(spaceId, type, accountId, categoryId),
+      ],
     })),
   cloneDraft: (localId) =>
     set((state) => {
@@ -67,4 +86,6 @@ export const useTransactionStore = create<Store>((set) => ({
     set((state) => ({
       drafts: state.drafts.filter((d) => d.localId !== localId),
     })),
+
+  clear: () => set({ drafts: [] }),
 }));

@@ -42,7 +42,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
   const [orderBy, setOrderBy] = useState<keyof Transaction>("created_at");
 
   const onRequestSort = (
-    event: MouseEvent<unknown>,
+    _: MouseEvent<unknown>,
     property: keyof Transaction,
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -59,7 +59,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
