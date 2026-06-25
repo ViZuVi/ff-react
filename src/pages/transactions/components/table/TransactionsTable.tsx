@@ -1,6 +1,5 @@
 import type { Transaction } from "@/shared/types/TransactionDraft";
 import {
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -11,12 +10,12 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { memo, useState, type ChangeEvent, type MouseEvent } from "react";
 import { useModal } from "@/shared/hooks/useModal";
-import { DeleteTransactionModal } from "./DeleteTransactionModal";
 import { EditTransactionModal } from "./EditTransactionModal";
+import { TransactionTableRow } from "./TransactionTableRow";
+import { useSnackbarStore } from "@/shared/store/snackbar";
+import { useDeleteTransaction } from "@/entities/transaction/hooks/use-transactions";
 
 type HeadCell = {
   value: keyof Transaction | "actions";
@@ -40,6 +39,8 @@ const headCells: readonly HeadCell[] = [
 const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<keyof Transaction>("created_at");
+  const { showSnackbar } = useSnackbarStore.getState();
+  const { mutate, isPending } = useDeleteTransaction();
 
   const onRequestSort = (
     _: MouseEvent<unknown>,
@@ -82,10 +83,32 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
     setSelectedTransaction(undefined);
   };
 
-  const deleteTransaction = () => {
-    console.log("deleted transaction id: ", selectedTransaction?.id);
-    closeModal();
-    setSelectedTransaction(undefined);
+  const deleteTransaction = (tr: Transaction) => {
+    showSnackbar({
+      mode: "confirm",
+      message: `Вы действительно хотите удалить транзакцию`,
+      loading: isPending,
+      type: "warning",
+
+      confirmAction: async () => {
+        mutate(tr.id, {
+          onSuccess: () => {
+            showSnackbar({
+              message: "Транзакция успешно удалена",
+              type: "success",
+              mode: "auto",
+            });
+          },
+          onError: () => {
+            showSnackbar({
+              message: "Ошибка удаления",
+              type: "error",
+              mode: "auto",
+            });
+          },
+        });
+      },
+    });
   };
 
   return (
@@ -122,34 +145,12 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <TableRow
+                <TransactionTableRow
+                  row={row}
                   key={row.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell>{row.created_at}</TableCell>
-                  <TableCell>{row.category.name}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                  <TableCell>{row.account.name}</TableCell>
-                  <TableCell>{row.user_name}</TableCell>
-                  <TableCell>{row.comment}</TableCell>
-                  <TableCell>
-                    <IconButton
-                      size="small"
-                      aria-label="редактировать"
-                      onClick={() => handleOpen("edit", row)}
-                    >
-                      <EditIcon fontSize="inherit" />
-                    </IconButton>
-                    <IconButton
-                      size="small"
-                      color="error"
-                      aria-label="удалить"
-                      onClick={() => handleOpen("delete", row)}
-                    >
-                      <DeleteIcon fontSize="inherit" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                  openEditModal={() => handleOpen("edit", row)}
+                  onDeleteClick={() => deleteTransaction(row)}
+                />
               ))}
           </TableBody>
         </Table>
@@ -167,14 +168,6 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
         <EditTransactionModal
           open={isOpen("edit")}
           onClose={handleCloseModal}
-          transaction={selectedTransaction}
-        />
-      )}
-      {selectedTransaction && (
-        <DeleteTransactionModal
-          open={isOpen("delete")}
-          onClose={handleCloseModal}
-          confirmDelete={deleteTransaction}
           transaction={selectedTransaction}
         />
       )}
