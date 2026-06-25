@@ -17,6 +17,9 @@ import { useModal } from "@/shared/hooks/useModal";
 import { CreateAccount } from "./CreateAccount";
 import type { Category } from "@/shared/types/Category";
 import type { Account } from "@/shared/types/Account";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 type Props = {
   draft: TransactionDraft;
@@ -48,6 +51,14 @@ export const TransactionFields = ({
 
   const { openModal, closeModal, isOpen } = useModal<ModalType>();
 
+  const changeDate = (e: Dayjs | null) => {
+    updateDraft(
+      draft.localId,
+      "created_at",
+      dayjs(e).format("YYYY-MM-DD HH:mm:ss"),
+    );
+  };
+
   return (
     <div className="new-transaction-modal__fields">
       <TextField
@@ -57,15 +68,19 @@ export const TransactionFields = ({
         value={draft.comment}
         onChange={(e) => updateDraft(draft.localId, "comment", e.target.value)}
       />
-      <TextField
-        id="created_at"
-        label="Дата"
-        size="small"
-        value={draft.created_at}
-        onChange={(e) =>
-          updateDraft(draft.localId, "created_at", e.target.value)
-        }
-      />
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
+        <DatePicker
+          slotProps={{
+            textField: {
+              size: "small",
+            },
+          }}
+          disableFuture
+          label="Дата от"
+          value={dayjs(draft.created_at)}
+          onChange={(e) => changeDate(e)}
+        />
+      </LocalizationProvider>
       <NumberField
         label="Сумма"
         value={Number(draft.amount)}

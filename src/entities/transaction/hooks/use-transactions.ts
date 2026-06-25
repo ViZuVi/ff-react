@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import { createTransaction } from "../api/create-transaction";
 import { editTransaction } from "../api/edit-transaction";
 import { deleteTransaction } from "../api/delete-transaction";
-import type { CreateTransaction } from "@/shared/types/TransactionDraft";
+import type { TransactionDraft } from "@/shared/types/TransactionDraft";
 
 const useInvalidateTransactionQueries = () => {
   const queryClient = useQueryClient();
@@ -60,10 +60,14 @@ export const useCreateTransaction = () => {
   const invalidate = useInvalidateTransactionQueries();
 
   return useMutation({
-    mutationFn: async (transactions: CreateTransaction[]) => {
+    mutationFn: async (transactions: TransactionDraft[]) => {
+      const payload = transactions.map(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        ({ localId, ...transaction }) => transaction,
+      );
       const results = [];
 
-      for (const tx of transactions) {
+      for (const tx of payload) {
         const res = await createTransaction(tx); // ждём завершения каждого запроса
         results.push(res.data);
       }

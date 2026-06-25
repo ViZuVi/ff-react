@@ -1,4 +1,5 @@
 import type { TransactionDraft } from "@/shared/types/TransactionDraft";
+import dayjs from "dayjs";
 import { create } from "zustand";
 
 type Store = {
@@ -32,7 +33,7 @@ const createEmptyDraft = (
   categoryId: number,
 ): TransactionDraft => ({
   localId: crypto.randomUUID(),
-  created_at: new Date().toISOString(),
+  created_at: dayjs().format("YYYY-MM-DD HH:mm:ss"),
   amount: "0",
   account_id: accountId,
   category_id: categoryId,
@@ -69,6 +70,7 @@ export const useTransactionStore = create<Store>((set) => ({
       const cloned: TransactionDraft = {
         ...structuredClone(source),
         localId: crypto.randomUUID(),
+        created_at: dayjs().format("YYYY-MM-DD HH:mm:ss"),
       };
 
       return {
