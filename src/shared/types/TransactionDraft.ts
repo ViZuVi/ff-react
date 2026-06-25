@@ -19,15 +19,11 @@ interface BaseTransaction {
   comment: string;
 }
 
-export interface CreateTransaction extends BaseTransaction {
-  account_id: number | null;
-  category_id: number | null;
-  space_id: number | null;
-}
-
-export interface UpdateTransaction extends CreateTransaction {
-  id: number;
-}
+// export interface CreateTransaction extends BaseTransaction {
+//   account_id: number | null;
+//   category_id: number | null;
+//   space_id: number | null;
+// }
 
 export interface Transaction extends BaseTransaction {
   id: number;
@@ -38,7 +34,35 @@ export interface Transaction extends BaseTransaction {
   editable: boolean;
 }
 
-export interface TransactionDraft extends CreateTransaction {
+// export interface TransactionDraft extends CreateTransaction {
+//   localId: string;
+//   type: number | null;
+// }
+
+// export interface UpdateTransaction extends CreateTransaction {
+//   id: number;
+// }
+
+export interface TransactionFormData {
+  created_at: string;
+  amount: string;
+  comment: string;
+
+  account_id: number | null;
+  category_id: number | null;
+}
+
+export interface CreateTransactionDto extends TransactionFormData {
+  space_id: number;
+}
+
+export interface TransactionDraft extends CreateTransactionDto {
   localId: string;
-  type: number | null;
+  type: 0 | 1;
+}
+
+export interface UpdateTransactionDto extends TransactionFormData {
+  id: number;
+  space_id: number;
+  type: 0 | 1;
 }

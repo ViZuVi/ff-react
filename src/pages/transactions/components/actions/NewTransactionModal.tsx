@@ -1,12 +1,13 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { useTransactionStore } from "@/app/store/transaction";
 import { useEffect, useMemo } from "react";
-import { TransactionFields } from "./TransactionFields";
 import { Button } from "@mui/material";
 import { useSpaceStore } from "@/app/store/space";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCreateTransaction } from "@/entities/transaction/hooks/use-transactions";
 import { useSnackbarStore } from "@/shared/store/snackbar";
+import { TransactionForm } from "./TransactionForm";
+import { TransactionActions } from "./TransactionActions";
 
 interface props {
   open: boolean;
@@ -18,6 +19,10 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
   const title = `Добавить ${type === "income" ? "Доход" : "Расход"}`;
   const transactionType = type === "income" ? 0 : 1;
 
+  const updateDraft = useTransactionStore((s) => s.updateDraft);
+  const cloneDraft = useTransactionStore((s) => s.cloneDraft);
+  const removeDraft = useTransactionStore((s) => s.removeDraft);
+  const addEmptyDraft = useTransactionStore((s) => s.addEmptyDraft);
   const drafts = useTransactionStore((s) => s.drafts);
   const clear = useTransactionStore((s) => s.clear);
   const init = useTransactionStore((s) => s.init);
@@ -87,23 +92,34 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
       title={title}
     >
       <div className="new-transaction-modal">
-        <div className="new-transaction-modal__form">
-          {spaceResp &&
-            currentSpaceId &&
-            drafts.map((draft, i) => (
-              <TransactionFields
-                key={draft.localId}
-                draft={draft}
-                showRemoveIcon={i > 0}
-                spaceId={Number(currentSpaceId)}
-                type={transactionType}
-                accounts={spaceResp.data.accounts || []}
-                categories={categories || []}
-                defaultAccountId={spaceResp.data.accounts[0].id}
-                defaultCategoryId={categories[0].id}
+        {spaceResp &&
+          currentSpaceId &&
+          drafts.map((draft, i) => (
+            <div key={draft.localId} className="new-transaction-modal__fields">
+              <TransactionForm
+                transaction={draft}
+                accounts={spaceResp.data.accounts}
+                categories={categories}
+                onChange={(field, value) =>
+                  updateDraft(draft.localId, field, value)
+                }
               />
-            ))}
-        </div>
+
+              <TransactionActions
+                showRemove={i > 0}
+                onClone={() => cloneDraft(draft.localId)}
+                onRemove={() => removeDraft(draft.localId)}
+                onAdd={() =>
+                  addEmptyDraft(
+                    Number(currentSpaceId),
+                    transactionType,
+                    spaceResp.data.accounts[0].id,
+                    categories[0].id,
+                  )
+                }
+              />
+            </div>
+          ))}
         <Button
           variant="contained"
           loading={isPending}

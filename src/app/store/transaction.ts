@@ -1,6 +1,11 @@
-import type { TransactionDraft } from "@/shared/types/TransactionDraft";
+import type {
+  TransactionDraft,
+  TransactionFormData,
+} from "@/shared/types/TransactionDraft";
 import dayjs from "dayjs";
 import { create } from "zustand";
+
+type EditableTransactionField = keyof TransactionFormData;
 
 type Store = {
   drafts: TransactionDraft[];
@@ -11,10 +16,10 @@ type Store = {
     categoryId: number,
   ) => void;
   cloneDraft: (localId: string) => void;
-  updateDraft: <K extends keyof TransactionDraft>(
+  updateDraft: <K extends EditableTransactionField>(
     localId: string,
     field: K,
-    value: TransactionDraft[K],
+    value: TransactionFormData[K],
   ) => void;
   removeDraft: (localId: string) => void;
   init: (

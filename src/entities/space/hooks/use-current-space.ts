@@ -12,5 +12,7 @@ export const useCurrentSpace = () => {
       return getCurrentSpace(spaceId as string);
     },
     enabled: currentSpaceId != null,
+    staleTime: 1000 * 60 * 10,
+    refetchOnMount: false,
   });
 };

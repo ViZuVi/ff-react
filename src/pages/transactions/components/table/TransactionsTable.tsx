@@ -82,12 +82,6 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
     setSelectedTransaction(undefined);
   };
 
-  const EditTransaction = () => {
-    console.log("edited transaction id: ", selectedTransaction?.id);
-    closeModal();
-    setSelectedTransaction(undefined);
-  };
-
   const deleteTransaction = () => {
     console.log("deleted transaction id: ", selectedTransaction?.id);
     closeModal();
@@ -173,7 +167,6 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
         <EditTransactionModal
           open={isOpen("edit")}
           onClose={handleCloseModal}
-          confirmEdit={EditTransaction}
           transaction={selectedTransaction}
         />
       )}
