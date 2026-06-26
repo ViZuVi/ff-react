@@ -1,5 +1,5 @@
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
-import { Button, IconButton } from "@mui/material";
+import { Button, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSnackbarStore } from "@/shared/store/snackbar";
@@ -67,34 +67,38 @@ export const BalanceAccounts = () => {
         {spaceResp?.data.accounts.map((acc) => {
           // TODO: вынести в отдельный компонент Item
           return (
-            <li className="balance-accounts__item" key={acc.id}>
-              <span className="balance-accounts__name">{acc.name}</span>
-              <b
-                className={
-                  parseFloat(acc.balance) < 0 ? "text-error" : "text-success"
-                }
-              >
-                {parseFloat(acc.balance).toLocaleString("ru")}
-              </b>
-              <span>{acc.currency.code}</span>
-              <span className="balance-accounts__actions">
-                <IconButton
-                  size="small"
-                  aria-label="редактировать"
-                  onClick={() => handleAccountEdit(acc)}
+            <>
+              <li className="balance-accounts__item" key={acc.id}>
+                <span className="balance-accounts__name">{acc.name}</span>
+                <b
+                  className={
+                    parseFloat(acc.balance) < 0 ? "text-error" : "text-success"
+                  }
                 >
-                  <EditIcon fontSize="inherit" />
-                </IconButton>
-                <IconButton
-                  size="small"
-                  color="error"
-                  aria-label="удалить"
-                  onClick={() => handleAccountDelete(acc)}
-                >
-                  <DeleteIcon fontSize="inherit" />
-                </IconButton>
-              </span>
-            </li>
+                  {parseFloat(acc.balance).toLocaleString("ru")}
+                </b>
+                <span>{acc.currency.code}</span>
+                <span className="balance-accounts__actions">
+                  <IconButton
+                    size="small"
+                    aria-label="редактировать"
+                    onClick={() => handleAccountEdit(acc)}
+                  >
+                    <EditIcon fontSize="inherit" />
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    color="error"
+                    aria-label="удалить"
+                    onClick={() => handleAccountDelete(acc)}
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                </span>
+              </li>
+
+              <Divider />
+            </>
           );
         })}
       </ul>

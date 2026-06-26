@@ -1,5 +1,5 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import { Button, IconButton } from "@mui/material";
+import { Button, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
@@ -73,26 +73,29 @@ export const CategoryModal = ({ open, onClose }: props) => {
           {spaceResp?.data.categories.map((cat) => {
             // TODO: вынести в отдельный компонент Item
             return (
-              <li className="category-modal__item" key={cat.id}>
-                <span>{cat.name}</span>
-                <span className="category-modal__actions">
-                  <IconButton
-                    size="small"
-                    aria-label="редактировать"
-                    onClick={() => handleCategoryEdit(cat)}
-                  >
-                    <EditIcon fontSize="inherit" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    color="error"
-                    aria-label="удалить"
-                    onClick={() => handleCategoryDelete(cat)}
-                  >
-                    <DeleteIcon fontSize="inherit" />
-                  </IconButton>
-                </span>
-              </li>
+              <>
+                <li className="category-modal__item" key={cat.id}>
+                  <span>{cat.name}</span>
+                  <span className="category-modal__actions">
+                    <IconButton
+                      size="small"
+                      aria-label="редактировать"
+                      onClick={() => handleCategoryEdit(cat)}
+                    >
+                      <EditIcon fontSize="inherit" />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      color="error"
+                      aria-label="удалить"
+                      onClick={() => handleCategoryDelete(cat)}
+                    >
+                      <DeleteIcon fontSize="inherit" />
+                    </IconButton>
+                  </span>
+                </li>
+                <Divider />
+              </>
             );
           })}
         </ul>

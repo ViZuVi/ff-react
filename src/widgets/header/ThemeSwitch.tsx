@@ -1,3 +1,4 @@
+import { useThemeStore } from "@/shared/theme/theme.store";
 import { FormControlLabel, Switch } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -58,9 +59,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export const ThemeSwitch = () => {
+ 
+  const mode = useThemeStore((state) => state.mode);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+
   return (
     <FormControlLabel
-      control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+      control={
+        <MaterialUISwitch
+          sx={{ m: 1 }}
+          checked={mode === "dark"}
+          onChange={toggleTheme}
+        />
+      }
       label="Выберите тему интерфейса"
     />
   );

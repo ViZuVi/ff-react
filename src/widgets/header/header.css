@@ -9,12 +9,13 @@
   align-items: center;
   justify-content: space-between;
   z-index: 2;
-  box-shadow: 0px 4px 11px -2px #eceef1;
-  background-color: #fff;
+  /* border-bottom: 1px solid #ececec; */
+  /* background-color: #fff; */
 }
 
 .app-header__logo-link {
   text-decoration: none;
+  color: inherit;
 }
 
 .app-header__logo {
@@ -22,7 +23,6 @@
   align-items: center;
   gap: 8px;
   text-transform: uppercase;
-  color: #0b3d91;
   font-weight: 700;
 }
 
@@ -59,15 +59,17 @@
 
 .settings-modal {
   width: 100%;
+  min-width: 420px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 16px;
 }
 
 .app-header__loader-wrapper {
   position: absolute;
   content: "";
-  bottom: 2px;
+  bottom: -2px;
   left: 0;
   right: 0;
   background-color: #00c389;

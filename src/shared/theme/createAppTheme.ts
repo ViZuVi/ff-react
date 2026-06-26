@@ -24,7 +24,7 @@ export const createAppTheme = (mode: "light" | "dark") => {
       },
 
       secondary: {
-        main: primitiveColors.purple500,
+        main: primitiveColors.blue400,
       },
 
       success: {

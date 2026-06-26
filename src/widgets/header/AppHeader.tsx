@@ -1,7 +1,7 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Paper } from "@mui/material";
 import { Link } from "react-router";
 import SettingsIcon from "@mui/icons-material/Settings";
-import PersonIcon from "@mui/icons-material/Person";
+// import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./header.css";
 import { useModal } from "@/shared/hooks/useModal";
@@ -24,7 +24,7 @@ export const AppHeader = () => {
   const isFetching = useIsFetching();
 
   return (
-    <div className="app-header">
+    <Paper className="app-header">
       <Link to="/" className="app-header__logo-link">
         <div className="app-header__logo">
           <img width={32} height={32} src="/logo.svg" alt="Logo" />
@@ -39,13 +39,13 @@ export const AppHeader = () => {
         >
           <SettingsIcon />
         </IconButton>
-        <IconButton
+        {/* <IconButton
           size="small"
           aria-label="личный кабинет"
           onClick={() => openModal("profile")}
         >
           <PersonIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton
           size="small"
           aria-label="выход из аккаунта"
@@ -62,6 +62,6 @@ export const AppHeader = () => {
           <div className="app-header__loader-bar"></div>
         </div>
       )}
-    </div>
+    </Paper>
   );
 };

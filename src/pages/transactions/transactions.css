@@ -65,9 +65,9 @@
   padding: 4px 8px;
 }
 
-.balance-accounts__item:nth-child(odd) {
+/* .balance-accounts__item:nth-child(odd) {
   background-color: #f7f7f7;
-}
+} */
 
 .balance-accounts__name {
   padding-right: 8px;
@@ -98,10 +98,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.category-modal__item:nth-child(odd) {
-  background-color: #f7f7f7;
 }
 
 .converter-modal {

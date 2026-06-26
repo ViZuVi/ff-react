@@ -1,14 +1,8 @@
 .u-modal {
-  background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.u-modal__title {
-  margin: 24px auto;
-  text-align: center;
 }
 
 .u-modal__close-btn {

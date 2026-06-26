@@ -1,14 +1,9 @@
-import {
-  createContext,
-  type PropsWithChildren,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, type PropsWithChildren, useMemo } from "react";
 
-import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { createAppTheme } from "./createAppTheme";
-import { cssVariables } from "./cssVariables";
+import { useThemeStore } from "./theme.store";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ThemeModeContext = createContext({
@@ -16,27 +11,14 @@ export const ThemeModeContext = createContext({
 });
 
 export function AppThemeProvider({ children }: PropsWithChildren) {
-  const [mode, setMode] = useState<"light" | "dark">("light");
-
-  const toggleTheme = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  const mode = useThemeStore((state) => state.mode);
 
   const theme = useMemo(() => createAppTheme(mode), [mode]);
 
   return (
-    <ThemeModeContext.Provider value={{ toggleTheme }}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-
-        <GlobalStyles
-          styles={{
-            ":root": cssVariables,
-          }}
-        />
-
-        {children}
-      </ThemeProvider>
-    </ThemeModeContext.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 }

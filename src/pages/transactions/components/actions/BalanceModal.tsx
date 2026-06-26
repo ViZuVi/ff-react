@@ -1,5 +1,9 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import { CircularProgress, type SelectChangeEvent } from "@mui/material";
+import {
+  CircularProgress,
+  Divider,
+  type SelectChangeEvent,
+} from "@mui/material";
 import { useBalance } from "@/entities/balance/hooks/use-balance";
 import { useState } from "react";
 import { useCurrency } from "@/entities/currency/hooks/use-currency";
@@ -83,26 +87,29 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                       {balance.amountByCurrency.map((acc) => {
                         // TODO: вынести в отдельный компонент Item
                         return (
-                          <li
-                            className="balance-modal__curr-item"
-                            key={acc.currency.id}
-                          >
-                            <b
-                              className={
-                                acc.total < 0 ? "text-error" : "text-success"
-                              }
+                          <>
+                            <li
+                              className="balance-modal__curr-item"
+                              key={acc.currency.id}
                             >
-                              {acc.total.toLocaleString("ru")}&nbsp;
-                            </b>
-                            <span>{acc.currency.code}</span>
-                            <span>
-                              (курс{" "}
-                              {parseFloat(acc.currency.rate).toLocaleString(
-                                "ru",
-                              )}
-                              )
-                            </span>
-                          </li>
+                              <b
+                                className={
+                                  acc.total < 0 ? "text-error" : "text-success"
+                                }
+                              >
+                                {acc.total.toLocaleString("ru")}&nbsp;
+                              </b>
+                              <span>{acc.currency.code}</span>
+                              <span>
+                                (курс{" "}
+                                {parseFloat(acc.currency.rate).toLocaleString(
+                                  "ru",
+                                )}
+                                )
+                              </span>
+                            </li>
+                            <Divider />
+                          </>
                         );
                       })}
                     </ul>

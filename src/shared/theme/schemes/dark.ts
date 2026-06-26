@@ -2,9 +2,9 @@ import { primitiveColors as c } from "../tokens/colors";
 
 export const darkScheme = {
   background: {
-    body: "#070B14",
-    surface: "#0D111C",
-    elevated: "#121826",
+    body: "#1a1f2e",
+    surface: "#232734",
+    elevated: "#2e323d",
     glass: "rgba(255,255,255,0.04)",
   },
 

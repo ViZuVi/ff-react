@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { Divider, IconButton } from "@mui/material";
+import { Divider, IconButton, Paper, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./modal.module.css";
@@ -24,25 +24,29 @@ export const UModal = ({
   onClose,
 }: ModalProps) => {
   return createPortal(
-    <div>
-      <Modal open={open} onClose={(_, reason) => onClose(reason)}>
-        <div className={styles["u-modal"]}>
-          <h3 className={styles["u-modal__title"]}>{title}</h3>
-          {divider && <Divider />}
-          {closeIcon && (
-            <IconButton
-              className={styles["u-modal__close-btn"]}
-              size="small"
-              aria-label="закрыть"
-              onClick={() => onClose()}
-            >
-              <CloseIcon />
-            </IconButton>
-          )}
-          <div>{content || children}</div>
-        </div>
-      </Modal>
-    </div>,
+    <Modal open={open} onClose={(_, reason) => onClose(reason)}>
+      <Paper className={styles["u-modal"]}>
+        <Typography
+          sx={{ margin: "16px auto", textAlign: "center" }}
+          variant="h6"
+          className={styles["u-modal__title"]}
+        >
+          {title}
+        </Typography>
+        {divider && <Divider />}
+        {closeIcon && (
+          <IconButton
+            className={styles["u-modal__close-btn"]}
+            size="small"
+            aria-label="закрыть"
+            onClick={() => onClose()}
+          >
+            <CloseIcon />
+          </IconButton>
+        )}
+        <>{content || children}</>
+      </Paper>
+    </Modal>,
     document.body,
   );
 };
