@@ -1,5 +1,6 @@
 import type { Transaction } from "@/shared/types/TransactionDraft";
 import {
+  Divider,
   Paper,
   Table,
   TableBody,
@@ -9,6 +10,7 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
+  useMediaQuery,
 } from "@mui/material";
 import { memo, useState, type ChangeEvent, type MouseEvent } from "react";
 import { useModal } from "@/shared/hooks/useModal";
@@ -16,6 +18,7 @@ import { EditTransactionModal } from "./EditTransactionModal";
 import { TransactionTableRow } from "./TransactionTableRow";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useDeleteTransaction } from "@/entities/transaction/hooks/use-transactions";
+import { MobileCards } from "./MobileCards";
 
 type HeadCell = {
   value: keyof Transaction | "actions";
@@ -53,9 +56,10 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
 
   const createSortHandler =
     (property: keyof Transaction) => (event: MouseEvent<unknown>) => {
-      console.log("createSortHandler");
       onRequestSort(event, property);
     };
+
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -112,57 +116,74 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: "calc(100vh - 80px - 88px - 80px)" }}>
-        <Table
-          stickyHeader
-          sx={{ minWidth: 650 }}
-          size="small"
-          aria-label="transactions table"
-        >
-          <TableHead>
-            <TableRow>
-              {headCells.map((h) => (
-                // TODO: вынести в отдельный компонент Item
-                <TableCell key={h.value}>
-                  {h.value === "actions" ? (
-                    h.name
-                  ) : (
-                    <TableSortLabel
-                      active={orderBy === h.value}
-                      direction={orderBy === h.value ? order : "asc"}
-                      onClick={createSortHandler(h.value)}
-                    >
-                      {h.name}
-                    </TableSortLabel>
-                  )}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+    <Paper sx={{ width: "100%" }}>
+      <TableContainer
+        sx={{
+          maxHeight: "calc(100vh - 80px - 88px - 160px)",
+        }}
+      >
+        {isMobile ? (
+          rows
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row) => (
+              <MobileCards
+                transaction={row}
+                key={row.id}
+                openEditModal={() => handleOpen("edit", row)}
+                onDeleteClick={() => deleteTransaction(row)}
+              ></MobileCards>
+            ))
+        ) : (
+          <Table stickyHeader size="small" aria-label="transactions table">
+            <TableHead>
+              <TableRow>
+                {headCells.map((h) => (
+                  // TODO: вынести в отдельный компонент Item
+                  <TableCell key={h.value}>
+                    {h.value === "actions" ? (
+                      h.name
+                    ) : (
+                      <TableSortLabel
+                        active={orderBy === h.value}
+                        direction={orderBy === h.value ? order : "asc"}
+                        onClick={createSortHandler(h.value)}
+                      >
+                        {h.name}
+                      </TableSortLabel>
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TransactionTableRow
-                  row={row}
-                  key={row.id}
-                  openEditModal={() => handleOpen("edit", row)}
-                  onDeleteClick={() => deleteTransaction(row)}
-                />
-              ))}
-          </TableBody>
-        </Table>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <TransactionTableRow
+                    row={row}
+                    key={row.id}
+                    openEditModal={() => handleOpen("edit", row)}
+                    onDeleteClick={() => deleteTransaction(row)}
+                  />
+                ))}
+            </TableBody>
+          </Table>
+        )}
       </TableContainer>
+      <Divider />
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
+        labelRowsPerPage="Строк:"
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        slotProps={{
+          select: { sx: { margin: "0 8px 0 0" } },
+        }}
       />
       {selectedTransaction && (
         <EditTransactionModal

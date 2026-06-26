@@ -1,7 +1,7 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { useTransactionStore } from "@/app/store/transaction";
 import { useEffect, useMemo } from "react";
-import { Button } from "@mui/material";
+import { Button, Divider, useMediaQuery } from "@mui/material";
 import { useSpaceStore } from "@/app/store/space";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCreateTransaction } from "@/entities/transaction/hooks/use-transactions";
@@ -82,6 +82,7 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
     onClose();
   };
 
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
     <UModal
       open={open}
@@ -118,6 +119,8 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
                   )
                 }
               />
+
+              {isMobile && <Divider variant="fullWidth" />}
             </div>
           ))}
         <Button

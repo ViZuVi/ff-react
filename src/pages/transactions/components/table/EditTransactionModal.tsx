@@ -82,7 +82,7 @@ export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Редактирование транзакции">
+    <UModal open={open} onClose={onClose} title="Изменение транзакции">
       <div className="edit-transaction-modal">
         {spaceResp && (
           <TransactionForm

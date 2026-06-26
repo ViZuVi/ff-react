@@ -67,13 +67,18 @@ export const CreateCategory = ({ open, onClose }: Props) => {
   return (
     <UModal open={open} onClose={onClose} title="Создание новой категории">
       <Box
-        sx={{
+        sx={(theme) => ({
           p: "12px",
           minWidth: "600px",
           display: "flex",
           flexDirection: "column",
           gap: "12px",
-        }}
+          [theme.breakpoints.down(768)]: {
+            padding: "4px 8px",
+            width: "calc(100vw - 32px)",
+            minWidth: "auto",
+          },
+        })}
       >
         <TextField
           required

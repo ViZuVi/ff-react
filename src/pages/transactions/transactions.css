@@ -2,10 +2,17 @@
   display: flex;
   gap: 24px;
   align-items: flex-start;
+  height: 100%;
 }
 
 .transactions-wrapper {
   flex-grow: 1;
+  width: 100%;
+}
+
+.transactions-view-skeleton {
+  display: flex;
+  gap: 24px;
 }
 
 .transactions-table {
@@ -28,6 +35,7 @@
 .transactions-actions__block {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .transactions-actions__block--add {
@@ -107,7 +115,7 @@
 }
 
 .filters {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: stretch;
   gap: 12px;
@@ -115,6 +123,10 @@
   position: sticky;
   height: 100%;
   top: 88px;
+}
+
+.filters--visable {
+  display: flex;
 }
 
 .filters__date-picker-range {
@@ -128,13 +140,15 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  padding: 0 24px 24px;
+  padding: 24px;
   min-width: 80vw;
+  max-height: 80vh;
+  overflow: auto;
 }
 
 .new-transaction-modal__fields {
   display: grid;
-  grid-template-columns: repeat(5, 1fr) 36px 36px 36px;
+  grid-template-columns: repeat(5, 1fr) 108px;
   align-items: center;
   gap: 12px;
 }
@@ -171,4 +185,70 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .transactions-view {
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .filters {
+    position: static;
+    order: 0;
+    width: 100%;
+  }
+
+  .filters-wrapper {
+    width: 100%;
+  }
+
+  .transactions-wrapper {
+    order: 1;
+    max-width: 100%;
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .transactions-actions__block {
+    gap: 4px;
+  }
+
+  .transactions-actions {
+    margin-bottom: 8px;
+  }
+
+  .transactions-view-skeleton {
+    flex-direction: column;
+  }
+
+  .category-modal {
+    min-width: calc(100vw - 32px);
+  }
+
+  .balance-modal {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow: auto;
+    padding: 0 12px;
+    width: calc(100vw - 32px);
+    gap: 12px;
+  }
+
+  .balance-modal__totals {
+    text-align: center;
+  }
+
+  .new-transaction-modal {
+    padding: 12px;
+  }
+
+  .new-transaction-modal__fields,
+  .edit-transaction-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

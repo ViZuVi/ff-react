@@ -188,3 +188,11 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: rgb(209, 206, 206, 0.5) transparent;
 }
+
+@media (max-width: 768px) {
+  body {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+  }
+}

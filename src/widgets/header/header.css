@@ -104,3 +104,14 @@
     background-position: -200% 0;
   }
 }
+
+@media (max-width: 768px) {
+  .app-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .settings-modal {
+    min-width: calc(100vw - 32px);
+  }
+}

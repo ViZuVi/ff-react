@@ -74,14 +74,22 @@ export const CreateAccount = ({ open, onClose }: Props) => {
   return (
     <UModal open={open} onClose={onClose} title="Создание нового счёта">
       <Box
-        sx={{
+        sx={(theme) => ({
           p: "12px",
           minWidth: "920px",
           display: "grid",
           gridTemplateColumns: "2fr 1fr 2fr",
           alignItems: "center",
           gap: "12px",
-        }}
+          [theme.breakpoints.down(768)]: {
+            padding: "4px 8px",
+            display: "flex",
+            flexDirection: "column",
+          alignItems: "stretch",
+            width: "calc(100vw - 32px)",
+            minWidth: "auto",
+          },
+        })}
       >
         <TextField
           required

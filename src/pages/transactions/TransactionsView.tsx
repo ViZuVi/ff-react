@@ -2,7 +2,7 @@ import { MainActions } from "@/pages/transactions/components/actions/MainActions
 import "./transactions.css";
 import { FiltersForm } from "./components/filters/FiltersForm";
 import { TransactionsTable } from "./components/table/TransactionsTable";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Typography, useMediaQuery } from "@mui/material";
 import { NoSpaces } from "./components/NoSpaces";
 import { useTransactions } from "@/entities/transaction/hooks/use-transactions";
 import { useSpaces } from "@/entities/space/hooks/use-spaces";
@@ -14,6 +14,8 @@ import dayjs from "dayjs";
 export const TransactionsView = () => {
   const { data: spaces, isLoading: spacesLoading } = useSpaces();
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
+
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   const [filters, setFilters] = useState<Omit<Filters, "space_id">>({
     search: "",
@@ -46,17 +48,17 @@ export const TransactionsView = () => {
 
   return spacesLoading ? (
     <>
-      <div style={{ display: "flex", gap: "24px" }}>
+      <div className="transactions-view-skeleton">
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={1300}
+          width={isMobile ? "100%" : 1300}
           height={400}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={400}
+          width={isMobile ? "100%" : 400}
           height={400}
         />
       </div>
@@ -65,12 +67,18 @@ export const TransactionsView = () => {
     <div className="transactions-view">
       <div className="transactions-wrapper">
         <MainActions />
+        {isMobile && (
+          <Typography align="center" variant="h5" sx={{ marginBottom: "12px" }}>
+            Операции
+          </Typography>
+        )}
         {transactions?.data ? (
           <TransactionsTable rows={transactions.data} />
         ) : (
           ""
         )}
       </div>
+
       <FiltersForm filters={filters} onChange={handleChange} />
     </div>
   ) : (

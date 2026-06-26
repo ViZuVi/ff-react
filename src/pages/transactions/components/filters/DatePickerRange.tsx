@@ -42,6 +42,11 @@ export const DatePickerRange = ({
         <DesktopDatePicker
           disableFuture
           label="Дата от"
+          slotProps={{
+            textField: {
+              size: "small",
+            },
+          }}
           value={dayjs(draft.from)}
           maxDate={dayjs(to)}
           onChange={(v) => v && changeDate("from", v)}
@@ -50,6 +55,11 @@ export const DatePickerRange = ({
         <DesktopDatePicker
           disableFuture
           label="Дата до"
+          slotProps={{
+            textField: {
+              size: "small",
+            },
+          }}
           value={dayjs(draft.to)}
           minDate={dayjs(from)}
           onChange={(v) => v && changeDate("to", v)}
