@@ -19,12 +19,6 @@ interface BaseTransaction {
   comment: string;
 }
 
-// export interface CreateTransaction extends BaseTransaction {
-//   account_id: number | null;
-//   category_id: number | null;
-//   space_id: number | null;
-// }
-
 export interface Transaction extends BaseTransaction {
   id: number;
   account: AccountType;
@@ -33,15 +27,6 @@ export interface Transaction extends BaseTransaction {
   user_name: string;
   editable: boolean;
 }
-
-// export interface TransactionDraft extends CreateTransaction {
-//   localId: string;
-//   type: number | null;
-// }
-
-// export interface UpdateTransaction extends CreateTransaction {
-//   id: number;
-// }
 
 export interface TransactionFormData {
   created_at: string;

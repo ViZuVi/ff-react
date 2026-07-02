@@ -12,7 +12,13 @@ import {
   TableSortLabel,
   useMediaQuery,
 } from "@mui/material";
-import { memo, useState, type ChangeEvent, type MouseEvent } from "react";
+import {
+  memo,
+  useMemo,
+  useState,
+  type ChangeEvent,
+  type MouseEvent,
+} from "react";
 import { useModal } from "@/shared/hooks/useModal";
 import { EditTransactionModal } from "./EditTransactionModal";
 import { TransactionTableRow } from "./TransactionTableRow";
@@ -25,7 +31,7 @@ type HeadCell = {
   name: string;
 };
 
-type Order = "asc" | "desc";
+type Order = "asc" | "desc" | null;
 
 type ModalType = "delete" | "edit";
 
@@ -40,8 +46,8 @@ const headCells: readonly HeadCell[] = [
 ];
 
 const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
-  const [order, setOrder] = useState<Order>("desc");
-  const [orderBy, setOrderBy] = useState<keyof Transaction>("created_at");
+  const [order, setOrder] = useState<Order>(null);
+  const [orderBy, setOrderBy] = useState<keyof Transaction | null>(null);
   const { showSnackbar } = useSnackbarStore.getState();
   const { mutate, isPending } = useDeleteTransaction();
 
@@ -49,9 +55,24 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
     _: MouseEvent<unknown>,
     property: keyof Transaction,
   ) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+    if (orderBy !== property) {
+      setOrderBy(property);
+      setOrder("asc");
+      return;
+    }
+
+    switch (order) {
+      case null:
+        setOrder("asc");
+        break;
+      case "asc":
+        setOrder("desc");
+        break;
+      case "desc":
+        setOrder(null);
+        setOrderBy(null);
+        break;
+    }
   };
 
   const createSortHandler =
@@ -115,6 +136,42 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
     });
   };
 
+  const getSortValue = (row: Transaction, key: keyof Transaction) => {
+    switch (key) {
+      case "created_at":
+        return new Date(row.created_at).getTime();
+      case "amount":
+        return Number(row.amount);
+      case "account":
+        return row.account.name;
+      case "category":
+        return row.category.name;
+      case "type":
+        return row.type.name;
+      default:
+        return row[key];
+    }
+  };
+
+  const sortedRows = useMemo(() => {
+    if (order === null || orderBy === null) {
+      return rows;
+    }
+
+    return [...rows].sort((a, b) => {
+      const av = getSortValue(a, orderBy);
+      const bv = getSortValue(b, orderBy);
+
+      if (typeof av === "string" && typeof bv === "string") {
+        const result = av.localeCompare(bv, "ru");
+        return order === "asc" ? result : -result;
+      }
+
+      const result = Number(av) - Number(bv);
+      return order === "asc" ? result : -result;
+    });
+  }, [rows, order, orderBy]);
+
   return (
     <Paper sx={{ width: "100%" }}>
       <TableContainer
@@ -123,7 +180,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
         }}
       >
         {isMobile ? (
-          rows
+          sortedRows
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row) => (
               <MobileCards
@@ -145,7 +202,9 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
                     ) : (
                       <TableSortLabel
                         active={orderBy === h.value}
-                        direction={orderBy === h.value ? order : "asc"}
+                        direction={
+                          orderBy === h.value ? (order ?? "asc") : "asc"
+                        }
                         onClick={createSortHandler(h.value)}
                       >
                         {h.name}
@@ -157,7 +216,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
             </TableHead>
 
             <TableBody>
-              {rows
+              {sortedRows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <TransactionTableRow
@@ -176,6 +235,9 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         labelRowsPerPage="Строк:"
+        labelDisplayedRows={({ from, to, count }) =>
+          `${from}–${to} из ${count !== -1 ? count : `более ${to}`}`
+        }
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}

@@ -87,11 +87,8 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                       {balance.amountByCurrency.map((acc) => {
                         // TODO: вынести в отдельный компонент Item
                         return (
-                          <>
-                            <li
-                              className="balance-modal__curr-item"
-                              key={acc.currency.id}
-                            >
+                          <div key={acc.currency.id}>
+                            <li className="balance-modal__curr-item">
                               <b
                                 className={
                                   acc.total < 0 ? "text-error" : "text-success"
@@ -109,7 +106,7 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                               </span>
                             </li>
                             <Divider />
-                          </>
+                          </div>
                         );
                       })}
                     </ul>

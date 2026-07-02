@@ -67,8 +67,8 @@ export const BalanceAccounts = () => {
         {spaceResp?.data.accounts.map((acc) => {
           // TODO: вынести в отдельный компонент Item
           return (
-            <>
-              <li className="balance-accounts__item" key={acc.id}>
+            <div key={acc.id}>
+              <li className="balance-accounts__item" >
                 <span className="balance-accounts__name">{acc.name}</span>
                 <b
                   className={
@@ -98,7 +98,7 @@ export const BalanceAccounts = () => {
               </li>
 
               <Divider />
-            </>
+            </div>
           );
         })}
       </ul>
