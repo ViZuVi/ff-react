@@ -51,30 +51,41 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
     );
   }, [open, init, currentSpaceId, transactionType, spaceResp, categories]);
 
-  const { mutate, isPending } = useCreateTransaction();
+  const { mutateAsync, isPending } = useCreateTransaction();
   const { showSnackbar } = useSnackbarStore.getState();
 
-  const handleCreateTransaction = () => {
-    mutate(drafts, {
-      onSuccess: () => {
-        console.log("success");
+  const handleCreateTransaction = async () => {
+    try {
+      const { success, errors } = await mutateAsync(drafts);
 
-        onClose();
-        clear();
+      if (errors.length === 0) {
         showSnackbar({
-          message: "Транзакция успешно создана",
+          message: `${drafts.length > 1 ? "Транзакции" : "Транзакция"} успешно ${drafts.length > 1 ? "созданы" : "создана"}`,
           type: "success",
           mode: "auto",
         });
-      },
-      onError: () => {
+        onClose();
+        clear();
+      } else if (success.length > 0) {
         showSnackbar({
-          message: "Ошибка создания",
+          message: `Создано ${success.length} транзакций. Не удалось создать ${errors.length}.`,
+          type: "warning",
+          mode: "auto",
+        });
+      } else {
+        showSnackbar({
+          message: "Не удалось создать ни одной транзакции",
           type: "error",
           mode: "auto",
         });
-      },
-    });
+      }
+    } catch {
+      showSnackbar({
+        message: "Произошла непредвиденная ошибка",
+        type: "error",
+        mode: "auto",
+      });
+    }
   };
 
   const handleClose = () => {

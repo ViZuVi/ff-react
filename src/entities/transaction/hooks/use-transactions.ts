@@ -65,12 +65,23 @@ export const useCreateTransaction = () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         ({ localId, ...transaction }) => transaction,
       );
-      const results = [];
 
-      for (const tx of payload) {
-        const res = await createTransaction(tx); // ждём завершения каждого запроса
-        results.push(res.data);
+      const results = await Promise.allSettled(
+        payload.map((tx) => createTransaction(tx)),
+      );
+
+      const success = [];
+      const errors = [];
+
+      for (const result of results) {
+        if (result.status === "fulfilled") {
+          success.push(result.value.data);
+        } else {
+          errors.push(result.reason);
+        }
       }
+
+      return { success, errors };
     },
     onSuccess: invalidate,
   });
