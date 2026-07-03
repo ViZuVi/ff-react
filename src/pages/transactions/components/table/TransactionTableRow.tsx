@@ -3,6 +3,7 @@ import { IconButton, TableCell, TableRow } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { ReactNode } from "react";
+import dayjs from "dayjs";
 
 interface Props {
   row: Transaction;
@@ -32,7 +33,7 @@ export const TransactionTableRow = ({
       key={row.id}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
-      <Cell>{row.created_at}</Cell>
+      <Cell>{dayjs(row.created_at).format("DD.MM.YYYY")}</Cell>
       <Cell>{row.category.name}</Cell>
       <Cell>
         <span className={row.type.id === 1 ? "text-error" : "text-success"}>

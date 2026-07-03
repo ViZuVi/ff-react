@@ -29,6 +29,7 @@ import { MobileCards } from "./MobileCards";
 type HeadCell = {
   value: keyof Transaction | "actions";
   name: string;
+  width: number | string;
 };
 
 type Order = "asc" | "desc" | null;
@@ -36,13 +37,13 @@ type Order = "asc" | "desc" | null;
 type ModalType = "delete" | "edit";
 
 const headCells: readonly HeadCell[] = [
-  { value: "created_at", name: "дата" },
-  { value: "category", name: "категория" },
-  { value: "amount", name: "сумма" },
-  { value: "account", name: "счёт" },
-  { value: "user_name", name: "создатель" },
-  { value: "comment", name: "описание" },
-  { value: "actions", name: "действия" },
+  { value: "created_at", name: "дата", width: 160 },
+  { value: "category", name: "категория", width: 260 },
+  { value: "amount", name: "сумма", width: 150 },
+  { value: "account", name: "счёт", width: 190 },
+  { value: "user_name", name: "создатель", width: 190 },
+  { value: "comment", name: "описание", width: "auto" },
+  { value: "actions", name: "действия", width: 140 },
 ];
 
 const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
@@ -196,7 +197,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
               <TableRow>
                 {headCells.map((h) => (
                   // TODO: вынести в отдельный компонент Item
-                  <TableCell key={h.value}>
+                  <TableCell key={h.value} width={h.width}>
                     {h.value === "actions" ? (
                       h.name
                     ) : (

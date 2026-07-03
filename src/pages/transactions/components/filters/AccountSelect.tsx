@@ -18,7 +18,7 @@ export const AccountSelect = ({
         id="account"
         value={value}
         label="Счет"
-        onChange={() => onChange("account_id")}
+        onChange={(e) => onChange(e.target.value)}
       >
         {accounts.map((item) => {
           return (
