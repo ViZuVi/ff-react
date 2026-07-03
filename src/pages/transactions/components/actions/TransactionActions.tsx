@@ -17,7 +17,7 @@ export const TransactionActions = ({
   showRemove,
 }: TransactionActionsProps) => {
   return (
-    <div style={{ alignSelf: "flex-end" }}>
+    <div>
       <IconButton color="primary" size="small" onClick={onClone}>
         <ContentCopyIcon fontSize="inherit" />
       </IconButton>

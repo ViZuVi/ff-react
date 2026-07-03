@@ -63,7 +63,7 @@
 .balance-accounts__item {
   display: grid;
   align-items: center;
-  grid-template-columns: 4fr 3fr 2fr 2fr;
+  grid-template-columns: 4fr 3fr 1fr 2fr;
   padding: 4px 8px;
 }
 
@@ -79,6 +79,7 @@
 
 .balance-accounts__name {
   padding-right: 8px;
+  word-break: break-word;
 }
 
 .balance-modal__block-title,
@@ -149,7 +150,6 @@
 .new-transaction-modal__fields {
   display: grid;
   grid-template-columns: repeat(5, 1fr) 108px;
-  align-items: center;
   gap: 12px;
 }
 

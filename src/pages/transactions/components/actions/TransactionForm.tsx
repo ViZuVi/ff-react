@@ -17,6 +17,7 @@ type TransactionFormProps = {
   transaction: TransactionFormData;
   accounts: Account[];
   categories: Category[];
+  errors: Partial<Record<keyof TransactionFormData, string>>;
   onChange: <K extends keyof TransactionFormData>(
     field: K,
     value: TransactionFormData[K],
@@ -26,6 +27,7 @@ type TransactionFormProps = {
 export const TransactionForm = ({
   transaction,
   accounts,
+  errors,
   categories,
   onChange,
 }: TransactionFormProps) => {
@@ -34,6 +36,8 @@ export const TransactionForm = ({
       <TextField
         label="Описание"
         size="small"
+        error={!!errors.comment}
+        helperText={errors.comment}
         value={transaction.comment}
         onChange={(e) => onChange("comment", e.target.value)}
       />
@@ -57,6 +61,8 @@ export const TransactionForm = ({
       <NumberField
         label="Сумма"
         size="small"
+        error={!!errors.amount}
+        helperText={errors.amount}
         min={1}
         value={Number(transaction.amount)}
         onValueChange={(value) => onChange("amount", String(value))}

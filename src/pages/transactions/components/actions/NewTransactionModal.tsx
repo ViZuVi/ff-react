@@ -1,6 +1,6 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { useTransactionStore } from "@/app/store/transaction";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, Divider, useMediaQuery } from "@mui/material";
 import { useSpaceStore } from "@/app/store/space";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
@@ -8,6 +8,10 @@ import { useCreateTransaction } from "@/entities/transaction/hooks/use-transacti
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { TransactionForm } from "./TransactionForm";
 import { TransactionActions } from "./TransactionActions";
+import {
+  transactionSchema,
+  type TransactionFormData,
+} from "@/features/transaction/transaction.schema";
 
 interface props {
   open: boolean;
@@ -29,6 +33,9 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
 
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
   const { data: spaceResp } = useCurrentSpace();
+  const [errors, setErrors] = useState<
+    Record<string, Partial<Record<keyof TransactionFormData, string>>>
+  >({});
 
   const categories = useMemo(
     () =>
@@ -55,6 +62,33 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
   const { showSnackbar } = useSnackbarStore.getState();
 
   const handleCreateTransaction = async () => {
+    const validationErrors: Record<
+      string,
+      Partial<Record<keyof TransactionFormData, string>>
+    > = {};
+
+    let hasErrors = false;
+
+    for (const draft of drafts) {
+      const result = transactionSchema.safeParse(draft);
+
+      if (!result.success) {
+        hasErrors = true;
+
+        validationErrors[draft.localId] = Object.fromEntries(
+          Object.entries(result.error.flatten().fieldErrors).map(
+            ([key, value]) => [key, value?.[0]],
+          ),
+        );
+      }
+    }
+
+    setErrors(validationErrors);
+
+    if (hasErrors) {
+      return;
+    }
+
     try {
       const { success, errors } = await mutateAsync(drafts);
 
@@ -109,12 +143,20 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
           drafts.map((draft, i) => (
             <div key={draft.localId} className="new-transaction-modal__fields">
               <TransactionForm
+                errors={errors[draft.localId] ?? {}}
                 transaction={draft}
                 accounts={spaceResp.data.accounts}
                 categories={categories}
-                onChange={(field, value) =>
-                  updateDraft(draft.localId, field, value)
-                }
+                onChange={(field, value) => {
+                  updateDraft(draft.localId, field, value);
+                  setErrors((prev) => ({
+                    ...prev,
+                    [draft.localId]: {
+                      ...prev[draft.localId],
+                      [field]: undefined,
+                    },
+                  }));
+                }}
               />
 
               <TransactionActions
