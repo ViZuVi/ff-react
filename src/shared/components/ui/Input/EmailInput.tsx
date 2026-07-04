@@ -1,19 +1,22 @@
 import { InputAdornment, TextField } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import type { ChangeEvent } from "react";
+import { type ControllerRenderProps } from "react-hook-form";
+import type { LoginFormData } from "@/pages/auth/components/login.schema";
 
 type TextFieldProps = {
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  field: ControllerRenderProps<LoginFormData, "email">;
+  error?: string;
 };
 
-export const EmailInput = ({ value, onChange }: TextFieldProps) => {
+export const EmailInput = ({ field, error }: TextFieldProps) => {
   return (
     <TextField
+      {...field}
       id="email"
       size="small"
       placeholder="Email"
-      value={value}
+      error={!!error}
+      helperText={error}
       required
       slotProps={{
         input: {
@@ -24,7 +27,6 @@ export const EmailInput = ({ value, onChange }: TextFieldProps) => {
           ),
         },
       }}
-      onChange={onChange}
     />
   );
 };

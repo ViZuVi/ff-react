@@ -1,39 +1,53 @@
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { PasswordInput } from "@/shared/components/ui/Input/PasswordInput";
 import { EmailInput } from "@/shared/components/ui/Input/EmailInput";
 import { useLogin } from "@/features/auth/hooks/use-login";
+import { loginSchema, type LoginFormData } from "./login.schema";
 
 export const LoginForm = () => {
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+  const { mutate, isPending } = useLogin();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onBlur",
   });
 
-  const onChange = (
-    field: keyof typeof credentials,
-    e: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setCredentials({ ...credentials, [field]: e.target.value });
-  };
-
-  const loginMutation = useLogin();
-
-  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    loginMutation.mutate(credentials);
+  const onSubmit = (data: LoginFormData) => {
+    mutate(data);
   };
 
   return (
-    <form className="login-form" onSubmit={onSubmit}>
-      <EmailInput
-        value={credentials.email}
-        onChange={(e) => onChange("email", e)}
+    <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <EmailInput field={field} error={errors.email?.message} />
+        )}
       />
-      <PasswordInput
-        value={credentials.password}
-        onChange={(e) => onChange("password", e)}
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <PasswordInput
+            field={field}
+            error={errors.password?.message}
+            disabled={isPending}
+          />
+        )}
       />
-      <button type="submit">Подтвердить</button>
+      <button type="submit" disabled={isSubmitting || isPending}>
+        Подтвердить
+      </button>
     </form>
   );
 };

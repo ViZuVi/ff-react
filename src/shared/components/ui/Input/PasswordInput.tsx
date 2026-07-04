@@ -1,21 +1,23 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { useState, type ChangeEvent } from "react";
+import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import type { ControllerRenderProps } from "react-hook-form";
+import type { LoginFormData } from "@/pages/auth/components/login.schema";
 
 type TextFieldProps = {
-  value: string;
+  field: ControllerRenderProps<LoginFormData, "password">;
+  error?: string;
   autoComplete?: string;
   disabled?: boolean;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const PasswordInput = ({
-  value,
+  field,
+  error,
   autoComplete,
   disabled,
-  onChange,
 }: TextFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,11 +25,13 @@ export const PasswordInput = ({
 
   return (
     <TextField
+      {...field}
       id="password"
       size="small"
       placeholder="Password"
+      error={!!error}
+      helperText={error}
       disabled={disabled}
-      value={value}
       type={showPassword ? "text" : "password"}
       autoComplete={autoComplete}
       required
@@ -53,7 +57,6 @@ export const PasswordInput = ({
           ),
         },
       }}
-      onChange={onChange}
     />
   );
 };
