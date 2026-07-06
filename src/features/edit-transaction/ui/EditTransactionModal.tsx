@@ -1,6 +1,6 @@
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import { useCurrentSpace } from "@/entities/space/model/use-current-space";
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import type {
   Transaction,
   TransactionFormData,
@@ -8,7 +8,7 @@ import type {
 } from "@/entities/transaction";
 import { Button } from "@mui/material";
 import { useMemo, useState } from "react";
-import { TransactionForm } from "../../../shared/components/TransactionForm";
+import { TransactionForm } from "@/features/transaction-form/ui/TransactionForm";
 import { useEditTransaction } from "@/entities/transaction";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import styles from "./styles.module.css"

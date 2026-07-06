@@ -1,4 +1,4 @@
-import { MainActions } from "@/widgets/MainActions";
+import { MainActions } from "@/widgets/main-actions/MainActions";
 import { FiltersForm } from "../../features/filter-transactions/ui/FiltersForm";
 import { TransactionsTable } from "../../widgets/transaction-table/TransactionsTable";
 import { Skeleton, Typography, useMediaQuery } from "@mui/material";

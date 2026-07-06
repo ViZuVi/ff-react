@@ -6,8 +6,8 @@ import { gradients } from "./tokens/gradients";
 import { darkScheme } from "./schemes/dark";
 import { lightScheme } from "./schemes/light";
 
-import { buttonOverrides } from "../components/ui/Button/button";
-import { inputOverrides } from "../components/ui/Input/input";
+import { buttonOverrides } from "../ui/Button/button";
+import { inputOverrides } from "../ui/Input/input";
 // import { cardOverrides } from './components/card'
 
 export const createAppTheme = (mode: "light" | "dark") => {

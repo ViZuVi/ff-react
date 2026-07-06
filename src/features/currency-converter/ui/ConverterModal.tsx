@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import {
   IconButton,
   MenuItem,

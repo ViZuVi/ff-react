@@ -1,4 +1,4 @@
-import NumberField from "@/shared/components/ui/Input/NumberField";
+import NumberField from "@/shared/ui/Input/NumberField";
 import type { Account } from "@/entities/account";
 import type { Category } from "@/entities/category";
 import type { TransactionFormData } from "@/entities/transaction";

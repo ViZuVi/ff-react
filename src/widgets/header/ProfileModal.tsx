@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
 import { InboxInvitations } from "./InboxInvitations";

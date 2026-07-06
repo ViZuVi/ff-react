@@ -1,4 +1,4 @@
-import { EmailInput } from "@/shared/components/ui/Input/EmailInput";
+import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { Button, TextField } from "@mui/material";
 import { useState, type ChangeEvent } from "react";
 import { InvitationsList } from "./InvitationsList";

@@ -1,4 +1,4 @@
-import NumberField from "@/shared/components/ui/Input/NumberField";
+import NumberField from "@/shared/ui/Input/NumberField";
 import type { CreateSpace } from "@/entities/space/model/types";
 import {
   Button,

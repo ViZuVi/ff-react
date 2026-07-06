@@ -4,7 +4,7 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import { useDebounce } from "@/shared/hooks/useDebounce";
-import { useDateRangeChange } from "@/shared/hooks/useDateRangeChange";
+import { useDateRangeChange } from "@/features/filter-transactions/model/useDateRangeChange";
 import styles from "./date-picker-range.module.css";
 
 type DateKey = "date_from" | "date_to";

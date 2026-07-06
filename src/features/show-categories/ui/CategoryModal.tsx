@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import { Button, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";

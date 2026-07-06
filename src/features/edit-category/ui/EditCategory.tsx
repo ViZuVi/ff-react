@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useSnackbarStore } from "@/shared/store/snackbar";

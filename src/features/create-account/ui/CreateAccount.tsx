@@ -1,5 +1,5 @@
-import NumberField from "@/shared/components/ui/Input/NumberField";
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import NumberField from "@/shared/ui/Input/NumberField";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import { Box, Button, FormControl, InputLabel, TextField } from "@mui/material";
 import { CurrencySelect } from "../../show-balance/ui/CurrencySelect";
 import { useCurrency } from "@/entities/currency/model/use-currency";

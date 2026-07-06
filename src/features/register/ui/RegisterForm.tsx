@@ -1,5 +1,5 @@
-import { PasswordInput } from "@/shared/components/ui/Input/PasswordInput";
-import { EmailInput } from "@/shared/components/ui/Input/EmailInput";
+import { PasswordInput } from "@/shared/ui/Input/PasswordInput";
+import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

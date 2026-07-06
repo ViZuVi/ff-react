@@ -1,8 +1,8 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import "./restore.css";
-import { EmailInput } from "@/shared/components/ui/Input/EmailInput";
+import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { useNavigate } from "react-router";
-import { PasswordInput } from "@/shared/components/ui/Input/PasswordInput";
+import { PasswordInput } from "@/shared/ui/Input/PasswordInput";
 import { Box, TextField } from "@mui/material";
 
 export const RestorePage = () => {

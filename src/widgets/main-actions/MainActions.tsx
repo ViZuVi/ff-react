@@ -11,7 +11,7 @@ import { CategoryModal } from "@/features/show-categories/ui/CategoryModal";
 import { ConverterModal } from "@/features/currency-converter/ui/ConverterModal";
 import { NewTransactionModal } from "@/features/create-transaction/ui/NewTransactionModal";
 import { useState } from "react";
-import styles from "./main-actions.module.css";
+import styles from "./styles.module.css";
 
 type ModalType = "balance" | "categories" | "converter" | "new";
 type NewTransType = "income" | "expense";

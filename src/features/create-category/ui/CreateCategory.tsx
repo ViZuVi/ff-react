@@ -1,4 +1,4 @@
-import { UModal } from "@/shared/components/ui/Modal/Modal";
+import { UModal } from "@/shared/ui/Modal/Modal";
 import { Box, Button, TextField } from "@mui/material";
 import { TransactionTypeSelect } from "../../filter-transactions/ui/TransactionTypeSelect";
 import { useState } from "react";
