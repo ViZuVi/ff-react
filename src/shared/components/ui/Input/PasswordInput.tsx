@@ -3,22 +3,31 @@ import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import type { ControllerRenderProps } from "react-hook-form";
-import type { RegisterFormData } from "@/pages/auth/components/register.schema";
+import {
+  type ControllerRenderProps,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 
-type TextFieldProps = {
-  field: ControllerRenderProps<RegisterFormData, "password">;
+type PasswordInputProps<
+  TFieldValues extends FieldValues,
+  TName extends Path<TFieldValues>,
+> = {
+  field: ControllerRenderProps<TFieldValues, TName>;
   error?: string;
   autoComplete?: string;
   disabled?: boolean;
 };
 
-export const PasswordInput = ({
+export const PasswordInput = <
+  TFieldValues extends FieldValues,
+  TName extends Path<TFieldValues>,
+>({
   field,
   error,
   autoComplete,
   disabled,
-}: TextFieldProps) => {
+}: PasswordInputProps<TFieldValues, TName>) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

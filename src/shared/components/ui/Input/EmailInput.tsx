@@ -1,14 +1,26 @@
 import { InputAdornment, TextField } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import { type ControllerRenderProps } from "react-hook-form";
-import type { RegisterFormData } from "@/pages/auth/components/register.schema";
+import {
+  type ControllerRenderProps,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 
-type TextFieldProps = {
-  field: ControllerRenderProps<RegisterFormData, "email">;
+type EmailInputProps<
+  TFieldValues extends FieldValues,
+  TName extends Path<TFieldValues>,
+> = {
+  field: ControllerRenderProps<TFieldValues, TName>;
   error?: string;
 };
 
-export const EmailInput = ({ field, error }: TextFieldProps) => {
+export const EmailInput = <
+  TFieldValues extends FieldValues,
+  TName extends Path<TFieldValues>,
+>({
+  field,
+  error,
+}: EmailInputProps<TFieldValues, TName>) => {
   return (
     <TextField
       {...field}
