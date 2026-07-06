@@ -7,8 +7,8 @@ export const AppLayout = () => {
   useInitCurrentSpace();
 
   return (
-    <div className="app-layout" style={{ height: "100%" }}>
-      <div className="content" style={{ height: "100%" }}>
+    <div style={{ height: "100%" }}>
+      <div style={{ height: "100%" }}>
         <AppHeader />
         <main style={{ height: "100%" }}>
           <GlobalSnackbar />

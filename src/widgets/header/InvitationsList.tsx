@@ -5,8 +5,8 @@ import {
 } from "@/entities/invitation";
 import { Box, Button, CircularProgress, Divider } from "@mui/material";
 import dayjs from "dayjs";
-import styles from "./invitations.module.css";
 import { useMe } from "@/entities/user";
+import styles from "./invitations.module.css";
 
 export const InvitationsList = ({
   invitations,
@@ -22,7 +22,7 @@ export const InvitationsList = ({
 
   return (
     <div>
-      <h3 className="invitations-list__title">Список приглашений</h3>
+      <h3 className={styles["invitations-list__title"]}>Список приглашений</h3>
       {loading ? (
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <CircularProgress aria-label="Loading…" />
@@ -92,7 +92,7 @@ export const InvitationsList = ({
           ))}
         </ul>
       ) : (
-        <p className="invitations-list__empty">
+        <p className={styles["invitations-list__empty"]}>
           Список {type} приглашений пуст
         </p>
       )}

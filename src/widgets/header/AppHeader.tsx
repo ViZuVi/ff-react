@@ -3,13 +3,13 @@ import { Link } from "react-router";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "./header.css";
 import { useModal } from "@/shared/hooks/useModal";
 import { ProfileModal } from "./ProfileModal";
 import { SettingsModal } from "./SettingsModal";
 import { useLogout } from "@/features/logout/model/use-logout";
 import { useIsFetching } from "@tanstack/react-query";
 import { routes } from "@/app/router/routes";
+import styles from "./header.module.css";
 
 type ModalType = "profile" | "settings";
 
@@ -25,14 +25,14 @@ export const AppHeader = () => {
   const isFetching = useIsFetching();
 
   return (
-    <Paper className="app-header">
-      <Link to={routes.home} className="app-header__logo-link">
-        <div className="app-header__logo">
+    <Paper className={styles["app-header"]}>
+      <Link to={routes.home} className={styles["app-header__logo-link"]}>
+        <div className={styles["app-header__logo"]}>
           <img width={32} height={32} src="/logo.svg" alt="Logo" />
           <span>Funds Flow</span>
         </div>
       </Link>
-      <div className="app-header__actions">
+      <div className={styles["app-header__actions"]}>
         <IconButton
           size="small"
           aria-label="настройки"
@@ -59,8 +59,8 @@ export const AppHeader = () => {
         <ProfileModal onClose={closeModal} open={isOpen("profile")} />
       </div>
       {isFetching > 0 && (
-        <div className="app-header__loader-wrapper">
-          <div className="app-header__loader-bar"></div>
+        <div className={styles["app-header__loader-wrapper"]}>
+          <div className={styles["app-header__loader-bar"]}></div>
         </div>
       )}
     </Paper>

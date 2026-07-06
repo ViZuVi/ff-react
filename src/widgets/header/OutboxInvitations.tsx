@@ -5,6 +5,7 @@ import { InvitationsList } from "./InvitationsList";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import { useGetInvitation, useSendInvitation } from "@/entities/invitation";
+import styles from "./invitations.module.css"
 
 export const OutboxInvitations = () => {
   const { data: invitations, isPending } = useGetInvitation();
@@ -59,11 +60,11 @@ export const OutboxInvitations = () => {
   };
 
   return (
-    <div className="outbox-invitations">
-      <h2 className="outbox-invitations__title">
+    <div className={styles["outbox-invitations"]}>
+      <h2 className={styles["outbox-invitations__title"]}>
         Пригласить пользователя в пространство
       </h2>
-      <div className="outbox-invitations__form">
+      <div className={styles["outbox-invitations__form"]}>
         <EmailInput
           value={invite.email}
           onChange={(e) => onChange("email", e)}

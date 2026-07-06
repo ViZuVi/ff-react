@@ -3,6 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { useSpaces } from "@/entities/space/model/use-spaces";
 import { useSpaceStore } from "@/entities/space/model/space-store";
+import styles from "./header.module.css"
 
 interface props {
   open: boolean;
@@ -22,7 +23,7 @@ export const SettingsModal = ({ open, onClose }: props) => {
 
   return (
     <UModal open={open} onClose={onClose} title="Настройки">
-      <div className="settings-modal">
+      <div className={styles["settings-modal"]}>
         <FormControl size="small">
           <InputLabel id="active-space">Активное пространство</InputLabel>
           <Select
