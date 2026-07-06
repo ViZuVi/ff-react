@@ -1,6 +1,22 @@
 import type { BaseSpace } from "./Space";
 
-type InvitationStatus = "new" | "accepted" | "revoked" | "rejected";
+// type InvitationStatus = "new" | "accepted" | "revoked" | "rejected";
+
+export const InvitationStatus = {
+  new: "new",
+  accepted: "accepted",
+  revoked: "revoked",
+  rejected: "rejected",
+} as const;
+
+export type InvitationStatus =
+  (typeof InvitationStatus)[keyof typeof InvitationStatus];
+
+export const statuses: Partial<Record<InvitationStatus, string>> = {
+  [InvitationStatus.revoked]: "Отозвано",
+  [InvitationStatus.rejected]: "Отклонено",
+  [InvitationStatus.accepted]: "Принято",
+};
 
 export type Invitation = {
   id: number;
@@ -15,3 +31,5 @@ export type Invitation = {
     image: string | null;
   };
 };
+
+export type InvitationsType = "inbox" | "outbox";

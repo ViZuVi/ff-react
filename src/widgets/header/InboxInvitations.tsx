@@ -1,8 +1,15 @@
-import type { Invitation } from "@/shared/types/Invitation";
 import { InvitationsList } from "./InvitationsList";
+import { useGetInvitation } from "@/entities/user/hooks/use-invitation";
 
-const invitations: Invitation[] = [];
 
 export const InboxInvitations = () => {
-  return <InvitationsList invitations={invitations} type="входящих" />;
+  const { data: invitations, isPending } = useGetInvitation();
+
+  return (
+    <InvitationsList
+      loading={isPending}
+      invitations={invitations?.data.inbox ?? []}
+      type="inbox"
+    />
+  );
 };

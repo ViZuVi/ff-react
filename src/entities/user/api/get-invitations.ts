@@ -8,6 +8,6 @@ type R = {
 };
 
 export const getInvitation = async (): Promise<ApiResponse<R>> => {
-  const { data } = await api.get("/user/show");
+  const { data } = await api.get("/invitation/all");
   return data;
 };

@@ -8,7 +8,7 @@ type TextFieldProps = {
   error?: string;
 };
 
-export const EmailInput = ({ field, error }: TextFieldProps) => {
+export const EmailInput = ({ field, error, onChange }: TextFieldProps) => {
   return (
     <TextField
       {...field}
@@ -18,6 +18,7 @@ export const EmailInput = ({ field, error }: TextFieldProps) => {
       error={!!error}
       helperText={error}
       required
+      onChange={onChange}
       slotProps={{
         input: {
           startAdornment: (

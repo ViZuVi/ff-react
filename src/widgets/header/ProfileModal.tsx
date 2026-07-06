@@ -42,7 +42,7 @@ function a11yProps(index: number) {
 }
 
 export const ProfileModal = ({ open, onClose }: props) => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -61,6 +61,7 @@ export const ProfileModal = ({ open, onClose }: props) => {
           display: "flex",
           height: "auto",
           minWidth: "60vw",
+          maxHeight: "90vh",
         }}
       >
         <Tabs
@@ -71,17 +72,17 @@ export const ProfileModal = ({ open, onClose }: props) => {
           sx={{ borderRight: 1, borderColor: "divider" }}
           aria-label="profile tabs"
         >
-          <Tab disabled label="Личная информация" {...a11yProps(0)} />
-          <Tab label="Входящие приглашения" {...a11yProps(1)} />
-          <Tab label="Исходящие приглашения" {...a11yProps(2)} />
+          {/* <Tab disabled label="Личная информация" {...a11yProps(0)} /> */}
+          <Tab label="Входящие приглашения" {...a11yProps(0)} />
+          <Tab label="Исходящие приглашения" {...a11yProps(1)} />
         </Tabs>
-        <TabPanel value={value} index={0}>
+        {/* <TabPanel value={value} index={0}>
           1
-        </TabPanel>
-        <TabPanel value={value} index={1}>
+        </TabPanel> */}
+        <TabPanel value={value} index={0}>
           <InboxInvitations />
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={1}>
           <OutboxInvitations />
         </TabPanel>
       </Box>

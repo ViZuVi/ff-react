@@ -1,7 +1,7 @@
 import { IconButton, Paper } from "@mui/material";
 import { Link } from "react-router";
 import SettingsIcon from "@mui/icons-material/Settings";
-// import PersonIcon from "@mui/icons-material/Person";
+import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./header.css";
 import { useModal } from "@/shared/hooks/useModal";
@@ -39,13 +39,13 @@ export const AppHeader = () => {
         >
           <SettingsIcon />
         </IconButton>
-        {/* <IconButton
+        <IconButton
           size="small"
           aria-label="личный кабинет"
           onClick={() => openModal("profile")}
         >
           <PersonIcon />
-        </IconButton> */}
+        </IconButton>
         <IconButton
           size="small"
           aria-label="выход из аккаунта"
