@@ -16,7 +16,7 @@ export const primitiveColors = {
   slate900: "#0F172A",
 
   blue400: "#5B8CFF",
-  blue500: "#2962FF",
+  blue500: "#6781c5",
   blue600: "#0039CB",
 
   purple400: "#A280FF",

@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/axios";
-import type { ApiResponse } from "../../shared/types/ApiResponse";
+import type { ApiResponse } from "../../../shared/types/ApiResponse";
 
 export interface LoginDTO {
   email: string;

@@ -1,14 +1,14 @@
 import { InputAdornment, TextField } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { type ControllerRenderProps } from "react-hook-form";
-import type { LoginFormData } from "@/pages/auth/components/login.schema";
+import type { RegisterFormData } from "@/pages/auth/components/register.schema";
 
 type TextFieldProps = {
-  field: ControllerRenderProps<LoginFormData, "email">;
+  field: ControllerRenderProps<RegisterFormData, "email">;
   error?: string;
 };
 
-export const EmailInput = ({ field, error, onChange }: TextFieldProps) => {
+export const EmailInput = ({ field, error }: TextFieldProps) => {
   return (
     <TextField
       {...field}
@@ -17,8 +17,6 @@ export const EmailInput = ({ field, error, onChange }: TextFieldProps) => {
       placeholder="Email"
       error={!!error}
       helperText={error}
-      required
-      onChange={onChange}
       slotProps={{
         input: {
           startAdornment: (

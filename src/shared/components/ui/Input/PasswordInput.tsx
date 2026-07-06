@@ -4,10 +4,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import type { ControllerRenderProps } from "react-hook-form";
-import type { LoginFormData } from "@/pages/auth/components/login.schema";
+import type { RegisterFormData } from "@/pages/auth/components/register.schema";
 
 type TextFieldProps = {
-  field: ControllerRenderProps<LoginFormData, "password">;
+  field: ControllerRenderProps<RegisterFormData, "password">;
   error?: string;
   autoComplete?: string;
   disabled?: boolean;

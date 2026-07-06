@@ -19,6 +19,7 @@ export const LoginForm = () => {
       password: "",
     },
     mode: "onBlur",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = (data: LoginFormData) => {

@@ -1,48 +1,72 @@
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { PasswordInput } from "@/shared/components/ui/Input/PasswordInput";
 import { EmailInput } from "@/shared/components/ui/Input/EmailInput";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegister } from "@/features/auth/hooks/use-login";
+import { registerSchema, type RegisterFormData } from "./register.schema";
 
 export const RegisterForm = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    email: "",
-    password: "",
+  const { mutate, isPending } = useRegister();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      username: "",
+    },
+    mode: "onBlur",
+    reValidateMode: "onChange",
   });
 
-  const onChange = (
-    field: keyof typeof credentials,
-    e: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setCredentials({ ...credentials, [field]: e.target.value });
-  };
-
-  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submit");
+  const onSubmit = (data: RegisterFormData) => {
+    mutate(data);
   };
 
   return (
-    <form className="login-form" onSubmit={onSubmit}>
-      <TextField
-        id="username"
-        autoComplete="off"
-        size="small"
-        placeholder="username"
-        value={credentials.username}
-        required
-        onChange={(e: ChangeEvent<HTMLInputElement>) => onChange("username", e)}
+    <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="username"
+        control={control}
+        render={({ field, fieldState }) => (
+          <TextField
+            {...field}
+            id="username"
+            helperText={fieldState.error?.message}
+            autoComplete="off"
+            error={!!fieldState.error}
+            size="small"
+            placeholder="username"
+          />
+        )}
       />
-      <EmailInput
-        value={credentials.email}
-        onChange={(e) => onChange("email", e)}
+
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <EmailInput field={field} error={errors.email?.message} />
+        )}
       />
-      <PasswordInput
-        value={credentials.password}
-        autoComplete="new-password"
-        onChange={(e) => onChange("password", e)}
+
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <PasswordInput
+            autoComplete="new-password"
+            field={field}
+            error={errors.password?.message}
+            disabled={isPending}
+          />
+        )}
       />
-      <button type="submit">Подтвердить</button>
+      <Button loading={isSubmitting}>Подтвердить</Button>
     </form>
   );
 };
