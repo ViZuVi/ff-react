@@ -2,11 +2,11 @@ import {
   statuses,
   type Invitation,
   type InvitationsType,
-} from "@/shared/types/Invitation";
+} from "@/entities/invitation";
 import { Box, Button, CircularProgress, Divider } from "@mui/material";
 import dayjs from "dayjs";
 import styles from "./invitations.module.css";
-import { useMe } from "@/entities/user/hooks/use-me";
+import { useMe } from "@/entities/user";
 
 export const InvitationsList = ({
   invitations,

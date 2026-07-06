@@ -1,4 +1,4 @@
-import type { Category } from "@/shared/types/Category";
+import type { Category } from "@/entities/category/model/types";
 import { Autocomplete, FormControl, TextField } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";

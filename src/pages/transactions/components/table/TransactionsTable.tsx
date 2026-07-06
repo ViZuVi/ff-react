@@ -1,4 +1,4 @@
-import type { Transaction } from "@/shared/types/TransactionDraft";
+import type { Transaction } from "@/entities/transaction";
 import {
   Divider,
   Paper,
@@ -23,7 +23,7 @@ import { useModal } from "@/shared/hooks/useModal";
 import { EditTransactionModal } from "./EditTransactionModal";
 import { TransactionTableRow } from "./TransactionTableRow";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import { useDeleteTransaction } from "@/entities/transaction/hooks/use-transactions";
+import { useDeleteTransaction } from "@/entities/transaction";
 import { MobileCards } from "./MobileCards";
 
 type HeadCell = {

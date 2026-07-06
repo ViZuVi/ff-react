@@ -2,9 +2,9 @@ import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import type { Category, CategoryCreate } from "@/shared/types/Category";
+import type { Category, CategoryCreate } from "@/entities/category/model/types";
 import { TransactionTypeSelect } from "../filters/TransactionTypeSelect";
-import { useEditCategory } from "@/entities/balance/hooks/use-category";
+import { useEditCategory } from "@/entities/category";
 
 interface Props {
   open: boolean;

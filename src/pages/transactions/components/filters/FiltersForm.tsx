@@ -1,5 +1,5 @@
 import type { Filters } from "@/shared/types/Filters";
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
+import { useCurrentSpace } from "@/entities/space/model/use-current-space";
 import { FiltersSkeleton } from "./FiltersSkeleton";
 import { memo, useState } from "react";
 import { CategoriesSelect } from "./CategoriesSelect";

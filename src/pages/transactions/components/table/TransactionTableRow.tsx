@@ -1,4 +1,4 @@
-import type { Transaction } from "@/shared/types/TransactionDraft";
+import type { Transaction } from "@/entities/transaction";
 import { IconButton, TableCell, TableRow } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";

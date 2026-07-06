@@ -1,10 +1,10 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import { useTransactionStore } from "@/entities/transaction/model/transaction";
+import { useTransactionStore } from "@/entities/transaction/model/transaction-store";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Divider, useMediaQuery } from "@mui/material";
-import { useSpaceStore } from "@/entities/space/model/space";
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
-import { useCreateTransaction } from "@/entities/transaction/hooks/use-transactions";
+import { useSpaceStore } from "@/entities/space/model/space-store";
+import { useCurrentSpace } from "@/entities/space/model/use-current-space";
+import { useCreateTransaction } from "@/entities/transaction";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { TransactionForm } from "./TransactionForm";
 import { TransactionActions } from "./TransactionActions";

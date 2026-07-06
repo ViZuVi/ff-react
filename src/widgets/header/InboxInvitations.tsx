@@ -1,5 +1,5 @@
 import { InvitationsList } from "./InvitationsList";
-import { useGetInvitation } from "@/entities/user/hooks/use-invitation";
+import { useGetInvitation } from "@/entities/invitation";
 
 export const InboxInvitations = () => {
   const { data: invitations, isPending } = useGetInvitation();

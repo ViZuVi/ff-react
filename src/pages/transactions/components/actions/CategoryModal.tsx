@@ -2,12 +2,12 @@ import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { Button, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
+import { useCurrentSpace } from "@/entities/space/model/use-current-space";
 import { useModal } from "@/shared/hooks/useModal";
 import { CreateCategory } from "./CreateCategory";
-import type { Category } from "@/shared/types/Category";
+import type { Category } from "@/entities/category/model/types";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import { useDeleteCategory } from "@/entities/balance/hooks/use-category";
+import { useDeleteCategory } from "@/entities/category";
 import { useState } from "react";
 import { EditCategory } from "./EditCategory";
 

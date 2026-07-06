@@ -3,11 +3,8 @@ import { Button, TextField } from "@mui/material";
 import { useState, type ChangeEvent } from "react";
 import { InvitationsList } from "./InvitationsList";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import { useSpaceStore } from "@/entities/space/model/space";
-import {
-  useGetInvitation,
-  useSendInvitation,
-} from "@/entities/user/hooks/use-invitation";
+import { useSpaceStore } from "@/entities/space/model/space-store";
+import { useGetInvitation, useSendInvitation } from "@/entities/invitation";
 
 export const OutboxInvitations = () => {
   const { data: invitations, isPending } = useGetInvitation();

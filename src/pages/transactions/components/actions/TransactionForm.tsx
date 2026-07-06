@@ -1,7 +1,7 @@
 import NumberField from "@/shared/components/ui/Input/NumberField";
 import type { Account } from "@/shared/types/Account";
-import type { Category } from "@/shared/types/Category";
-import type { TransactionFormData } from "@/shared/types/TransactionDraft";
+import type { Category } from "@/entities/category/model/types";
+import type { TransactionFormData } from "@/entities/transaction";
 import {
   FormControl,
   InputLabel,

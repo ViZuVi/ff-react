@@ -1,4 +1,4 @@
-import type { Currency } from "@/shared/types/Currency";
+import type { Currency } from "@/entities/currency/model/types";
 import { MenuItem, Select, type SelectChangeEvent } from "@mui/material";
 
 type Props = {

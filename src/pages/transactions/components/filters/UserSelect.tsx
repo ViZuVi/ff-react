@@ -1,4 +1,4 @@
-import type { User } from "@/shared/types/User";
+import type { User } from "@/entities/user/model/types";
 import {
   FormControl,
   IconButton,

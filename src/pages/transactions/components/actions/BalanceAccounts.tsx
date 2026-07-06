@@ -1,12 +1,12 @@
-import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
+import { useCurrentSpace } from "@/entities/space/model/use-current-space";
 import { Button, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import type { Account } from "@/shared/types/Account";
+import type { Account } from "@/entities/account";
 import { useModal } from "@/shared/hooks/useModal";
 import { CreateAccount } from "./CreateAccount";
-import { useDeleteAccount } from "@/entities/balance/hooks/use-account";
+import { useDeleteAccount } from "@/entities/account";
 import { EditAccount } from "./EditAccount";
 import { useState } from "react";
 

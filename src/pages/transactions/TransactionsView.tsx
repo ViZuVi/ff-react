@@ -4,10 +4,10 @@ import { FiltersForm } from "./components/filters/FiltersForm";
 import { TransactionsTable } from "./components/table/TransactionsTable";
 import { Skeleton, Typography, useMediaQuery } from "@mui/material";
 import { NoSpaces } from "./components/NoSpaces";
-import { useTransactions } from "@/entities/transaction/hooks/use-transactions";
-import { useSpaces } from "@/entities/space/hooks/use-spaces";
+import { useTransactions } from "@/entities/transaction";
+import { useSpaces } from "@/entities/space/model/use-spaces";
 import { useDeferredValue, useMemo, useState } from "react";
-import { useSpaceStore } from "@/entities/space/model/space";
+import { useSpaceStore } from "@/entities/space/model/space-store";
 import type { Filters } from "@/shared/types/Filters";
 import dayjs from "dayjs";
 

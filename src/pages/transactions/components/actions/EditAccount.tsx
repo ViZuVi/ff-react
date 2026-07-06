@@ -1,9 +1,9 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { useEditAccount } from "@/entities/balance/hooks/use-account";
+import { useEditAccount } from "@/entities/account";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import type { Account } from "@/shared/types/Account";
+import type { Account } from "@/entities/account";
 
 interface Props {
   open: boolean;

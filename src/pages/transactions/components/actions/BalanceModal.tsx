@@ -4,9 +4,9 @@ import {
   Divider,
   type SelectChangeEvent,
 } from "@mui/material";
-import { useBalance } from "@/entities/balance/hooks/use-balance";
+import { useBalance } from "@/entities/balance";
 import { useState } from "react";
-import { useCurrency } from "@/entities/currency/hooks/use-currency";
+import { useCurrency } from "@/entities/currency/model/use-currency";
 import { BalanceAccounts } from "./BalanceAccounts";
 import { CurrencySelect } from "./CurrencySelect";
 

@@ -1,5 +1,5 @@
 import NumberField from "@/shared/components/ui/Input/NumberField";
-import type { CreateSpace } from "@/shared/types/Space";
+import type { CreateSpace } from "@/entities/space/model/types";
 import {
   Button,
   FormControl,

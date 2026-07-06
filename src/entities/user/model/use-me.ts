@@ -1,0 +1,12 @@
+import { useAuthStore } from "@/entities/user/model/auth-store";
+import { useQuery } from "@tanstack/react-query";
+import { getMe } from "../model/api/get-me";
+
+export const useMe = () => {
+  const token = useAuthStore((s) => s.token);
+  return useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+    enabled: !!token,
+  });
+};

@@ -2,14 +2,11 @@ import NumberField from "@/shared/components/ui/Input/NumberField";
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { Box, Button, FormControl, InputLabel, TextField } from "@mui/material";
 import { CurrencySelect } from "./CurrencySelect";
-import { useCurrency } from "@/entities/currency/hooks/use-currency";
-import type {
-  AccountCreate,
-  AccountWithoutSpace,
-} from "@/shared/types/Account";
+import { useCurrency } from "@/entities/currency/model/use-currency";
+import type { AccountCreate, AccountWithoutSpace } from "@/entities/account";
 import { useState } from "react";
-import { useCreateAccount } from "@/entities/balance/hooks/use-account";
-import { useSpaceStore } from "@/entities/space/model/space";
+import { useCreateAccount } from "@/entities/account";
+import { useSpaceStore } from "@/entities/space/model/space-store";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 
 interface Props {
