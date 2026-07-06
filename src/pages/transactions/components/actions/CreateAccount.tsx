@@ -9,7 +9,7 @@ import type {
 } from "@/shared/types/Account";
 import { useState } from "react";
 import { useCreateAccount } from "@/entities/balance/hooks/use-account";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 
 interface Props {

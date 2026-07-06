@@ -2,7 +2,7 @@ import { UModal } from "@/shared/components/ui/Modal/Modal";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { useSpaces } from "@/entities/space/hooks/use-spaces";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 
 interface props {
   open: boolean;

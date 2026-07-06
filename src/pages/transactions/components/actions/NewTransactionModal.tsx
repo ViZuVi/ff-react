@@ -1,8 +1,8 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import { useTransactionStore } from "@/app/store/transaction";
+import { useTransactionStore } from "@/entities/transaction/model/transaction";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Divider, useMediaQuery } from "@mui/material";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { useCreateTransaction } from "@/entities/transaction/hooks/use-transactions";
 import { useSnackbarStore } from "@/shared/store/snackbar";

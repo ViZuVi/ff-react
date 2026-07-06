@@ -1,4 +1,4 @@
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { useCurrentSpace } from "@/entities/space/hooks/use-current-space";
 import { UModal } from "@/shared/components/ui/Modal/Modal";
 import type {

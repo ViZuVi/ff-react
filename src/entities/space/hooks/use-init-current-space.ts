@@ -1,4 +1,4 @@
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { useSpaces } from "./use-spaces";
 import { useEffect } from "react";
 

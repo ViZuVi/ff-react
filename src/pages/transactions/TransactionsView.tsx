@@ -7,7 +7,7 @@ import { NoSpaces } from "./components/NoSpaces";
 import { useTransactions } from "@/entities/transaction/hooks/use-transactions";
 import { useSpaces } from "@/entities/space/hooks/use-spaces";
 import { useDeferredValue, useMemo, useState } from "react";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import type { Filters } from "@/shared/types/Filters";
 import dayjs from "dayjs";
 

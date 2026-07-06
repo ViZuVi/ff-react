@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/entities/user/model/auth-store";
 import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../api/get-me";
 

@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { CategoryCreate } from "@/shared/types/Category";
 import { useCreateCategory } from "@/entities/balance/hooks/use-category";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 
 interface Props {
   open: boolean;

@@ -1,4 +1,4 @@
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { api } from "@/shared/api/axios";
 import type { ApiResponse } from "@/shared/types/ApiResponse";
 import type { Currency } from "@/shared/types/Currency";

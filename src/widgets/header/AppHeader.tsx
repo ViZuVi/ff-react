@@ -9,6 +9,7 @@ import { ProfileModal } from "./ProfileModal";
 import { SettingsModal } from "./SettingsModal";
 import { useLogout } from "@/features/auth/hooks/use-logout";
 import { useIsFetching } from "@tanstack/react-query";
+import { routes } from "@/app/router/routes";
 
 type ModalType = "profile" | "settings";
 
@@ -25,7 +26,7 @@ export const AppHeader = () => {
 
   return (
     <Paper className="app-header">
-      <Link to="/" className="app-header__logo-link">
+      <Link to={routes.home} className="app-header__logo-link">
         <div className="app-header__logo">
           <img width={32} height={32} src="/logo.svg" alt="Logo" />
           <span>Funds Flow</span>

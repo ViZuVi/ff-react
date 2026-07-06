@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/entities/user/model/auth-store";
 import { login } from "@/features/auth/api/login";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { register } from "../api/register";

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getTransactions } from "../api/get-transactions";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import type { TransactionsParams } from "@/shared/types/Filters";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useMemo } from "react";

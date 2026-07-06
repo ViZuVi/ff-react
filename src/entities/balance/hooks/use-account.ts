@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createAccount } from "../api/create-account";
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { deleteAccount } from "../api/delete-account";
 import { editAccount } from "../api/edit-account";
 

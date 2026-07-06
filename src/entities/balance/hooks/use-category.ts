@@ -1,4 +1,4 @@
-import { useSpaceStore } from "@/app/store/space";
+import { useSpaceStore } from "@/entities/space/model/space";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCategory } from "../api/create-category";
 import { deleteCategory } from "../api/delete-category";
