@@ -1,5 +1,12 @@
 import type { User } from "@/shared/types/User";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const UserSelect = ({
   users,
@@ -28,6 +35,20 @@ export const UserSelect = ({
           );
         })}
       </Select>
+      {value && (
+        <IconButton
+          size="small"
+          onClick={() => onChange("")}
+          sx={{
+            position: "absolute",
+            right: 32,
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+      )}
     </FormControl>
   );
 };

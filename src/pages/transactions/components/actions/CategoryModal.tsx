@@ -73,8 +73,8 @@ export const CategoryModal = ({ open, onClose }: props) => {
           {spaceResp?.data.categories.map((cat) => {
             // TODO: вынести в отдельный компонент Item
             return (
-              <>
-                <li className="category-modal__item" key={cat.id}>
+              <div key={cat.id}>
+                <li className="category-modal__item">
                   <span>{cat.name}</span>
                   <span className="category-modal__actions">
                     <IconButton
@@ -95,7 +95,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
                   </span>
                 </li>
                 <Divider />
-              </>
+              </div>
             );
           })}
         </ul>

@@ -1,34 +1,45 @@
 .invitations-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-height: 50vh;
-    overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .invitations-item {
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .invitations-item__date {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 .invitations-item__data {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .invitations-item__message {
-    font-size: 14px;
-    color: var(--mui-palette-grey-400);
+  font-size: 14px;
+  color: var(--mui-palette-grey-400);
 }
 
 .invitations-item__actions {
-    display: flex;
-    gap: 4px;
-    margin-left: auto;
-    flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .invitations-item {
+    flex-direction: column;
+  }
+
+  .invitations-item__actions {
+    margin-right: auto;
+    justify-content: center;
+  }
 }

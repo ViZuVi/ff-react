@@ -85,7 +85,7 @@ export const CreateAccount = ({ open, onClose }: Props) => {
             padding: "4px 8px",
             display: "flex",
             flexDirection: "column",
-          alignItems: "stretch",
+            alignItems: "stretch",
             width: "calc(100vw - 32px)",
             minWidth: "auto",
           },

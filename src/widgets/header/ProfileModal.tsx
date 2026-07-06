@@ -1,5 +1,5 @@
 import { UModal } from "@/shared/components/ui/Modal/Modal";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
 import { InboxInvitations } from "./InboxInvitations";
 import { OutboxInvitations } from "./OutboxInvitations";
@@ -42,6 +42,8 @@ function a11yProps(index: number) {
 }
 
 export const ProfileModal = ({ open, onClose }: props) => {
+  const isMobile = useMediaQuery("(max-width:768px)");
+
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -55,19 +57,25 @@ export const ProfileModal = ({ open, onClose }: props) => {
       divider
     >
       <Box
-        sx={{
+        sx={(theme) => ({
           flexGrow: 1,
           bgcolor: "background.paper",
           display: "flex",
           height: "auto",
           minWidth: "60vw",
           maxHeight: "90vh",
-        }}
+          [theme.breakpoints.down(768)]: {
+            width: "calc(100vw - 32px)",
+            minWidth: "auto",
+            flexDirection: "column",
+          },
+        })}
       >
         <Tabs
-          orientation="vertical"
-          variant="scrollable"
+          orientation={isMobile ? "horizontal" : "vertical"}
+          centered={!!isMobile}
           value={value}
+          variant={isMobile ? "fullWidth" : "scrollable"}
           onChange={handleChange}
           sx={{ borderRight: 1, borderColor: "divider" }}
           aria-label="profile tabs"

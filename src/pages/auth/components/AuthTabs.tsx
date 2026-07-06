@@ -44,7 +44,14 @@ export const AuthTabs = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: "background.paper", width: 500, margin: "32px auto" }}>
+    <Box
+      sx={(theme) => ({
+        bgcolor: "background.paper",
+        width: 500,
+        margin: "32px auto",
+        [theme.breakpoints.down(768)]: { width: "calc(100vw - 32px)" },
+      })}
+    >
       <AppBar position="static">
         <Tabs
           value={value}

@@ -76,7 +76,13 @@ export const InvitationsList = ({
                     )}
                   </div>
                 ) : (
-                  <Button sx={{ marginLeft: "auto" }} disabled>
+                  <Button
+                    sx={(theme) => ({
+                      marginLeft: "auto",
+                      [theme.breakpoints.down(768)]: { marginRight: "auto" },
+                    })}
+                    disabled
+                  >
                     {statuses[inv.status]}
                   </Button>
                 )}
