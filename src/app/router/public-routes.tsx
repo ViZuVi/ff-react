@@ -1,5 +1,5 @@
 import { AuthLayout } from "@/app/layouts/AuthLayout";
-import { GuestRoute } from "@/features/auth/GuestRoute";
+import { GuestRoute } from "@/features/auth-guard/ui/GuestRoute";
 
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RestorePage } from "@/pages/restore/RestorePage";

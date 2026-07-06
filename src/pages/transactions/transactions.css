@@ -42,58 +42,6 @@
   margin-left: auto;
 }
 
-.balance-modal {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 36px;
-  padding: 0 24px 24px;
-}
-
-.balance-modal__totals-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.balance-accounts__list {
-  margin-bottom: 24px;
-}
-
-.balance-accounts__item {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 4fr 3fr 1fr 2fr;
-  padding: 4px 8px;
-}
-
-.balance-modal__curr-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
-  padding: 4px 8px;
-}
-
-/* .balance-accounts__item:nth-child(odd) {
-  background-color: #f7f7f7;
-} */
-
-.balance-accounts__name {
-  padding-right: 8px;
-  word-break: break-word;
-}
-
-.balance-modal__block-title,
-.balance-accounts__title {
-  text-align: center;
-  margin-bottom: 0.7em;
-}
-
-.balance-accounts__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .category-modal,
 .converter-modal {
   min-width: 400px;
@@ -227,20 +175,7 @@
     min-width: calc(100vw - 32px);
   }
 
-  .balance-modal {
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
-    overflow: auto;
-    padding: 0 12px;
-    width: calc(100vw - 32px);
-    gap: 12px;
-  }
-
-  .balance-modal__totals {
-    text-align: center;
-  }
-
+  
   .new-transaction-modal {
     padding: 12px;
   }

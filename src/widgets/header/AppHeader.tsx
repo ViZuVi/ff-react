@@ -7,7 +7,7 @@ import "./header.css";
 import { useModal } from "@/shared/hooks/useModal";
 import { ProfileModal } from "./ProfileModal";
 import { SettingsModal } from "./SettingsModal";
-import { useLogout } from "@/features/auth/hooks/use-logout";
+import { useLogout } from "@/features/logout/model/use-logout";
 import { useIsFetching } from "@tanstack/react-query";
 import { routes } from "@/app/router/routes";
 

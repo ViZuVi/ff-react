@@ -1,5 +1,5 @@
 import { AppLayout } from "@/app/layouts/AppLayout";
-import { ProtectedRoute } from "@/features/auth/ProtectedRoute";
+import { ProtectedRoute } from "@/features/auth-guard/ui/ProtectedRoute";
 
 import { TransactionsPage } from "@/pages/transactions/TransactionsPage";
 import { ChartsPage } from "@/pages/charts/ChartsPage";

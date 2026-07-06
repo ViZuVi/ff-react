@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import { AppHeader } from "@/widgets/header/AppHeader";
-import { useInitCurrentSpace } from "@/entities/space/model/use-init-current-space";
+import { useInitCurrentSpace } from "@/app/providers/use-init-current-space";
 import { GlobalSnackbar } from "@/shared/components/GlobalSnackbar";
 
 export const AppLayout = () => {
