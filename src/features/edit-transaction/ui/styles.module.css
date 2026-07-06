@@ -1,0 +1,17 @@
+.edit-transaction-modal {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 0 24px 24px;
+  min-width: 80vw;
+}
+
+@media (max-width: 768px) {
+  .edit-transaction-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

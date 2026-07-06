@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import { TransactionForm } from "../../../shared/components/TransactionForm";
 import { useEditTransaction } from "@/entities/transaction";
 import { useSnackbarStore } from "@/shared/store/snackbar";
+import styles from "./styles.module.css"
 
 interface props {
   transaction: Transaction;
@@ -83,13 +84,14 @@ export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
 
   return (
     <UModal open={open} onClose={onClose} title="Изменение транзакции">
-      <div className="edit-transaction-modal">
+      <div className={styles["edit-transaction-modal"]}>
         {spaceResp && (
           <TransactionForm
             transaction={updatedTransaction}
             accounts={spaceResp.data.accounts}
             categories={categories}
             onChange={handleChange}
+            errors={{}}
           />
         )}
       </div>

@@ -9,6 +9,7 @@ import { UserSelect } from "./UserSelect";
 import { AccountSelect } from "./AccountSelect";
 import { DatePickerRange } from "./DatePickerRange";
 import { Button, useMediaQuery } from "@mui/material";
+import styles from "./filter.module.css";
 
 type FiltersWithoutSpaceId = Omit<Filters, "space_id">;
 
@@ -34,7 +35,7 @@ const FiltersFormComponent = ({ filters, onChange }: Props) => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const [filtersVisable, setFilersVisable] = useState(!isMobile);
   return space?.data ? (
-    <div className="filters-wrapper">
+    <div className={styles["filters-wrapper"]}>
       <Button
         variant="outlined"
         size="small"
@@ -50,7 +51,9 @@ const FiltersFormComponent = ({ filters, onChange }: Props) => {
       >
         Фильтры
       </Button>
-      <div className={`filters ${filtersVisable ? "filters--visable" : ""}`}>
+      <div
+        className={`${styles["filters"]} ${filtersVisable ? styles["filters--visable"] : ""}`}
+      >
         <SearchInput
           value={filters.search}
           onChange={(e) => handleChange("search", e)}

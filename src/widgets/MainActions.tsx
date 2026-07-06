@@ -11,6 +11,7 @@ import { CategoryModal } from "@/features/show-categories/ui/CategoryModal";
 import { ConverterModal } from "@/features/currency-converter/ui/ConverterModal";
 import { NewTransactionModal } from "@/features/create-transaction/ui/NewTransactionModal";
 import { useState } from "react";
+import styles from "./main-actions.module.css";
 
 type ModalType = "balance" | "categories" | "converter" | "new";
 type NewTransType = "income" | "expense";
@@ -27,8 +28,8 @@ export const MainActions = () => {
   };
 
   return (
-    <div className="transactions-actions">
-      <div className="transactions-actions__block">
+    <div className={styles["transactions-actions"]}>
+      <div className={styles["transactions-actions__block"]}>
         {isMobile ? (
           <IconButton
             aria-label="баланс"
@@ -90,7 +91,9 @@ export const MainActions = () => {
       </div>
 
       {isMobile ? (
-        <div className="transactions-actions__block transactions-actions__block--add">
+        <div
+          className={`${styles["transactions-actions__block"]} ${styles["transactions-actions__block--add"]}`}
+        >
           <IconButton
             size="small"
             aria-label="Добавить доход"
@@ -109,7 +112,9 @@ export const MainActions = () => {
           </IconButton>
         </div>
       ) : (
-        <div className="transactions-actions__block transactions-actions__block--add">
+        <div
+          className={`${styles["transactions-actions__block"]} ${styles["transactions-actions__block--add"]}`}
+        >
           <Button
             variant="contained"
             size="small"

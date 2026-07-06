@@ -1,0 +1,5 @@
+.date-picker-range {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

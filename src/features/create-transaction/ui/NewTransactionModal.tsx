@@ -12,6 +12,7 @@ import {
   transactionSchema,
   type TransactionFormData,
 } from "@/features/transaction/transaction.schema";
+import styles from "./styles.module.css";
 
 interface props {
   open: boolean;
@@ -137,11 +138,14 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
       }}
       title={title}
     >
-      <div className="new-transaction-modal">
+      <div className={styles["new-transaction-modal"]}>
         {spaceResp &&
           currentSpaceId &&
           drafts.map((draft, i) => (
-            <div key={draft.localId} className="new-transaction-modal__fields">
+            <div
+              key={draft.localId}
+              className={styles["new-transaction-modal__fields"]}
+            >
               <TransactionForm
                 errors={errors[draft.localId] ?? {}}
                 transaction={draft}

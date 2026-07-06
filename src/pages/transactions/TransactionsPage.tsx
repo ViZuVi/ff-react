@@ -1,5 +1,4 @@
 import { MainActions } from "@/widgets/MainActions";
-import "./transactions.css";
 import { FiltersForm } from "../../features/filter-transactions/ui/FiltersForm";
 import { TransactionsTable } from "../../widgets/transaction-table/TransactionsTable";
 import { Skeleton, Typography, useMediaQuery } from "@mui/material";
@@ -10,6 +9,7 @@ import { useDeferredValue, useMemo, useState } from "react";
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import type { Filters } from "@/shared/types/Filters";
 import dayjs from "dayjs";
+import styles from "./styles.module.css";
 
 export const TransactionsPage = () => {
   const { data: spaces, isLoading: spacesLoading } = useSpaces();
@@ -48,7 +48,7 @@ export const TransactionsPage = () => {
 
   return spacesLoading ? (
     <>
-      <div className="transactions-view-skeleton">
+      <div className={styles["transactions-view-skeleton"]}>
         <Skeleton
           animation="wave"
           variant="rectangular"
@@ -64,8 +64,8 @@ export const TransactionsPage = () => {
       </div>
     </>
   ) : spaces?.spaces.length ? (
-    <div className="transactions-view">
-      <div className="transactions-wrapper">
+    <div className={styles["transactions-view"]}>
+      <div className={styles["transactions-wrapper"]}>
         <MainActions />
         {isMobile && (
           <Typography align="center" variant="h5" sx={{ marginBottom: "12px" }}>

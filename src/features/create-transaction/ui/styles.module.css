@@ -1,0 +1,28 @@
+.new-transaction-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  min-width: 80vw;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.new-transaction-modal__fields {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 108px;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .new-transaction-modal {
+    padding: 12px;
+  }
+
+  .new-transaction-modal__fields {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -10,6 +10,7 @@ import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useDeleteCategory } from "@/entities/category";
 import { useState } from "react";
 import { EditCategory } from "../../edit-category/ui/EditCategory";
+import styles from "./styles.module.css"
 
 interface props {
   open: boolean;
@@ -68,15 +69,15 @@ export const CategoryModal = ({ open, onClose }: props) => {
 
   return (
     <UModal open={open} onClose={onClose} title="Категории">
-      <div className="category-modal">
+      <div className={styles["category-modal"]}>
         <ul>
           {spaceResp?.data.categories.map((cat) => {
             // TODO: вынести в отдельный компонент Item
             return (
               <div key={cat.id}>
-                <li className="category-modal__item">
+                <li className={styles["category-modal__item"]}>
                   <span>{cat.name}</span>
-                  <span className="category-modal__actions">
+                  <span className={styles["category-modal__actions"]}>
                     <IconButton
                       size="small"
                       aria-label="редактировать"

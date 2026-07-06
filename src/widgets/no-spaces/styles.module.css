@@ -1,0 +1,16 @@
+.no-space {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+.no-space__info {
+  text-align: center;
+}
+.no-space__form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}

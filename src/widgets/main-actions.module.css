@@ -1,0 +1,24 @@
+.transactions-actions {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.transactions-actions__block {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.transactions-actions__block--add {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .transactions-actions__block {
+    gap: 4px;
+  }
+
+  .transactions-actions {
+    margin-bottom: 8px;
+  }
+}

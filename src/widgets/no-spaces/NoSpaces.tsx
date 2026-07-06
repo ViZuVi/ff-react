@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import styles from "./styles.module.css"
 
 export const NoSpaces = () => {
   const [newSpace, setNewSpace] = useState({
@@ -31,16 +32,16 @@ export const NoSpaces = () => {
   };
 
   return (
-    <div className="no-space">
-      <div className="no-space__info">
+    <div className={styles["no-space"]}>
+      <div className={styles["no-space__info"]}>
         <p>У вас пока не создано ни одного пространства</p>
         <p>
           Чтобы создать свое первое пространство и начать работу заполните форму
           ниже
         </p>
       </div>
-      <div className="no-space__form-wrapper">
-        <div className="no-space__form">
+      <div className={styles["no-space__form-wrapper"]}>
+        <div className={styles["no-space__form"]}>
           <TextField
             id="name"
             label="Название пространства"

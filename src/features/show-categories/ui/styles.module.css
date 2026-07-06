@@ -1,0 +1,19 @@
+.category-modal {
+  min-width: 400px;
+  max-height: 400px;
+  overflow: auto;
+  padding: 0 24px 24px;
+}
+
+.category-modal__item {
+  padding: 2px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .category-modal {
+    min-width: calc(100vw - 32px);
+  }
+}
