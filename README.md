@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# 💰 Funds Flow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for personal and collaborative financial management.
 
-Currently, two official plugins are available:
+The application allows users to organize their finances in separate workspaces, collaborate with other members, track income and expenses, and gain insights through analytics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+### 👥 Collaborative Workspaces
+Create multiple independent workspaces.
+Invite other users to collaborate (e.g. shared family or couple finances).
+Manage finances together in real time.
+### 💸 Transactions
+Add income and expense transactions.
+Edit and delete existing transactions.
+Associate each transaction with an account and category.
+Store additional notes and transaction details.
+### 🏦 Accounts
+Create and manage multiple financial accounts.
+Track balances across different accounts.
+🏷 Categories
+Create custom income and expense categories.
+Organize transactions for better financial tracking.
+### 📊 Analytics
+View financial statistics and summaries.
+Analyze income and expenses by category.
+Track spending trends over time.
+Monitor overall financial activity within each workspace.
+### 🔐 Authentication
+Secure user authentication.
+Workspace access limited to invited members.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠 Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- TanStack Query / React Query
+- Zustand
+- REST API
+- React Hook Form
+- Zod
+- Recharts
+- Vite
+- ESLint
+- Prettier
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📸 Screenshots
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+Analytics
+Workspace management
+Transactions
+Accounts
+Categories
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Getting Started
+git clone https://github.com/ViZuVi/ff-react.git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+cd ff-react
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+npm install
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+npm run dev
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+## 🎯 Project Goals
+
+This project was built to practice building a scalable frontend application with modern React and TypeScript.
+
+The main focus was on:
+
+clean and maintainable architecture;
+reusable UI components;
+API integration;
+collaborative user workflows;
+responsive design;
+data visualization.
+
+## 📈 Future Improvements
+Budget planning
+Recurring transactions
+Currency conversion
+Notifications
+Export to CSV/PDF
+Mobile application
+Offline support
+
+## 👩‍💻 Author
+
+Built by Zukhra Baichorova.
+
+Feel free to explore the code, suggest improvements, or get in touch.
