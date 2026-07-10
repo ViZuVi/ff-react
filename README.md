@@ -1,5 +1,11 @@
 # 💰 Funds Flow
 
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+🔗 **Live Demo:** https://new.funds-flow.ru
+
 A modern web application for personal and collaborative financial management.
 
 The application allows users to organize their finances in separate workspaces, collaborate with other members, track income and expenses, and gain insights through analytics.
