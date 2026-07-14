@@ -2,6 +2,7 @@ import type { Category } from "@/entities/category/model/types";
 import { Autocomplete, FormControl, TextField } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { useTranslation } from "react-i18next";
 
 export const CategoriesSelect = ({
   categories,
@@ -11,6 +12,7 @@ export const CategoriesSelect = ({
   value: number[];
   onChange: (v: number[]) => void;
 }) => {
+  const { t } = useTranslation("main");
   const handleSelect = (e: Category[]) => {
     const payload = e.map((cat) => cat.id);
     onChange(payload);
@@ -41,7 +43,7 @@ export const CategoriesSelect = ({
           );
         }}
         renderInput={(params) => (
-          <TextField {...params} label="Категория" rows={1} maxRows={1} />
+          <TextField {...params} label={t("category")} rows={1} maxRows={1} />
         )}
         onChange={(_e, v) => handleSelect(v)}
       />

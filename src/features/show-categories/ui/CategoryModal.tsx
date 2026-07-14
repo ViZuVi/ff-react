@@ -10,7 +10,8 @@ import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useDeleteCategory } from "@/entities/category";
 import { useState } from "react";
 import { EditCategory } from "../../edit-category/ui/EditCategory";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
 
 interface props {
   open: boolean;
@@ -20,6 +21,7 @@ interface props {
 type ModalType = "edit" | "create";
 
 export const CategoryModal = ({ open, onClose }: props) => {
+  const { t } = useTranslation("main");
   const { data: spaceResp } = useCurrentSpace();
   const { showSnackbar } = useSnackbarStore.getState();
   const { mutate, isPending } = useDeleteCategory();
@@ -29,7 +31,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
   const handleCategoryDelete = (cat: Category) => {
     showSnackbar({
       mode: "confirm",
-      message: `Вы действительно хотите удалить категорию "${cat.name}?"`,
+      message: t("categoryDeleteConfirm", { category: cat.name }),
       loading: isPending,
       type: "warning",
 
@@ -37,14 +39,14 @@ export const CategoryModal = ({ open, onClose }: props) => {
         mutate(cat.id, {
           onSuccess: () => {
             showSnackbar({
-              message: "Категория удалена",
+              message: t("categoryDeleteSuccess"),
               type: "success",
               mode: "auto",
             });
           },
           onError: () => {
             showSnackbar({
-              message: "Ошибка удаления",
+              message: t("deleteError"),
               type: "error",
               mode: "auto",
             });
@@ -68,7 +70,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Категории">
+    <UModal open={open} onClose={onClose} title={t("categories")}>
       <div className={styles["category-modal"]}>
         <ul>
           {spaceResp?.data.categories.map((cat) => {
@@ -80,7 +82,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
                   <span className={styles["category-modal__actions"]}>
                     <IconButton
                       size="small"
-                      aria-label="редактировать"
+                      aria-label={t("categoryEditTitle")}
                       onClick={() => handleCategoryEdit(cat)}
                     >
                       <EditIcon fontSize="inherit" />
@@ -88,7 +90,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
                     <IconButton
                       size="small"
                       color="error"
-                      aria-label="удалить"
+                      aria-label={t("deleteCategory")}
                       onClick={() => handleCategoryDelete(cat)}
                     >
                       <DeleteIcon fontSize="inherit" />
@@ -105,7 +107,7 @@ export const CategoryModal = ({ open, onClose }: props) => {
           color="secondary"
           onClick={() => openModal("create")}
         >
-          Создать новую категорию
+          {t("createCategoryBtn")}
         </Button>
 
         <CreateCategory open={isOpen("create")} onClose={closeModal} />

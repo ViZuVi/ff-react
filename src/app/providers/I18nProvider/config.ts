@@ -18,7 +18,7 @@ i18n
 
     defaultNS: "common",
 
-    ns: ["common", "auth"],
+    ns: ["common", "auth", "profile", "main"],
 
     resources: resources,
 

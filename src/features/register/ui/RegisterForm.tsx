@@ -3,10 +3,15 @@ import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, type RegisterFormData } from "../model/register.schema";
+import {
+  registerSchema,
+  type RegisterFormData,
+} from "../model/register.schema";
 import { useRegister } from "../model/use-register";
+import { useTranslation } from "react-i18next";
 
 export const RegisterForm = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const { mutate, isPending } = useRegister();
 
   const {
@@ -41,7 +46,7 @@ export const RegisterForm = () => {
             autoComplete="off"
             error={!!fieldState.error}
             size="small"
-            placeholder="username"
+            placeholder={t("auth:username")}
           />
         )}
       />
@@ -66,7 +71,7 @@ export const RegisterForm = () => {
           />
         )}
       />
-      <Button loading={isSubmitting}>Подтвердить</Button>
+      <Button loading={isSubmitting}>{t("common:confirm")}</Button>
     </form>
   );
 };

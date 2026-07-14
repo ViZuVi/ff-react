@@ -7,6 +7,7 @@ import {
   Select,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
 
 export const UserSelect = ({
   users,
@@ -17,14 +18,15 @@ export const UserSelect = ({
   value: string;
   onChange: (v: string) => void;
 }) => {
+  const { t } = useTranslation("main");
   return (
     <FormControl fullWidth size="small">
-      <InputLabel id="users-label">Создатель</InputLabel>
+      <InputLabel id="users-label">{t("creator")}</InputLabel>
       <Select
         labelId="users-label"
         id="users"
         value={value}
-        label="Создатель"
+        label={t("creator")}
         onChange={(e) => onChange(e.target.value)}
       >
         {users.map((item) => {

@@ -3,6 +3,7 @@ import { Box, Card, Divider, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   transaction: Transaction;
@@ -15,6 +16,7 @@ export const MobileCards = ({
   openEditModal,
   onDeleteClick,
 }: Props) => {
+  const { t } = useTranslation("main");
   return (
     <Card
       sx={{
@@ -38,11 +40,11 @@ export const MobileCards = ({
           <span>{transaction.user_name}</span>
         </div>
         <div>
-          <b>Категория: </b>
+          <b>{t("category")}: </b>
           {transaction.category.name}
         </div>
         <div>
-          <b>Сумма: </b>
+          <b>{t("amount")}: </b>
           <span
             className={
               transaction.type.id === 1 ? "text-error" : "text-success"
@@ -52,11 +54,11 @@ export const MobileCards = ({
           </span>
         </div>
         <div>
-          <b>Счёт: </b>
+          <b>{t("account")}: </b>
           {transaction.account.name}
         </div>
         <div>
-          <b>Описание: </b>
+          <b>{t("description")}: </b>
           {transaction.comment || "------"}
         </div>
       </Box>
@@ -72,7 +74,7 @@ export const MobileCards = ({
       >
         <IconButton
           size="small"
-          aria-label="редактировать"
+          aria-label={t("transactionEditTitle")}
           onClick={openEditModal}
         >
           <EditIcon fontSize="inherit" />
@@ -80,7 +82,7 @@ export const MobileCards = ({
         <IconButton
           size="small"
           color="error"
-          aria-label="удалить"
+          aria-label={t("deleteTransaction")}
           onClick={onDeleteClick}
         >
           <DeleteIcon fontSize="inherit" />

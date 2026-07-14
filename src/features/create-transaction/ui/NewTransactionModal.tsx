@@ -13,6 +13,7 @@ import {
   type TransactionFormData,
 } from "@/features/transaction-form/model/transaction.schema";
 import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
 
 interface props {
   open: boolean;
@@ -21,7 +22,8 @@ interface props {
 }
 
 export const NewTransactionModal = ({ open, type, onClose }: props) => {
-  const title = `Добавить ${type === "income" ? "Доход" : "Расход"}`;
+  const { t } = useTranslation(["main", "common"]);
+  const title = type === "income" ? t("main:AddIncomeBtn") : t("main:AddExpenseBtn");
   const transactionType = type === "income" ? 0 : 1;
 
   const updateDraft = useTransactionStore((s) => s.updateDraft);
@@ -95,7 +97,10 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
 
       if (errors.length === 0) {
         showSnackbar({
-          message: `${drafts.length > 1 ? "Транзакции" : "Транзакция"} успешно ${drafts.length > 1 ? "созданы" : "создана"}`,
+          message:
+            drafts.length > 1
+              ? t("main:createTransactionsSuccessAll")
+              : t("main:createTransactionsSuccessOne"),
           type: "success",
           mode: "auto",
         });
@@ -103,20 +108,23 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
         clear();
       } else if (success.length > 0) {
         showSnackbar({
-          message: `Создано ${success.length} транзакций. Не удалось создать ${errors.length}.`,
+          message: t("main:createTransactionsResult", {
+            success: success.length,
+            errors: errors.length,
+          }),
           type: "warning",
           mode: "auto",
         });
       } else {
         showSnackbar({
-          message: "Не удалось создать ни одной транзакции",
+          message: t("main:createTransactionsError"),
           type: "error",
           mode: "auto",
         });
       }
     } catch {
       showSnackbar({
-        message: "Произошла непредвиденная ошибка",
+        message: t("main:unexpectedError"),
         type: "error",
         mode: "auto",
       });
@@ -185,7 +193,7 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
           loading={isPending}
           onClick={handleCreateTransaction}
         >
-          Сохранить
+          {t("common:save")}
         </Button>
       </div>
     </UModal>

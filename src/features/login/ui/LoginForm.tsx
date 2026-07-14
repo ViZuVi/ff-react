@@ -4,8 +4,10 @@ import { PasswordInput } from "@/shared/ui/Input/PasswordInput";
 import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { useLogin } from "../model/use-login";
 import { loginSchema, type LoginFormData } from "../model/login.schema";
+import { useTranslation } from "react-i18next";
 
 export const LoginForm = () => {
+  const { t } = useTranslation("common");
   const { mutate, isPending } = useLogin();
 
   const {
@@ -47,7 +49,7 @@ export const LoginForm = () => {
         )}
       />
       <button type="submit" disabled={isSubmitting || isPending}>
-        Подтвердить
+        {t("confirm")}
       </button>
     </form>
   );

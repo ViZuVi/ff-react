@@ -15,6 +15,9 @@
   "empty": "List is empty",
   "sendSuccess": "Invitation successfully send",
   "sendError": "Sending error",
+  "activeSpace": "Active space",
+  "settings": "Settings",
+  "themeSelect": "Select theme",
   "status": {
     "accepted": "Accepted",
     "rejected": "Rejected",

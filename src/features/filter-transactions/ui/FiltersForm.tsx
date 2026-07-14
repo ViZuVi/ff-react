@@ -10,6 +10,7 @@ import { AccountSelect } from "./AccountSelect";
 import { DatePickerRange } from "./DatePickerRange";
 import { Button, useMediaQuery } from "@mui/material";
 import styles from "./filter.module.css";
+import { useTranslation } from "react-i18next";
 
 type FiltersWithoutSpaceId = Omit<Filters, "space_id">;
 
@@ -22,6 +23,7 @@ type Props = {
 };
 
 const FiltersFormComponent = ({ filters, onChange }: Props) => {
+  const { t } = useTranslation("main");
   const { data: space } = useCurrentSpace();
   // TODO if error && is Loading
 
@@ -49,7 +51,7 @@ const FiltersFormComponent = ({ filters, onChange }: Props) => {
         })}
         onClick={() => setFilersVisable(!filtersVisable)}
       >
-        Фильтры
+        {t("filters")}
       </Button>
       <div
         className={`${styles["filters"]} ${filtersVisable ? styles["filters--visable"] : ""}`}

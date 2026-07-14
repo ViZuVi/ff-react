@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useCreateAccount } from "@/entities/account";
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import { useSnackbarStore } from "@/shared/store/snackbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const CreateAccount = ({ open, onClose }: Props) => {
+  const { t } = useTranslation("main");
   const { data: currencyResp } = useCurrency();
   const [newAccount, setNewAccount] = useState<AccountWithoutSpace>({
     balance: 0,
@@ -42,14 +44,14 @@ export const CreateAccount = ({ open, onClose }: Props) => {
             name: "",
           });
           showSnackbar({
-            message: "Счёт успешно создан",
+            message: t("createAccountSuccess"),
             type: "success",
             mode: "auto",
           });
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка создания",
+            message: t("createError"),
             type: "error",
             mode: "auto",
           });
@@ -69,7 +71,7 @@ export const CreateAccount = ({ open, onClose }: Props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Создание нового счёта">
+    <UModal open={open} onClose={onClose} title={t("createAccountTitle")}>
       <Box
         sx={(theme) => ({
           p: "12px",
@@ -90,13 +92,13 @@ export const CreateAccount = ({ open, onClose }: Props) => {
       >
         <TextField
           required
-          label="Наименование счёта"
+          label={t("accountName")}
           value={newAccount.name}
           size="small"
           onChange={(e) => handleChange("name", e.target.value)}
         />
         <NumberField
-          label="Сумма"
+          label={t("amount")}
           value={newAccount.balance}
           onValueChange={(e) => handleChange("balance", e ?? 0)}
           size="small"
@@ -104,7 +106,7 @@ export const CreateAccount = ({ open, onClose }: Props) => {
         />
         {currencyResp?.data && (
           <FormControl size="small">
-            <InputLabel id="currency">Валюта</InputLabel>
+            <InputLabel id="currency">{t("currency")}</InputLabel>
             <CurrencySelect
               labelId="currency"
               label="Валюта"
@@ -121,7 +123,7 @@ export const CreateAccount = ({ open, onClose }: Props) => {
         variant="contained"
         onClick={handleCreate}
       >
-        Создать
+        {t("createBtn")}
       </Button>
     </UModal>
   );

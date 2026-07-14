@@ -3,8 +3,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState, type ReactNode, type SyntheticEvent } from "react";
-import { LoginForm } from "../../features/login/ui/LoginForm";
-import { RegisterForm } from "../../features/register/ui/RegisterForm";
+import { LoginForm } from "@/features/login/ui/LoginForm";
+import { RegisterForm } from "@/features/register/ui/RegisterForm";
+import { useTranslation } from "react-i18next";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -37,6 +38,8 @@ function a11yProps(index: number) {
 }
 
 export const AuthTabs = () => {
+  const { t } = useTranslation("auth");
+
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -62,8 +65,8 @@ export const AuthTabs = () => {
           variant="fullWidth"
           aria-label="auth tabs"
         >
-          <Tab label="Вход" {...a11yProps(0)} />
-          <Tab label="Регистрация" {...a11yProps(1)} />
+          <Tab label={t("titleAuth")} {...a11yProps(0)} />
+          <Tab label={t("titleRegister")} {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

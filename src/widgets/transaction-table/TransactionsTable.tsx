@@ -25,6 +25,7 @@ import { TransactionTableRow } from "./TransactionTableRow";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useDeleteTransaction } from "@/entities/transaction";
 import { MobileCards } from "./MobileCards";
+import { useTranslation } from "react-i18next";
 
 type HeadCell = {
   value: keyof Transaction | "actions";
@@ -36,17 +37,19 @@ type Order = "asc" | "desc" | null;
 
 type ModalType = "delete" | "edit";
 
-const headCells: readonly HeadCell[] = [
-  { value: "created_at", name: "дата", width: 160 },
-  { value: "category", name: "категория", width: 260 },
-  { value: "amount", name: "сумма", width: 150 },
-  { value: "account", name: "счёт", width: 190 },
-  { value: "user_name", name: "создатель", width: 190 },
-  { value: "comment", name: "описание", width: "auto" },
-  { value: "actions", name: "действия", width: 140 },
-];
-
 const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
+  const { t } = useTranslation("main");
+
+  const headCells: readonly HeadCell[] = [
+    { value: "created_at", name: t("date"), width: 160 },
+    { value: "category", name: t("category"), width: 260 },
+    { value: "amount", name: t("amount"), width: 150 },
+    { value: "account", name: t("account"), width: 190 },
+    { value: "user_name", name: t("creator"), width: 190 },
+    { value: "comment", name: t("description"), width: "auto" },
+    { value: "actions", name: t("actions"), width: 140 },
+  ] as const;
+
   const [order, setOrder] = useState<Order>(null);
   const [orderBy, setOrderBy] = useState<keyof Transaction | null>(null);
   const { showSnackbar } = useSnackbarStore.getState();
@@ -112,7 +115,7 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
   const deleteTransaction = (tr: Transaction) => {
     showSnackbar({
       mode: "confirm",
-      message: `Вы действительно хотите удалить транзакцию`,
+      message: t("transactionDeleteConfirm"),
       loading: isPending,
       type: "warning",
 
@@ -120,14 +123,14 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
         mutate(tr.id, {
           onSuccess: () => {
             showSnackbar({
-              message: "Транзакция успешно удалена",
+              message: t("transactionDeleteSuccess"),
               type: "success",
               mode: "auto",
             });
           },
           onError: () => {
             showSnackbar({
-              message: "Ошибка удаления",
+              message: t("deleteError"),
               type: "error",
               mode: "auto",
             });
@@ -235,9 +238,9 @@ const TransactionsTableComponent = ({ rows }: { rows: Array<Transaction> }) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        labelRowsPerPage="Строк:"
+        labelRowsPerPage={t("paginationRows")}
         labelDisplayedRows={({ from, to, count }) =>
-          `${from}–${to} из ${count !== -1 ? count : `более ${to}`}`
+          `${from}–${to} ${t("paginationFrom")} ${count !== -1 ? count : `${t("more")} ${to}`}`
         }
         count={rows.length}
         rowsPerPage={rowsPerPage}

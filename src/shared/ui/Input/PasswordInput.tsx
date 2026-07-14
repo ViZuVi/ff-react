@@ -8,6 +8,7 @@ import {
   type FieldValues,
   type Path,
 } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type PasswordInputProps<
   TFieldValues extends FieldValues,
@@ -28,6 +29,7 @@ export const PasswordInput = <
   autoComplete,
   disabled,
 }: PasswordInputProps<TFieldValues, TName>) => {
+  const { t } = useTranslation("auth");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -37,7 +39,7 @@ export const PasswordInput = <
       {...field}
       id="password"
       size="small"
-      placeholder="Password"
+      placeholder={t("password")}
       error={!!error}
       helperText={error}
       disabled={disabled}

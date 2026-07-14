@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEditAccount } from "@/entities/account";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import type { Account } from "@/entities/account";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const EditAccount = ({ open, account, onClose }: Props) => {
+  const { t } = useTranslation(["main", "common"]);
   const [newAccount, setNewAccount] = useState(account.name);
 
   const { mutate, isPending } = useEditAccount();
@@ -23,7 +25,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
       {
         onSuccess: () => {
           showSnackbar({
-            message: `Изменения счета "${newAccount}" сохранены`,
+            message: t("main:editAccountSuccess", { account: newAccount }),
             type: "success",
             mode: "auto",
           });
@@ -31,7 +33,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка изменения",
+            message: t("main:editError"),
             type: "error",
             mode: "auto",
           });
@@ -41,7 +43,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Редактирование счёта">
+    <UModal open={open} onClose={onClose} title={t("main:accountEditTitle")}>
       <Box
         sx={{
           p: "12px",
@@ -53,7 +55,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
       >
         <TextField
           required
-          label="Наименование счёта"
+          label={t("main:accountName")}
           value={newAccount}
           size="small"
           onChange={(e) => setNewAccount(e.target.value)}
@@ -65,7 +67,7 @@ export const EditAccount = ({ open, account, onClose }: Props) => {
         variant="contained"
         onClick={handleEdit}
       >
-        Подтвердить
+        {t("common:confirm")}
       </Button>
     </UModal>
   );

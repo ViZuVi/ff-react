@@ -5,6 +5,7 @@ import { useSnackbarStore } from "@/shared/store/snackbar";
 import type { Category, CategoryCreate } from "@/entities/category/model/types";
 import { TransactionTypeSelect } from "../../filter-transactions/ui/TransactionTypeSelect";
 import { useEditCategory } from "@/entities/category";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const EditCategory = ({ open, category, onClose }: Props) => {
+  const { t } = useTranslation(["main", "common"]);
   const [newCategory, setNewCategory] = useState({
     name: category.name,
     type: category.type.id,
@@ -27,7 +29,9 @@ export const EditCategory = ({ open, category, onClose }: Props) => {
       {
         onSuccess: () => {
           showSnackbar({
-            message: `Изменения категории "${newCategory.name}" сохранены`,
+            message: t("main:editCategorySuccess", {
+              category: newCategory.name,
+            }),
             type: "success",
             mode: "auto",
           });
@@ -35,7 +39,7 @@ export const EditCategory = ({ open, category, onClose }: Props) => {
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка изменения",
+            message: t("main:editError"),
             type: "error",
             mode: "auto",
           });
@@ -55,7 +59,7 @@ export const EditCategory = ({ open, category, onClose }: Props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Редактирование категории">
+    <UModal open={open} onClose={onClose} title={t("main:categoryEditTitle")}>
       <Box
         sx={{
           p: "12px",
@@ -67,7 +71,7 @@ export const EditCategory = ({ open, category, onClose }: Props) => {
       >
         <TextField
           required
-          label="Наименование категории"
+          label={t("main:categoryName")}
           value={newCategory.name}
           size="small"
           onChange={(e) => handleChange("name", e.target.value)}
@@ -83,7 +87,7 @@ export const EditCategory = ({ open, category, onClose }: Props) => {
         variant="contained"
         onClick={handleEdit}
       >
-        Подтвердить
+        {t("common:confirm")}
       </Button>
     </UModal>
   );

@@ -12,11 +12,14 @@ import { ConverterModal } from "@/features/currency-converter/ui/ConverterModal"
 import { NewTransactionModal } from "@/features/create-transaction/ui/NewTransactionModal";
 import { useState } from "react";
 import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
 
 type ModalType = "balance" | "categories" | "converter" | "new";
 type NewTransType = "income" | "expense";
 
 export const MainActions = () => {
+  const { t } = useTranslation("main");
+
   const isMobile = useMediaQuery("(max-width:768px)");
   const { openModal, closeModal, isOpen } = useModal<ModalType>();
 
@@ -32,7 +35,7 @@ export const MainActions = () => {
       <div className={styles["transactions-actions__block"]}>
         {isMobile ? (
           <IconButton
-            aria-label="баланс"
+            aria-label={t("balance")}
             size="small"
             color="primary"
             onClick={() => openModal("balance")}
@@ -45,12 +48,12 @@ export const MainActions = () => {
             size="small"
             onClick={() => openModal("balance")}
           >
-            баланс и счета
+            {t("balanceBtn")}
           </Button>
         )}
         {isMobile ? (
           <IconButton
-            aria-label="категории"
+            aria-label={t("categories")}
             size="small"
             color="primary"
             onClick={() => openModal("categories")}
@@ -63,13 +66,13 @@ export const MainActions = () => {
             size="small"
             onClick={() => openModal("categories")}
           >
-            категории
+            {t("categoryBtn")}
           </Button>
         )}
         {!isMobile && (
           <>
             <IconButton
-              aria-label="конвертер"
+              aria-label={t("converterBtn")}
               disabled
               size="small"
               color="primary"
@@ -78,7 +81,7 @@ export const MainActions = () => {
               <CurrencyExchangeIcon />
             </IconButton>
             <IconButton
-              aria-label="аналитика"
+              aria-label={t("analitycsBtn")}
               disabled
               size="small"
               color="primary"
@@ -96,7 +99,7 @@ export const MainActions = () => {
         >
           <IconButton
             size="small"
-            aria-label="Добавить доход"
+            aria-label={t("AddIncomeBtn")}
             color="primary"
             onClick={() => toggleNewTransModal("income")}
           >
@@ -104,7 +107,7 @@ export const MainActions = () => {
           </IconButton>
           <IconButton
             size="small"
-            aria-label="Добавить расход"
+            aria-label={t("AddExpenseBtn")}
             color="primary"
             onClick={() => toggleNewTransModal("expense")}
           >
@@ -120,14 +123,14 @@ export const MainActions = () => {
             size="small"
             onClick={() => toggleNewTransModal("income")}
           >
-            Добавить доход
+            {t("AddIncomeBtn")}
           </Button>
           <Button
             variant="contained"
             size="small"
             onClick={() => toggleNewTransModal("expense")}
           >
-            Добавить расход
+            {t("AddExpenseBtn")}
           </Button>
         </div>
       )}

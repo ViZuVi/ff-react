@@ -10,8 +10,10 @@ import { useSpaceStore } from "@/entities/space/model/space-store";
 import type { Filters } from "@/shared/types/Filters";
 import dayjs from "dayjs";
 import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
 
 export const TransactionsPage = () => {
+  const { t } = useTranslation("main");
   const { data: spaces, isLoading: spacesLoading } = useSpaces();
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
 
@@ -69,7 +71,7 @@ export const TransactionsPage = () => {
         <MainActions />
         {isMobile && (
           <Typography align="center" variant="h5" sx={{ marginBottom: "12px" }}>
-            Операции
+            {t("transactions")}
           </Typography>
         )}
         {transactions?.data ? (

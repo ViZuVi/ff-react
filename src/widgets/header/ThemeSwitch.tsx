@@ -1,6 +1,7 @@
 import { useThemeStore } from "@/shared/theme/theme.store";
 import { FormControlLabel, Switch } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -59,6 +60,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export const ThemeSwitch = () => {
+  const { t } = useTranslation("profile");
  
   const mode = useThemeStore((state) => state.mode);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
@@ -72,7 +74,7 @@ export const ThemeSwitch = () => {
           onChange={toggleTheme}
         />
       }
-      label="Выберите тему интерфейса"
+      label={t("themeSelect")}
     />
   );
 };

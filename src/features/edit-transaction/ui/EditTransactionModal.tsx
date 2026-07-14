@@ -11,7 +11,8 @@ import { useMemo, useState } from "react";
 import { TransactionForm } from "@/features/transaction-form/ui/TransactionForm";
 import { useEditTransaction } from "@/entities/transaction";
 import { useSnackbarStore } from "@/shared/store/snackbar";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
 
 interface props {
   transaction: Transaction;
@@ -20,6 +21,7 @@ interface props {
 }
 
 export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
+  const { t } = useTranslation(["main", "common"]);
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
   const { data: spaceResp } = useCurrentSpace();
   const { mutate, isPending } = useEditTransaction();
@@ -66,14 +68,14 @@ export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
         onSuccess: () => {
           onClose();
           showSnackbar({
-            message: "Транзакция успешно создана",
+            message: t("main:editTransactionSuccess"),
             type: "success",
             mode: "auto",
           });
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка создания",
+            message: t("main:editError"),
             type: "error",
             mode: "auto",
           });
@@ -83,7 +85,11 @@ export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Изменение транзакции">
+    <UModal
+      open={open}
+      onClose={onClose}
+      title={t("main:transactionEditTitle")}
+    >
       <div className={styles["edit-transaction-modal"]}>
         {spaceResp && (
           <TransactionForm
@@ -102,7 +108,7 @@ export const EditTransactionModal = ({ transaction, open, onClose }: props) => {
         loading={isPending}
         onClick={confirmEdit}
       >
-        Подтвердить изменения
+        {t("common:confirm")}
       </Button>
     </UModal>
   );

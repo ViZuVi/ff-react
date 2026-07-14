@@ -4,6 +4,7 @@ import { ThemeSwitch } from "./ThemeSwitch";
 import { useSpaces } from "@/entities/space/model/use-spaces";
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import styles from "./header.module.css";
+import { useTranslation } from "react-i18next";
 
 interface props {
   open: boolean;
@@ -11,6 +12,7 @@ interface props {
 }
 
 export const SettingsModal = ({ open, onClose }: props) => {
+  const { t } = useTranslation("profile");
   const currentSpaceId = useSpaceStore((s) => s.currentSpaceId);
   const setCurrentSpaceId = useSpaceStore((s) => s.setCurrentSpaceId);
 
@@ -22,15 +24,15 @@ export const SettingsModal = ({ open, onClose }: props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Настройки">
+    <UModal open={open} onClose={onClose} title={t("settings")}>
       <div className={styles["settings-modal"]}>
         <FormControl size="small">
-          <InputLabel id="active-space">Активное пространство</InputLabel>
+          <InputLabel id="active-space">{t("activeSpace")}</InputLabel>
           <Select
             labelId="active-space"
             id="active-space"
             value={currentSpaceId}
-            label="Активное пространство"
+            label={t("activeSpace")}
             onChange={(e) => handleSpaceSelect(e.target.value)}
           >
             {data?.spaces.map((item) => {

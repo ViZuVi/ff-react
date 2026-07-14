@@ -4,6 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { ReactNode } from "react";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   row: Transaction;
@@ -28,6 +29,7 @@ export const TransactionTableRow = ({
   openEditModal,
   onDeleteClick,
 }: Props) => {
+  const { t } = useTranslation("main");
   return (
     <TableRow
       key={row.id}
@@ -46,7 +48,7 @@ export const TransactionTableRow = ({
       <Cell>
         <IconButton
           size="small"
-          aria-label="редактировать"
+          aria-label={t("transactionEditTitle")}
           onClick={openEditModal}
         >
           <EditIcon fontSize="inherit" />
@@ -54,7 +56,7 @@ export const TransactionTableRow = ({
         <IconButton
           size="small"
           color="error"
-          aria-label="удалить"
+          aria-label={t("deleteTransaction")}
           onClick={onDeleteClick}
         >
           <DeleteIcon fontSize="inherit" />

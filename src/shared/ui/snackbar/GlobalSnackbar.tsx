@@ -1,7 +1,9 @@
 import { Snackbar, Alert, Button } from "@mui/material";
 import { useSnackbarStore } from "@/shared/store/snackbar";
+import { useTranslation } from "react-i18next";
 
 export const GlobalSnackbar = () => {
+  const { t } = useTranslation("common");
   const { open, loading, message, type, mode, hideSnackbar, confirm, cancel } =
     useSnackbarStore();
   return (
@@ -25,7 +27,7 @@ export const GlobalSnackbar = () => {
           mode === "confirm" ? (
             <>
               <Button onClick={cancel} color="inherit" size="small">
-                Отмена
+                {t("cancel")}
               </Button>
               <Button
                 onClick={confirm}
@@ -33,7 +35,7 @@ export const GlobalSnackbar = () => {
                 size="small"
                 loading={loading}
               >
-                Подтвердить
+                {t("confirm")}
               </Button>
             </>
           ) : undefined

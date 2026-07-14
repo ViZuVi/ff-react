@@ -1,4 +1,3 @@
-import type { Account } from "@/shared/types/Account";
 import {
   FormControl,
   IconButton,
@@ -7,6 +6,8 @@ import {
   Select,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import type { Account } from "@/entities/account";
+import { useTranslation } from "react-i18next";
 
 export const AccountSelect = ({
   accounts,
@@ -17,14 +18,15 @@ export const AccountSelect = ({
   value: string;
   onChange: (v: string) => void;
 }) => {
+  const { t } = useTranslation("main");
   return (
     <FormControl fullWidth size="small">
-      <InputLabel id="account-label">Счет</InputLabel>
+      <InputLabel id="account-label">{t("account")}</InputLabel>
       <Select
         labelId="account-label"
         id="account"
         value={value}
-        label="Счет"
+        label={t("account")}
         onChange={(e) => onChange(e.target.value)}
       >
         {accounts.map((item) => {

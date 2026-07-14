@@ -10,6 +10,7 @@ import { useCurrency } from "@/entities/currency/model/use-currency";
 import { BalanceAccounts } from "./BalanceAccounts";
 import { CurrencySelect } from "@/features/show-balance/ui/CurrencySelect";
 import styles from "./balance.module.css";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const BalanceModal = ({ open, onClose }: Props) => {
+  const { t } = useTranslation("main");
   const { data: currencyResp } = useCurrency();
 
   const [selectedCurrencyId, setSelectedCurrencyId] = useState<number | null>(
@@ -42,7 +44,7 @@ export const BalanceModal = ({ open, onClose }: Props) => {
 
   return (
     open && (
-      <UModal open={open} onClose={onClose} title="Счета и баланс">
+      <UModal open={open} onClose={onClose} title={t("balanceTitle")}>
         <div className={styles["balance-modal"]}>
           <BalanceAccounts />
           {isLoadingBalance ? (
@@ -58,10 +60,12 @@ export const BalanceModal = ({ open, onClose }: Props) => {
           ) : (
             balance && (
               <div className={styles["balance-modal__totals"]}>
-                <h3 className={styles["balance-modal__block-title"]}>Баланс</h3>
+                <h3 className={styles["balance-modal__block-title"]}>
+                  {t("balance")}
+                </h3>
                 <div className={styles["balance-modal__totals-wrapper"]}>
                   <div className={styles["balance-modal__total"]}>
-                    <h4>Общий баланс:</h4>
+                    <h4>{t("OverAllBalance")}</h4>
                     <div>
                       <b
                         className={
@@ -83,7 +87,7 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                     </div>
                   </div>
                   <div className={styles["balance-modal__by-curr"]}>
-                    <h4>Баланс по валютам:</h4>
+                    <h4>{t("byCurrencyBalance")}</h4>
                     <ul>
                       {balance.amountByCurrency.map((acc) => {
                         // TODO: вынести в отдельный компонент Item
@@ -99,7 +103,7 @@ export const BalanceModal = ({ open, onClose }: Props) => {
                               </b>
                               <span>{acc.currency.code}</span>
                               <span>
-                                (курс{" "}
+                                ({t("rate")}
                                 {parseFloat(acc.currency.rate).toLocaleString(
                                   "ru",
                                 )}

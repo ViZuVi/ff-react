@@ -6,11 +6,7 @@ import {
   Select,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
-const transactionTypes = [
-  { type: "0", name: "Доход" },
-  { type: "1", name: "Расход" },
-];
+import { useTranslation } from "react-i18next";
 
 export const TransactionTypeSelect = ({
   value,
@@ -19,14 +15,22 @@ export const TransactionTypeSelect = ({
   value: string;
   onChange: (v: string) => void;
 }) => {
+  const { t } = useTranslation("main");
+  const transactionTypes = [
+    { type: "0", name: t("income") },
+    { type: "1", name: t("expense") },
+  ] as const;
+
   return (
     <FormControl fullWidth size="small">
-      <InputLabel id="transaction-type-label">Тип транзакций</InputLabel>
+      <InputLabel id="transaction-type-label">
+        {t("transactionType")}
+      </InputLabel>
       <Select
         labelId="transaction-type-label"
         id="transaction-type"
         value={value}
-        label="Тип транзакций"
+        label={t("transactionType")}
         onChange={(e) => onChange(e.target.value)}
       >
         {transactionTypes.map((item) => {

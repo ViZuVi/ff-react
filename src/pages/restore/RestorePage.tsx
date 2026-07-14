@@ -4,8 +4,10 @@ import { EmailInput } from "@/shared/ui/Input/EmailInput";
 import { useNavigate } from "react-router";
 import { PasswordInput } from "@/shared/ui/Input/PasswordInput";
 import { Box, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export const RestorePage = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -28,7 +30,7 @@ export const RestorePage = () => {
 
   return (
     <div className="restore-view">
-      <h1 className="restore-view__title">Восстановление пароля</h1>
+      <h1 className="restore-view__title">{t("auth:restoreTitle")}</h1>
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -42,7 +44,7 @@ export const RestorePage = () => {
             value={credentials.email}
             onChange={(e) => onChange("email", e)}
           />
-          <button type="button">Получить код подверждения</button>
+          <button type="button">{t("auth:getCode")}</button>
           <TextField
             id="code"
             size="small"
@@ -63,10 +65,10 @@ export const RestorePage = () => {
             autoComplete="new-password"
             onChange={(e) => onChange("password_confirmation", e)}
           />
-          <button type="submit">Подтвердить</button>
+          <button type="submit">{t("common:confirm")}</button>
         </form>
       </Box>
-      <button onClick={() => navigate(-1)}>Вернуться назад</button>
+      <button onClick={() => navigate(-1)}>{t("auth:return")}</button>
     </div>
   );
 };

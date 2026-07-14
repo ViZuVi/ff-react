@@ -6,6 +6,7 @@ import type { CategoryCreate } from "@/entities/category/model/types";
 import { useCreateCategory } from "@/entities/category";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useSpaceStore } from "@/entities/space/model/space-store";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const CreateCategory = ({ open, onClose }: Props) => {
+  const { t } = useTranslation("main");
   const [newCategory, setNewCategory] = useState({
     name: "",
     type: 1,
@@ -48,14 +50,14 @@ export const CreateCategory = ({ open, onClose }: Props) => {
             type: 1,
           });
           showSnackbar({
-            message: "Категория успешно создана",
+            message: t("createCategorySuccess"),
             type: "success",
             mode: "auto",
           });
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка создания",
+            message: t("createError"),
             type: "error",
             mode: "auto",
           });
@@ -65,7 +67,7 @@ export const CreateCategory = ({ open, onClose }: Props) => {
   };
 
   return (
-    <UModal open={open} onClose={onClose} title="Создание новой категории">
+    <UModal open={open} onClose={onClose} title={t("createCategoryTitle")}>
       <Box
         sx={(theme) => ({
           p: "12px",
@@ -82,7 +84,7 @@ export const CreateCategory = ({ open, onClose }: Props) => {
       >
         <TextField
           required
-          label="Наименование категории"
+          label={t("categoryName")}
           value={newCategory.name}
           size="small"
           onChange={(e) => handleChange("name", e.target.value)}
@@ -98,7 +100,7 @@ export const CreateCategory = ({ open, onClose }: Props) => {
         variant="contained"
         onClick={handleCreate}
       >
-        Создать
+        {t("createBtn")}
       </Button>
     </UModal>
   );

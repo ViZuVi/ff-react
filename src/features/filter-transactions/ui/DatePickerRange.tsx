@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useDateRangeChange } from "@/features/filter-transactions/model/useDateRangeChange";
 import styles from "./date-picker-range.module.css";
+import { useTranslation } from "react-i18next";
 
 type DateKey = "date_from" | "date_to";
 
@@ -18,6 +19,7 @@ export const DatePickerRange = ({
   to: string;
   onChange: (key: DateKey, v: string) => void;
 }) => {
+  const { t } = useTranslation("main");
   const [draft, setDraft] = useState<{
     from: Dayjs | null;
     to: Dayjs | null;
@@ -43,7 +45,7 @@ export const DatePickerRange = ({
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
         <DesktopDatePicker
           disableFuture
-          label="Дата от"
+          label={t("from")}
           slotProps={{
             textField: {
               size: "small",
@@ -56,7 +58,7 @@ export const DatePickerRange = ({
         <span>-</span>
         <DesktopDatePicker
           disableFuture
-          label="Дата до"
+          label={t("to")}
           slotProps={{
             textField: {
               size: "small",

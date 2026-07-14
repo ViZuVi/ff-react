@@ -10,8 +10,10 @@ import { useDeleteAccount } from "@/entities/account";
 import { EditAccount } from "../../edit-account/ui/EditAccount";
 import { useState } from "react";
 import styles from "./balance.module.css";
+import { useTranslation } from "react-i18next";
 
 export const BalanceAccounts = () => {
+  const { t } = useTranslation("main");
   const { data: spaceResp } = useCurrentSpace();
   const { showSnackbar } = useSnackbarStore.getState();
   const { mutate, isPending } = useDeleteAccount();
@@ -19,7 +21,7 @@ export const BalanceAccounts = () => {
   const handleAccountDelete = (acc: Account) => {
     showSnackbar({
       mode: "confirm",
-      message: `Вы действительно хотите удалить счёт "${acc.name}?"`,
+      message: t("accountDeleteConfirm", { account: acc.name }),
       loading: isPending,
       type: "warning",
 
@@ -27,14 +29,14 @@ export const BalanceAccounts = () => {
         mutate(acc.id, {
           onSuccess: () => {
             showSnackbar({
-              message: "Счёт удалён",
+              message: t("accountDeleteSuccess"),
               type: "success",
               mode: "auto",
             });
           },
           onError: () => {
             showSnackbar({
-              message: "Ошибка удаления",
+              message: t("deleteError"),
               type: "error",
               mode: "auto",
             });
@@ -63,7 +65,7 @@ export const BalanceAccounts = () => {
 
   return (
     <div className={styles["balance-accounts"]}>
-      <h3 className={styles["balance-accounts__title"]}>Счета</h3>
+      <h3 className={styles["balance-accounts__title"]}>{t("accounts")}</h3>
       <ul className={styles["balance-accounts__list"]}>
         {spaceResp?.data.accounts.map((acc) => {
           // TODO: вынести в отдельный компонент Item
@@ -84,7 +86,7 @@ export const BalanceAccounts = () => {
                 <span className={styles["balance-accounts__actions"]}>
                   <IconButton
                     size="small"
-                    aria-label="редактировать"
+                    aria-label={t("accountEditTitle")}
                     onClick={() => handleAccountEdit(acc)}
                   >
                     <EditIcon fontSize="inherit" />
@@ -92,7 +94,7 @@ export const BalanceAccounts = () => {
                   <IconButton
                     size="small"
                     color="error"
-                    aria-label="удалить"
+                    aria-label={t("deleteAccount")}
                     onClick={() => handleAccountDelete(acc)}
                   >
                     <DeleteIcon fontSize="inherit" />
@@ -110,7 +112,7 @@ export const BalanceAccounts = () => {
         color="secondary"
         onClick={() => openModal("create")}
       >
-        Создать новый счёт
+        {t("createAccountBtn")}
       </Button>
 
       <CreateAccount open={isOpen("create")} onClose={closeModal} />

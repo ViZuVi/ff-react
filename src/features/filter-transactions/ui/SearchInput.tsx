@@ -1,5 +1,6 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
 
 export const SearchInput = ({
   value,
@@ -8,11 +9,12 @@ export const SearchInput = ({
   value: string;
   onChange: (v: string) => void;
 }) => {
+  const { t } = useTranslation("main");
   return (
     <TextField
       id="search"
       size="small"
-      label="Поиск"
+      label={t("search")}
       value={value}
       slotProps={{
         input: {

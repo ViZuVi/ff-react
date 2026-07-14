@@ -5,6 +5,7 @@ import {
   type FieldValues,
   type Path,
 } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type EmailInputProps<
   TFieldValues extends FieldValues,
@@ -21,12 +22,13 @@ export const EmailInput = <
   field,
   error,
 }: EmailInputProps<TFieldValues, TName>) => {
+  const { t } = useTranslation("auth");
   return (
     <TextField
       {...field}
       id="email"
       size="small"
-      placeholder="Email"
+      placeholder={t("email")}
       error={!!error}
       helperText={error}
       slotProps={{
