@@ -3,6 +3,7 @@ import { Box, Tab, Tabs, useMediaQuery } from "@mui/material";
 import { useState, type SyntheticEvent } from "react";
 import { InboxInvitations } from "./InboxInvitations";
 import { OutboxInvitations } from "./OutboxInvitations";
+import { useTranslation } from "react-i18next";
 
 interface props {
   open: boolean;
@@ -42,6 +43,7 @@ function a11yProps(index: number) {
 }
 
 export const ProfileModal = ({ open, onClose }: props) => {
+  const { t } = useTranslation("profile");
   const isMobile = useMediaQuery("(max-width:768px)");
 
   const [value, setValue] = useState(0);
@@ -50,12 +52,7 @@ export const ProfileModal = ({ open, onClose }: props) => {
     setValue(newValue);
   };
   return (
-    <UModal
-      open={open}
-      onClose={onClose}
-      title="Информация пользователя"
-      divider
-    >
+    <UModal open={open} onClose={onClose} title={t("profileInfo")} divider>
       <Box
         sx={(theme) => ({
           flexGrow: 1,
@@ -81,8 +78,8 @@ export const ProfileModal = ({ open, onClose }: props) => {
           aria-label="profile tabs"
         >
           {/* <Tab disabled label="Личная информация" {...a11yProps(0)} /> */}
-          <Tab label="Входящие приглашения" {...a11yProps(0)} />
-          <Tab label="Исходящие приглашения" {...a11yProps(1)} />
+          <Tab label={t("inboxInvitations")} {...a11yProps(0)} />
+          <Tab label={t("outboxInvitations")} {...a11yProps(1)} />
         </Tabs>
         {/* <TabPanel value={value} index={0}>
           1

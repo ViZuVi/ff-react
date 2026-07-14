@@ -1,0 +1,23 @@
+{
+  "profileInfo": "Информация пользователя",
+  "inboxInvitations": "Входящие приглашения",
+  "outboxInvitations": "Исходящие приглашения",
+  "inviteTitle": "Пригласить пользователя в пространство",
+  "message": "Сообщение",
+  "invitationsList": "Список приглашений",
+  "youInvited": "Вы пригласили",
+  "youWereInvited": "пригласил вас",
+  "youAreInvited": "приглашает вас",
+  "invitedToSpace": "в пространство",
+  "inviteBtn": "Пригласить",
+  "aceptBtn": "Принять",
+  "declineBtn": "Отклонить",
+  "empty": "Список приглашений пуст",
+  "sendSuccess": "Приглашение успешно отправлено",
+  "sendError": "Ошибка отправки",
+  "status": {
+    "accepted": "Принято",
+    "rejected": "Отклонено",
+    "revoked": "Отозвано"
+  }
+}

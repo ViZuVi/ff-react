@@ -10,11 +10,11 @@ export const InvitationStatus = {
 export type InvitationStatus =
   (typeof InvitationStatus)[keyof typeof InvitationStatus];
 
-export const statuses: Partial<Record<InvitationStatus, string>> = {
-  [InvitationStatus.revoked]: "Отозвано",
-  [InvitationStatus.rejected]: "Отклонено",
-  [InvitationStatus.accepted]: "Принято",
-};
+export const statusTranslationKeys = {
+  [InvitationStatus.accepted]: "status.accepted",
+  [InvitationStatus.rejected]: "status.rejected",
+  [InvitationStatus.revoked]: "status.revoked",
+} as const;
 
 export type Invitation = {
   id: number;

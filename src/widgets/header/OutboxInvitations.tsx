@@ -5,9 +5,11 @@ import { InvitationsList } from "./InvitationsList";
 import { useSnackbarStore } from "@/shared/store/snackbar";
 import { useSpaceStore } from "@/entities/space/model/space-store";
 import { useGetInvitation, useSendInvitation } from "@/entities/invitation";
-import styles from "./invitations.module.css"
+import styles from "./invitations.module.css";
+import { useTranslation } from "react-i18next";
 
 export const OutboxInvitations = () => {
+  const { t } = useTranslation("profile");
   const { data: invitations, isPending } = useGetInvitation();
   const { mutate, isPending: isCreating } = useSendInvitation();
 
@@ -43,14 +45,14 @@ export const OutboxInvitations = () => {
             message: "",
           });
           showSnackbar({
-            message: "Приглашение успешно отправлено",
+            message: t("sendSuccess"),
             type: "success",
             mode: "auto",
           });
         },
         onError: () => {
           showSnackbar({
-            message: "Ошибка отправки",
+            message: t("sendError"),
             type: "error",
             mode: "auto",
           });
@@ -62,7 +64,7 @@ export const OutboxInvitations = () => {
   return (
     <div className={styles["outbox-invitations"]}>
       <h2 className={styles["outbox-invitations__title"]}>
-        Пригласить пользователя в пространство
+        {t("inviteTitle")}
       </h2>
       <div className={styles["outbox-invitations__form"]}>
         <EmailInput
@@ -71,7 +73,7 @@ export const OutboxInvitations = () => {
         />
         <TextField
           id="message"
-          placeholder="Сообщение"
+          placeholder={t("message")}
           size="small"
           value={invite.message}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -84,7 +86,7 @@ export const OutboxInvitations = () => {
           loading={isCreating}
           onClick={sendInvitation}
         >
-          Пригласить
+          {t("inviteBtn")}
         </Button>
       </div>
       <InvitationsList

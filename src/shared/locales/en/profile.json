@@ -1,0 +1,23 @@
+{
+  "profileInfo": "Profile info",
+  "inboxInvitations": "Inbox invitations",
+  "outboxInvitations": "Outbox Invitations",
+  "inviteTitle": "Invite user to the space",
+  "message": "Message",
+  "invitationsList": "Invitations list",
+  "youInvited": "You invited",
+  "youWereInvited": "invited you",
+  "youAreInvited": "invites you",
+  "invitedToSpace": "to space",
+  "inviteBtn": "Invite",
+  "aceptBtn": "Accept",
+  "declineBtn": "Decline",
+  "empty": "List is empty",
+  "sendSuccess": "Invitation successfully send",
+  "sendError": "Sending error",
+  "status": {
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "revoked": "Revoked"
+  }
+}

@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { ThemeSwitch } from "./ThemeSwitch";
 import { useSpaces } from "@/entities/space/model/use-spaces";
 import { useSpaceStore } from "@/entities/space/model/space-store";
-import styles from "./header.module.css"
+import styles from "./header.module.css";
 
 interface props {
   open: boolean;

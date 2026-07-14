@@ -27,7 +27,7 @@ export const CurrencySelect = ({
       {options.map((item) => {
         return (
           <MenuItem value={item.id} key={item.id}>
-            {item.name}
+            {item.code}
           </MenuItem>
         );
       })}

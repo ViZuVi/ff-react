@@ -1,5 +1,5 @@
 import {
-  statuses,
+  statusTranslationKeys,
   type Invitation,
   type InvitationsType,
 } from "@/entities/invitation";
@@ -7,6 +7,7 @@ import { Box, Button, CircularProgress, Divider } from "@mui/material";
 import dayjs from "dayjs";
 import { useMe } from "@/entities/user";
 import styles from "./invitations.module.css";
+import { useTranslation } from "react-i18next";
 
 export const InvitationsList = ({
   invitations,
@@ -20,9 +21,13 @@ export const InvitationsList = ({
   const { data: user } = useMe();
   // TODO: check inbox inv, separate logic?
 
+  const { t } = useTranslation("profile");
+
   return (
     <div>
-      <h3 className={styles["invitations-list__title"]}>Список приглашений</h3>
+      <h3 className={styles["invitations-list__title"]}>
+        {t("invitationsList")}
+      </h3>
       {loading ? (
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <CircularProgress aria-label="Loading…" />
@@ -38,19 +43,21 @@ export const InvitationsList = ({
                 <p className={styles["invitations-item__data"]}>
                   {type === "inbox" && (
                     <span>
-                      {inv.user.name}
-                      {inv.status === "new" ? "приглашает" : "пригласил"} вас в
-                      пространство {inv.space.name}
+                      {inv.user.name} &nbsp;
+                      {inv.status === "new"
+                        ? t("youAreInvited")
+                        : t("youWereInvited")}{" "}
+                      {t("invitedToSpace")} {inv.space.name}
                     </span>
                   )}
                   {type === "outbox" && (
                     <span>
-                      Вы пригласили {inv.user.name} в пространство{" "}
+                      {t("youInvited")} {inv.user.name} {t("invitedToSpace")}{" "}
                       {inv.space.name}
                     </span>
                   )}
                   <span className={styles["invitations-item__message"]}>
-                    Сообщение: {inv.message || "отсутствует"}
+                    {t("message")}: {inv.message || "отсутствует"}
                   </span>
                 </p>
                 {inv.status === "new" ? (
@@ -62,7 +69,7 @@ export const InvitationsList = ({
                           color="success"
                           sx={{ marginLeft: "auto" }}
                         >
-                          Принять
+                          {t("aceptBtn")}
                         </Button>
 
                         <Button
@@ -70,7 +77,7 @@ export const InvitationsList = ({
                           color="error"
                           sx={{ marginLeft: "auto" }}
                         >
-                          Отклонить
+                          {t("declineBtn")}
                         </Button>
                       </>
                     )}
@@ -83,7 +90,7 @@ export const InvitationsList = ({
                     })}
                     disabled
                   >
-                    {statuses[inv.status]}
+                    {t(statusTranslationKeys[inv.status])}
                   </Button>
                 )}
               </li>
@@ -92,9 +99,7 @@ export const InvitationsList = ({
           ))}
         </ul>
       ) : (
-        <p className={styles["invitations-list__empty"]}>
-          Список {type} приглашений пуст
-        </p>
+        <p className={styles["invitations-list__empty"]}>{t("empty")}</p>
       )}
     </div>
   );

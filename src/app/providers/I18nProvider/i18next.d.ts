@@ -2,6 +2,7 @@ import "i18next";
 
 import common from "@/shared/locales/en/common.json";
 import auth from "@/shared/locales/en/auth.json";
+import profile from "@/shared/locales/en/profile.json";
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -10,6 +11,7 @@ declare module "i18next" {
     resources: {
       common: typeof common;
       auth: typeof auth;
+      profile: typeof profile;
     };
   }
 }
