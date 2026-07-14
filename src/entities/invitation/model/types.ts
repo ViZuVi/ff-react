@@ -1,7 +1,5 @@
 import type { BaseSpace } from "@/entities/space";
 
-// type InvitationStatus = "new" | "accepted" | "revoked" | "rejected";
-
 export const InvitationStatus = {
   new: "new",
   accepted: "accepted",
