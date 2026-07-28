@@ -1,0 +1,9 @@
+{
+  "codeSuccess": "Code successfully send to your email",
+  "codeError": "Eerror occured. Check your email address.",
+  "getCodeBtn": "Get restore code",
+  "restoreTitle": "Restore password",
+  "code": "Code",
+  "passwordPlaceholder": "Enter new password",
+  "repeatPassword": "Repeat new password"
+}

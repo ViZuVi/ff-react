@@ -23,7 +23,8 @@ interface props {
 
 export const NewTransactionModal = ({ open, type, onClose }: props) => {
   const { t } = useTranslation(["main", "common"]);
-  const title = type === "income" ? t("main:AddIncomeBtn") : t("main:AddExpenseBtn");
+  const title =
+    type === "income" ? t("main:AddIncomeBtn") : t("main:AddExpenseBtn");
   const transactionType = type === "income" ? 0 : 1;
 
   const updateDraft = useTransactionStore((s) => s.updateDraft);

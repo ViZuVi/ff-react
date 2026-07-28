@@ -61,7 +61,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export const ThemeSwitch = () => {
   const { t } = useTranslation("profile");
- 
+
   const mode = useThemeStore((state) => state.mode);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 

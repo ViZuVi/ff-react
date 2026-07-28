@@ -75,7 +75,6 @@ export const useTransactionStore = create<Store>((set) => ({
       const cloned: TransactionDraft = {
         ...structuredClone(source),
         localId: crypto.randomUUID(),
-        created_at: dayjs().format("YYYY-MM-DD HH:mm:ss"),
       };
 
       return {

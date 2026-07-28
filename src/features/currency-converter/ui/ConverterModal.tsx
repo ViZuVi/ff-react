@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useState } from "react";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 // https://api.funds-flow.ru/v1/currency/convert POST payload: { from: "RUB", to: "USD", value: 1}
 // https://api.funds-flow.ru/v1/currency/all GET

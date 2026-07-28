@@ -17,6 +17,7 @@ type PasswordInputProps<
   field: ControllerRenderProps<TFieldValues, TName>;
   error?: string;
   autoComplete?: string;
+  placeholder?: string;
   disabled?: boolean;
 };
 
@@ -26,6 +27,7 @@ export const PasswordInput = <
 >({
   field,
   error,
+  placeholder,
   autoComplete,
   disabled,
 }: PasswordInputProps<TFieldValues, TName>) => {
@@ -39,7 +41,7 @@ export const PasswordInput = <
       {...field}
       id="password"
       size="small"
-      placeholder={t("password")}
+      placeholder={placeholder || t("password")}
       error={!!error}
       helperText={error}
       disabled={disabled}
