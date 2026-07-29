@@ -62,7 +62,7 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
     );
   }, [open, init, currentSpaceId, transactionType, spaceResp, categories]);
 
-  const { mutateAsync, isPending } = useCreateTransaction();
+  const { mutate, isPending } = useCreateTransaction();
   const { showSnackbar } = useSnackbarStore.getState();
 
   const handleCreateTransaction = async () => {
@@ -93,43 +93,28 @@ export const NewTransactionModal = ({ open, type, onClose }: props) => {
       return;
     }
 
-    try {
-      const { success, errors } = await mutateAsync(drafts);
-
-      if (errors.length === 0) {
+    const payload = drafts.map(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ({ localId, ...transaction }) => transaction,
+    );
+    mutate(payload, {
+      onSuccess: () => {
         showSnackbar({
-          message:
-            drafts.length > 1
-              ? t("main:createTransactionsSuccessAll")
-              : t("main:createTransactionsSuccessOne"),
+          message: t("main:createTransactionsSuccessAll"),
           type: "success",
           mode: "auto",
         });
         onClose();
         clear();
-      } else if (success.length > 0) {
-        showSnackbar({
-          message: t("main:createTransactionsResult", {
-            success: success.length,
-            errors: errors.length,
-          }),
-          type: "warning",
-          mode: "auto",
-        });
-      } else {
+      },
+      onError: () => {
         showSnackbar({
           message: t("main:createTransactionsError"),
           type: "error",
           mode: "auto",
         });
-      }
-    } catch {
-      showSnackbar({
-        message: t("main:unexpectedError"),
-        type: "error",
-        mode: "auto",
-      });
-    }
+      },
+    });
   };
 
   const handleClose = () => {

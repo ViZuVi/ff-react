@@ -4,10 +4,9 @@ import { useSpaceStore } from "@/entities/space/model/space-store";
 import type { TransactionsParams } from "@/shared/types/Filters";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useMemo } from "react";
-import { createTransaction } from "./api/create-transaction";
 import { editTransaction } from "./api/edit-transaction";
 import { deleteTransaction } from "./api/delete-transaction";
-import type { TransactionDraft } from "@/entities/transaction";
+import { createMultipleTransactions } from "./api/create-multiple-transactions";
 
 const useInvalidateTransactionQueries = () => {
   const queryClient = useQueryClient();
@@ -60,29 +59,7 @@ export const useCreateTransaction = () => {
   const invalidate = useInvalidateTransactionQueries();
 
   return useMutation({
-    mutationFn: async (transactions: TransactionDraft[]) => {
-      const payload = transactions.map(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ({ localId, ...transaction }) => transaction,
-      );
-
-      const results = await Promise.allSettled(
-        payload.map((tx) => createTransaction(tx)),
-      );
-
-      const success = [];
-      const errors = [];
-
-      for (const result of results) {
-        if (result.status === "fulfilled") {
-          success.push(result.value.data);
-        } else {
-          errors.push(result.reason);
-        }
-      }
-
-      return { success, errors };
-    },
+    mutationFn: createMultipleTransactions,
     onSuccess: invalidate,
   });
 };
