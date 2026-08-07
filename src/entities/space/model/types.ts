@@ -8,7 +8,8 @@ export interface BaseSpace {
   created_at: string;
 }
 
-export interface Space extends BaseSpace {
+export interface Space {
+  space: BaseSpace;
   categories: Category[];
   accounts: Account[];
   users: User[];

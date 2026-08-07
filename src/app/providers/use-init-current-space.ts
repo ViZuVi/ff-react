@@ -1,6 +1,25 @@
 import { useSpaceStore, useSpaces } from "@/entities/space";
 import { useEffect } from "react";
 
+export const getInitialSpaceId = (
+  spaces: Array<{ id: number | string }>,
+  currentSpaceId: string | null,
+) => {
+  if (!spaces.length) {
+    return null;
+  }
+
+  const exists =
+    currentSpaceId &&
+    spaces.some((space) => space.id.toString() === currentSpaceId);
+
+  if (exists) {
+    return currentSpaceId;
+  }
+
+  return spaces[0].id.toString();
+};
+
 export const useInitCurrentSpace = () => {
   const { data } = useSpaces();
   const { currentSpaceId, setCurrentSpaceId } = useSpaceStore();
@@ -8,15 +27,10 @@ export const useInitCurrentSpace = () => {
   useEffect(() => {
     if (!data?.spaces.length) return;
 
-    const savedId = currentSpaceId;
+    const initialSpaceId = getInitialSpaceId(data.spaces, currentSpaceId);
 
-    const exists =
-      savedId && data.spaces.some((s) => s.id.toString() === savedId);
-
-    if (exists) return;
-
-    const firstId = data.spaces[0].id.toString();
-
-    setCurrentSpaceId(firstId);
+    if (initialSpaceId && initialSpaceId !== currentSpaceId) {
+      setCurrentSpaceId(initialSpaceId);
+    }
   }, [data, currentSpaceId, setCurrentSpaceId]);
 };
